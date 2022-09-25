@@ -17,8 +17,8 @@ const config = {
 	},
 	devtool: 'source-map',
 	output: {
-		path: path.resolve(__dirname, 'dist', 'pages'),
-		filename: '[name]/[name].js',
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'pages/[name]/[name].js',
 		assetModuleFilename: './assets/[name][ext]',
 	},
 	devServer: {
@@ -27,21 +27,21 @@ const config = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			filename: 'main/index.html',
-			template: 'src/pages/index.html',
+			filename: 'pages/main/index.html',
+			template: 'src/pages/main/index.html',
 			chunks: ['main'],
 		}),
 
 		new HtmlWebpackPlugin({
-			filename: 'donate/index.html',
-			template: 'src/pages/index.html',
+			filename: 'pages/donate/index.html',
+			template: 'src/pages/donate/index.html',
 			chunks: ['donate'],
 		}),
 
 		new CopyPlugin({
 			patterns: [
-				{from: 'src/assets/images', to: 'dest/assets/images'},
-				//   { from: "other", to: "public" },
+				{from: 'src/assets/images', to: 'assets/images'},
+				{ from: "src/assets/icons", to: "assets/icons" },
 			],
 		}),
 
@@ -84,7 +84,7 @@ module.exports = () => {
 		config.mode = 'production';
 
 		config.plugins.push(new MiniCssExtractPlugin({
-			filename: '[name]/[name].css',
+			filename: 'pages/[name]/[name].css',
 		}));
 	} else {
 		config.mode = 'development';
