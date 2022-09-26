@@ -1,0 +1,62 @@
+.logo__container {
+  position: relative;
+  width: 82px;
+  height: 52px;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  &:hover {
+    
+    .logo__title {
+      color: $TEXT-HOVER-COLOR;
+      transition: all 0.5s;
+      &::before {
+        background-image: url("../../assets/icons/bamboo_orange.png");
+        transition: all 0.5s;
+      }
+    }
+  }
+}
+
+.logo__title {
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 120%;
+  text-align: center;
+  transition: all 0.5s;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 21px;
+    background-image: url("../../assets/icons/bamboo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: all 0.5s;
+  }
+}
+
+.header {
+
+  .logo__title {
+    padding-top: 4px;
+    padding-left: 2px;
+    &::before {
+      bottom: 6px;
+      left: 9px;
+    }
+  }
+}
+
+.footer {
+  .logo__title {
+    &::before {
+      bottom: 8px;
+      left: 9px;
+    }
+  }
+}
+
+.header__nav .logo {
+  display: none;
+}

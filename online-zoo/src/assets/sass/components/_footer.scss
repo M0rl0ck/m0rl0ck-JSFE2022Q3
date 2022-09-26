@@ -1,0 +1,122 @@
+.footer {
+  background-color: black;
+  color: #ffffff;
+}
+
+.wrapper__footer {
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    "L L L L L L E E E E E E"
+    "B B B B B B B B B B B B"
+    "S S S S N N N N N D D D";
+  justify-content: start;
+  align-items: start;
+}
+
+.container__logo {
+  grid-area: L;
+}
+.container__emaile {
+  grid-area: E;
+  justify-self: end;
+  label {
+    display: block;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 120%;
+    padding-bottom: 13px;
+  }
+  input {
+    width: 226px;
+    height: 40px;
+    border: 1px solid #fb8527;
+    border-radius: 2px;
+    &::placeholder {
+      padding-left: 8px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 140%;
+      color: #bdbdbd;
+    }
+    &:focus {
+      &:valid ~ button {
+        color: $ACTIV-COLOR;
+        border-color: $ACTIV-COLOR;
+      }
+      &:invalid ~ button {
+        color: $MISTAKE-COLOR;
+        border-color: $MISTAKE-COLOR;
+      }
+    }
+  }
+
+  button {
+    width: 129px;
+    height: 42px;
+    margin-left: 8px;
+    background: #f1f3f2;
+    border: 1px solid $DEFAULT-BORDER-COLOR;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.container__footer__button {
+  grid-area: B;
+  padding-top: 36px;
+}
+
+.container__social {
+  grid-area: S;
+}
+
+.container__footer__nav {
+  grid-area: N;
+  align-self: end;
+}
+
+.container__desiner {
+  grid-area: D;
+  align-self: end;
+  justify-self: end;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 130%;
+  p {
+    padding-top: 8px;
+  }
+}
+
+.footer__social {
+  padding-top: 34px;
+  .social__link {
+    padding-top: 10px;
+    a {
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 140%;
+      span {
+        padding-left: 12px;
+        padding-top: 2px;
+      }
+    }
+    svg {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      padding: 5px 4px;
+      border-radius: 50%;
+      background: rgba(196, 196, 196, 0.5);
+    }
+
+    use {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

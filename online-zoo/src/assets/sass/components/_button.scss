@@ -1,0 +1,38 @@
+.button {
+  width: 298px;
+  height: 54px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  text-transform: uppercase;
+
+  z-index: 0;
+  &::before {
+    content: "";
+    width: 298px;
+    height: 54px;
+    position: absolute;
+    background: $TEXT-HOVER-COLOR;
+    opacity: 0;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.5s;
+  }
+  &:hover::before {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  &:active::before {
+    background: $ACTIV-COLOR;
+  }
+}

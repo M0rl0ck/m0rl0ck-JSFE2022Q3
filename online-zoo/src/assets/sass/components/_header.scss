@@ -1,0 +1,10 @@
+.header {
+  background-color: black;
+  color: #ffffff;
+}
+
+.wrapper__header, .wrapper__donate {
+  display: flex;
+  height: 80px;
+  align-items: center;
+}

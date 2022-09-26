@@ -8,7 +8,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+const stylesHandler =  MiniCssExtractPlugin.loader;
 
 const config = {
 	entry: {
@@ -37,11 +37,13 @@ const config = {
 			template: 'src/pages/donate/index.html',
 			chunks: ['donate'],
 		}),
+		new MiniCssExtractPlugin({
+			filename: 'pages/[name]/[name].css',
+		}),
 
 		new CopyPlugin({
 			patterns: [
-				{from: 'src/assets/images', to: 'assets/images'},
-				{ from: "src/assets/icons", to: "assets/icons" },
+				{from: 'src/assets/svg', to: 'assets/icons'},
 			],
 		}),
 
@@ -66,8 +68,18 @@ const config = {
 				use: [stylesHandler, 'css-loader', 'sass-loader'],
 			},
 			{
-				test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+				test: /\.(svg|png|jpg|gif)$/i,
 				type: 'asset',
+				generator: {
+					filename: 'assets/img/[name][ext]'
+			}
+			},
+			{
+				test: /\.(eot|ttf|woff|woff2)$/i,
+				type: 'asset',
+				generator: {
+					filename: 'assets/font/[name][ext]'
+			}
 			},
 
 			// Add your rules for custom modules here
@@ -83,9 +95,6 @@ module.exports = () => {
 	if (isProduction) {
 		config.mode = 'production';
 
-		config.plugins.push(new MiniCssExtractPlugin({
-			filename: 'pages/[name]/[name].css',
-		}));
 	} else {
 		config.mode = 'development';
 	}
