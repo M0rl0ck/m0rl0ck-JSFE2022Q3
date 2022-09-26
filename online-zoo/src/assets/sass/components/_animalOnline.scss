@@ -1,0 +1,28 @@
+.animalOnline {
+  background-image: url("../../assets/images/GiantPanda.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+.watchBlock {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 86px;
+  padding-bottom: 100px;
+  width: 500px;
+  font-weight: 700;
+  font-size: 106.496px;
+  line-height: 75%;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  p {
+    padding-bottom: 60px;
+    span {
+      color: #FFEE2E;
+    }
+  }
+}

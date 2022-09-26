@@ -13,7 +13,6 @@
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
-
   z-index: 0;
   &::before {
     content: "";
@@ -35,5 +34,11 @@
   }
   &:active::before {
     background: $ACTIV-COLOR;
+  }
+  &_circle {
+    border-radius: 25px;
+    &::before {
+      border-radius: 25px;
+    }
   }
 }
