@@ -44,6 +44,7 @@ const config = {
 		new CopyPlugin({
 			patterns: [
 				{from: 'src/assets/svg', to: 'assets/icons'},
+				{from: 'src/assets/foto', to: 'assets/foto'},
 			],
 		}),
 

@@ -1,0 +1,49 @@
+.backstage {
+  padding: 140px 0;
+}
+.wrapper__backstage {
+  display: flex;
+  position: relative;
+  .backstage__foto {
+    width: 609px;
+    height: 403px;
+  }
+  .backstage__text {
+    max-width: 551px;
+    padding-left: 87px;
+    color: #333B41;
+    font-weight: 400;
+    h2 {      
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 120%;
+    }
+    h4 {
+      padding: 32px 0 11px;
+      font-size: 24px;
+      line-height: 120%;
+      font-weight: 400;
+    }
+    p {
+      font-size: 16px;
+      line-height: 130%;
+      padding: 22px 0;
+      &:nth-last-child(1) {
+        line-height: 140%;
+      }
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.flower1 {
+  position: absolute;
+  width: 293px;
+  top: -120px;
+  right: -313px;
+}
