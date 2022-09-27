@@ -1,9 +1,10 @@
 .backstage {
   padding: 140px 0;
+  position: relative;
 }
 .wrapper__backstage {
   display: flex;
-  position: relative;
+
   .backstage__foto {
     width: 609px;
     height: 403px;
@@ -11,9 +12,9 @@
   .backstage__text {
     max-width: 551px;
     padding-left: 87px;
-    color: #333B41;
+    color: #333b41;
     font-weight: 400;
-    h2 {      
+    h2 {
       font-size: 48px;
       font-weight: 400;
       line-height: 120%;
@@ -41,9 +42,16 @@
   }
 }
 
-.flower1 {
+.flower1__container {
+  display: flex;
+  justify-content: end;
   position: absolute;
-  width: 293px;
-  top: -120px;
-  right: -313px;
+  width: 100vw;
+  top: 12px;
+  left: 0;
+  .flower1 {
+    // width: 293px ;
+    // height: 597px;
+    font-size: 0;
+  }
 }
