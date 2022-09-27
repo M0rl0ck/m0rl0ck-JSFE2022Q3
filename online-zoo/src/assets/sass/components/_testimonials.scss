@@ -1,0 +1,82 @@
+.testimonials {
+  width: 100%;
+}
+
+.wrapper__testimonials {
+  padding-top: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  h3 {
+    padding: 46px 0;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 130%;
+    text-align: center;
+    color: #333b41;
+  }
+}
+
+.testimonials__container {
+  margin-bottom: 21px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress__container_border {
+  width: 599px;
+  height: 8px;
+  padding: 1px;
+  background: linear-gradient(
+    315.75deg,
+    rgba(254, 189, 171, 0.74) 30.06%,
+    rgba(243, 169, 248, 0.66) 50.74%,
+    #e0d8f0 80.49%,
+    #eaf7fe 127.9%,
+    #eaf7fe 149.54%
+  );
+  border-radius: 5px;
+
+  .progress__container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #f5f7f6, #f5f7f6);
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      .progress__container_fill {
+        background: $ACTIV-COLOR;
+        transition: all 0.5s;
+      }
+    }
+  }
+
+  .progress__container_fill {
+    width: 115px;
+    height: 100%;
+    background: #fe9013;
+    border-radius: 5px;
+    transition: all 0.5s;
+  }
+}
+
+.testimonials__button {
+  padding: 31px 0 180px;
+  width: 100%;
+  align-items: start;
+}
+
+.testimonials__flower {
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  .flower__leav {
+    height: 275px;
+    overflow: hidden;
+  }
+}
