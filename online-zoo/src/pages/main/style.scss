@@ -4,6 +4,9 @@
 // base
 @import '../../assets/sass/base/fonts';
 @import '../../assets/sass/base/base';
+@import '../../assets/sass/base/nav';
+@import '../../assets/sass/base/button';
+@import '../../assets/sass/base/card';
 
 // layoui
 @import '../../assets/sass/layout/wrapper';
@@ -12,7 +15,6 @@
 @import '../../assets/sass/components/header';
 @import '../../assets/sass/components/footer';
 @import '../../assets/sass/components/logo';
-@import '../../assets/sass/components/nav';
-@import '../../assets/sass/components/button';
 @import '../../assets/sass/components/animalOnline';
 @import '../../assets/sass/components/backstage';
+@import '../../assets/sass/components/pet';

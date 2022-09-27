@@ -1,0 +1,93 @@
+.cart__border {
+  width: 366px;
+  height: 426px;
+  padding: 1px;
+  background: linear-gradient(to top left, #fa6f32 1.49%, #fe9013 101.44%);
+  border: 0;
+  border-radius: 5px;
+  // border-image-source: linear-gradient(113.96deg, #FA6F32 1.49%, #FE9013 101.44%);
+}
+
+.pet__text {
+  h4 {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 140%;
+    text-transform: uppercase;
+  }
+  p {
+    font-weight: 300;
+    font-size: 1.5rem;
+    line-height: 110%;
+  }
+}
+
+.container__cart {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 5px;
+  background: #ffffff;
+  .pet__foto {
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    img {
+      display: block;
+      object-fit: contain;
+      transition: all 0.5s;
+    }
+    .pet__foto__title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      bottom: -100%;
+      color: #ffffff;
+      // text-align: center;
+      transition: all 0.5s;
+      background: rgba($color: #000000, $alpha: 0.5);
+      h4 {
+        font-size: 2.4rem;
+      }
+      p {
+        font-size: 2.2rem;
+        padding-top: 1.5rem;
+      }
+    }
+  }
+  .pet__title {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+    .pet__text {
+      padding-left: 15px;
+   
+    }
+
+    .pet__food__ico {
+      padding-right: 12px;
+      svg {
+        width: 33px;
+        height: 37px;
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    .pet__foto {
+      img {
+        transform: scale(1.1);
+        transition: all 0.5s;
+      }
+      .pet__foto__title {
+        transition: all 0.5s;
+        bottom: 0;
+      }
+    }
+  }
+}
