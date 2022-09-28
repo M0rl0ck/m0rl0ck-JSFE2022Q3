@@ -1,1 +1,0 @@
-{"version":3,"file":"pages/main/main.js","mappings":"AAAAA,MAAM","sources":["webpack://my-webpack-project/./src/pages/main/index.ts"],"sourcesContent":["alert('please check my work later');"],"names":["alert"],"sourceRoot":""}
