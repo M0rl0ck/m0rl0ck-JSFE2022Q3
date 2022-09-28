@@ -1,0 +1,54 @@
+.rang__container {
+  width: 976px;
+  label {
+    padding-left: 5px;
+    padding-bottom: 17px;
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #000000;
+    cursor: pointer;
+  }
+  input[type="range"] {
+    width: 100%;
+    height: 27px;
+    padding-left: 26px;
+    padding-right: 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #404950;
+    border-radius: 2px;
+    cursor: pointer;
+    &::-webkit-slider-runnable-track {
+      width: 915px;
+      height: 2px;
+      border: 0;
+      background-color: #72828e;
+    }
+    &::-webkit-slider-thumb {
+      border: 1px solid $TEXT-ORANGE-COLOR;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      -webkit-appearance: none;
+      margin-top: -20px;
+      // box-shadow: 4px 4px 4px #000000, 0px 0px 1px #0d0d0d;
+    }
+  }
+  datalist {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-items: center;
+    font-size: 26px;
+    line-height: 140%;
+    text-transform: uppercase;
+    color: $DEFAULT-BORDER-COLOR;
+    option {
+      font-weight: 500;
+    }
+  }
+}

@@ -29,7 +29,7 @@
     font-size: 4.8rem;
     line-height: 120%;
     text-align: center;
-    color: #fe9013;
+    color: $TEXT-ORANGE-COLOR;
   }
   &_large {
     padding: 33px 0;
@@ -53,7 +53,7 @@
       position: absolute;
       width: 178px;
       height: 1px;
-      background: #fe9013;
+      background: $TEXT-ORANGE-COLOR;
       left: 0;
       bottom: -3px;
     }
