@@ -1,0 +1,2 @@
+(()=>{var e,o,t;e=document.querySelector(".payRange"),o=document.querySelector(".rangeSum"),t=document.querySelectorAll(".option"),o.addEventListener("click",(function(o){var c=o.target;c.classList.contains("option")&&(e.value=c.value,t.forEach((function(e){e.classList.remove("option_active")})),c.classList.add("option_active"))})),console.log(o)})();
+//# sourceMappingURL=donate.js.map
