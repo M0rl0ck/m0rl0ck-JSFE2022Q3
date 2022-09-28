@@ -7,6 +7,7 @@
 
 .watchBlock {
   margin-left: auto;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +20,18 @@
   color: #ffffff;
   text-align: center;
   text-transform: uppercase;
+  z-index: 0;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 465px;
+    height: 465px;
+    border-radius: 50%;
+    background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+    left: -74px;
+    top: 11px;
+    z-index: -1;
+  }
   p {
     padding-bottom: 60px;
     span {
