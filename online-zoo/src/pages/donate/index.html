@@ -92,15 +92,18 @@
             </div>
 
             <form class="rang__container">
-              <label for="payRange">Amount</label>
-              <input
-                list="rangeSum"
-                type="range"
-                id="payRange"
-                min="1"
-                max="8"
-                value="3"
-              >
+              <div class="input__rangPay">
+                <label for="payRange">Amount</label>
+                <input
+                  list="rangeSum"
+                  type="range"
+                  id="payRange"
+                  min="1"
+                  max="8"
+                  value="3"
+                />
+              </div>
+
               <datalist id="rangeSum">
                 <option value="1" label="$5000"></option>
                 <option value="2" label="$2000"></option>
@@ -122,7 +125,7 @@
                 onkeypress="if(this.value.length === 4) return false"
               />
               <svg>
-                <use href='../../assets/icons/sprite.svg#_$_'/>
+                <use href="../../assets/icons/sprite.svg#_$_" />
               </svg>
             </div>
             <div class="radio__container">
