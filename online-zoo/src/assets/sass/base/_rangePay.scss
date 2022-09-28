@@ -49,10 +49,14 @@
     line-height: 140%;
     text-transform: uppercase;
     color: $DEFAULT-BORDER-COLOR;
-    option {
+    .option {
       font-weight: 500;
       cursor: pointer;
       position: relative;
+      user-select: none;
+      &_active {
+        color: #FE9013;
+      }
       &::before {
         content: '';
         position: absolute;
@@ -89,5 +93,6 @@
       }
   
     }
+
   }
 }

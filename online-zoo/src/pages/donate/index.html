@@ -95,6 +95,7 @@
               <div class="input__rangPay">
                 <label for="payRange">Amount</label>
                 <input
+                  class="payRange"
                   list="rangeSum"
                   type="range"
                   id="payRange"
@@ -104,15 +105,19 @@
                 />
               </div>
 
-              <datalist id="rangeSum">
-                <option value="1" label="$5000"></option>
-                <option value="2" label="$2000"></option>
-                <option value="3" label="$1000"></option>
-                <option value="4" label="$500"></option>
-                <option value="5" label="$250"></option>
-                <option value="6" label="$100"></option>
-                <option value="7" label="$50"></option>
-                <option value="8" label="$25"></option>
+              <datalist id="rangeSum" class="rangeSum">
+                <option value="1" class="option" label="$5000"></option>
+                <option value="2" class="option" label="$2000"></option>
+                <option
+                  value="3"
+                  class="option option_active"
+                  label="$1000"
+                ></option>
+                <option value="4" class="option" label="$500"></option>
+                <option value="5" class="option" label="$250"></option>
+                <option value="6" class="option" label="$100"></option>
+                <option value="7" class="option" label="$50"></option>
+                <option value="8" class="option" label="$25"></option>
               </datalist>
             </form>
 
