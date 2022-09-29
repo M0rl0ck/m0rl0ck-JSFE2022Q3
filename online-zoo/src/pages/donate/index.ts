@@ -35,5 +35,3 @@ function setRang(e: Event) {
 
 sum.addEventListener('click', setRang);
 range.addEventListener('click', setLableRang )
-
-console.log(sum);
