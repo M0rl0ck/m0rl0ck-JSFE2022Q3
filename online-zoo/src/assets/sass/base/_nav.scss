@@ -2,15 +2,17 @@
   display: flex;
   width: 100%;
   padding-left: 10px;
+  transition: all 0.5s;
+  @media screen and (max-width: 1200px) {
+    padding-left: 15px;
+    transition: all 0.5s;
+  }
 }
 
-
-.footer__nav {
-  padding-left: 7px;
-}
 
 .header__nav__ul,
 .footer__nav__ul {
+  padding-left: 0px;
   display: flex;
   font-size: 1.6rem;
   font-weight: 500;
@@ -31,6 +33,12 @@
     transition: all 0.5s;
     &:hover {
       color: $TEXT-HOVER-COLOR;
+      transition: all 0.5s;
+    }
+
+    @media screen and (max-width: 1200px) {
+      padding-left: 0;
+      padding-right: 0;
       transition: all 0.5s;
     }
   }

@@ -11,7 +11,17 @@
     #eaf7fe 127.9%,
     #eaf7fe 149.54%
   );
+  @include transit;
+  @media screen and (max-width: 1150px) {
+    width: 293px;
+    @include transit;
+  &:nth-last-child(1) {
+    display: none;
+  }
 }
+}
+
+
 
 .testimonials__card_content {
   width: 100%;

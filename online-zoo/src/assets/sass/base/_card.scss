@@ -5,7 +5,12 @@
   background: linear-gradient(to top left, #fa6f32 1.49%, #fe9013 101.44%);
   border: 0;
   border-radius: 5px;
-  // border-image-source: linear-gradient(113.96deg, #FA6F32 1.49%, #FE9013 101.44%);
+  @include transit;
+  @media screen and (max-width: 1220px) {
+    @include transit;
+    width: 294px;
+    height: 354px;
+  }
 }
 
 .pet__text {
@@ -29,13 +34,18 @@
   border-radius: 5px;
   background: #ffffff;
   .pet__foto {
-    width: 100%;
+    width: 364;
+    height: 366;
     border-radius: 5px;
     position: relative;
     overflow: hidden;
+    @include transit;
     img {
+      width: 364;
+      height: 366;
       display: block;
-      object-fit: contain;
+      object-fit:contain;
+      // object-position: -40px 0;
       transition: all 0.5s;
     }
     .pet__foto__title {
@@ -59,7 +69,16 @@
         padding-top: 1.5rem;
       }
     }
-  }
+    @media screen and (max-width: 1220px) {
+      width: 292px;
+      height: 294px;
+      @include transit;
+      img {
+        width: 292px;
+        height: 294px;
+      }
+    }
+   }
   .pet__title {
     display: flex;
     justify-content: space-between;
@@ -70,10 +89,14 @@
     }
 
     .pet__food__ico {
-      padding-right: 12px;
-      svg {
-        width: 33px;
-        height: 37px;
+      padding-right: 7px;
+      .svg_banana {
+        width: 42px;
+        height: 38px;
+      }
+      .svg_meet {
+        width: 48px;
+        height: 38px;
       }
     }
   }

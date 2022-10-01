@@ -1,19 +1,40 @@
 .backstage {
   padding: 140px 0;
   position: relative;
+  transition: all 0.5s;
+  @media screen and (max-width: 1570px) {
+    padding: 100px 30px 105px;
+    transition: all 0.5s;
+  }
 }
 .wrapper__backstage {
   display: flex;
-
   .backstage__foto {
     width: 609px;
     height: 403px;
+    overflow: hidden;
+    transition: all 0.5s;
+    img {
+      width: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: -80px;
+    
+    }
+    @media screen and (max-width: 1220px) {
+      margin-top: 9px;
+      width: 455px;
+      height: 408px;
+      transition: all 0.5s;
+      object-position: -81px;
+    }
   }
   .backstage__text {
-    max-width: 551px;
+    width: 551px;
     padding-left: 87px;
     color: #333b41;
     font-weight: 400;
+    transition: all 0.5s;
     h2 {
       font-size: 48px;
       font-weight: 400;
@@ -33,13 +54,13 @@
         line-height: 140%;
       }
     }
+    @media screen and (max-width: 1220px) {
+      padding-left: 31px;
+      width: 485px;
+      transition: all 0.5s;
+    }
   }
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
 }
 
 .flower1__container {
@@ -50,8 +71,14 @@
   top: 12px;
   left: 0;
   .flower1 {
-    // width: 293px ;
-    // height: 597px;
+    transition: all 0.5s;
     font-size: 0;
+  }
+  @media screen and (max-width: 1570px) {
+    width: 1570px;
+    transition: all 0.5s;
+  }
+  @media screen and (max-width: 1220px) {
+    display: none;
   }
 }

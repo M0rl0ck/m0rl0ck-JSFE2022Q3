@@ -1,0 +1,7 @@
+@mixin transit {
+  transition: all 0.5s;
+}
+
+@mixin transit-delay {
+  transition: all 0.5s 0.2s;
+}

@@ -5,4 +5,10 @@
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  @include transit;
+  @media screen and (max-width: 1110px) {
+    height: 390px;
+    background-position: -172px bottom;
+    @include transit;
+  }
 }

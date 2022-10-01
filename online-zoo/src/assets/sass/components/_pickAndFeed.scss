@@ -21,6 +21,10 @@
       #eaf7fe 127.9%,
       #eaf7fe 149.54%
     );
+    @media screen and (max-width: 1220px) {
+      padding-left: 30px;
+      padding-right: 30px;
+  }
 }
 
 .wrapper__pickAndFeed {
@@ -47,6 +51,16 @@
     font-size: 36px;
     line-height: 130%;
     color: $TEXT-ORANGE-COLOR;
+  }
+  @media screen and (max-width: 1220px) {
+    padding-bottom: 30px;
+    h2 {
+      padding-right: 100px;
+      padding-bottom: 20px;
+    }
+    h3 {
+      padding-bottom: 38px;
+    }
   }
 }
 
@@ -79,6 +93,16 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
+  }
+  @media screen and (max-width: 1220px) {
+    padding-top: 20px;
+    padding-bottom: 35px;
+    h2 {
+      padding-bottom: 0;
+    }
+    .pickAndFeed__top__text {
+      padding-left: 27px;
+    }
   }
 }
 
@@ -117,8 +141,6 @@
       svg {
         width: 14px;
         height: 14px;
-        use {
-        }
       }
     }
   }

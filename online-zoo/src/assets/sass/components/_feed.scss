@@ -6,6 +6,11 @@
     #febdab 100.95%,
     rgba(254, 210, 144, 0.7) 106.36%
   );
+  @include transit;
+  @media screen and (max-width: 1220px) {
+    padding: 30px 30px 50px 30px;
+    @include transit;
+  }
 }
 
 .wrapper__feed {
@@ -23,6 +28,7 @@
   font-size: 1.6rem;
   line-height: 130%;
   color: #333b41;
+  @include transit;
   h2 {
     padding-right: 50px;
     font-weight: 400;
@@ -58,6 +64,22 @@
       bottom: -3px;
     }
   }
+  @media screen and (max-width: 1220px) {
+    padding: 30px 40px 0 50px;
+    @include transit;
+    h2 {
+      padding-right: 10px;
+    }
+    &_large {
+      padding: 23px 0 14px;
+    }
+    &_medium {
+      padding-right: 40px;
+    }
+    &_small {
+      padding-right: 40px;
+    }
+  }
 }
 
 .feed_how {
@@ -72,6 +94,13 @@
     font-size: 3.6rem;
     line-height: 130%;
     color: #333b41;
+    @include transit;
+  }
+  @media screen and (max-width: 1220px) {
+    h3 {
+      padding-top: 40px;
+      @include transit;
+    }
   }
 }
 
@@ -157,4 +186,9 @@
 
 .feed__button {
   padding: 40px 0 60px;
+  @include transit;
+  @media screen and (max-width: 1220px) {
+    padding: 49px 0 50px;
+    @include transit;
+  }
 }

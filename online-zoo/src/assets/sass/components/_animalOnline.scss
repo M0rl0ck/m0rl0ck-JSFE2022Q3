@@ -3,6 +3,13 @@
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  overflow: hidden;
+  transition: all 0.5s;
+  @media screen and (max-width: 1200px) {
+    background-size: 120% auto;
+    transition: all 0.5s;
+
+  }
 }
 
 .watchBlock {
@@ -21,21 +28,41 @@
   text-align: center;
   text-transform: uppercase;
   z-index: 0;
+  transition: all 0.5s;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 465px;
     height: 465px;
     border-radius: 50%;
-    background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+    background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
     left: -74px;
     top: 11px;
     z-index: -1;
+    transition: all 0.5s;
   }
   p {
-    padding-bottom: 60px;
+    padding-bottom: 61px;
     span {
-      color: #FFEE2E;
+      color: #ffee2e;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    padding-right: 71px;
+    padding-top: 43px;
+    padding-bottom: 47px;
+    font-size: 85px;
+    transition: all 0.5s;
+    &::before {
+     width: 367px;
+     height: 367px;
+     left: -44px;
+     top: -11px;
+     transition: all 0.5s;
+    }
+    p {
+      padding-bottom: 41px;
+      transition: all 0.5s;
     }
   }
 }

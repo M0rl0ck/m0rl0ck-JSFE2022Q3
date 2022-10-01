@@ -12,9 +12,12 @@
   grid-template-areas:
     "L L L L L L E E E E E E"
     "B B B B B B B B B B B B"
-    "S S S S N N N N N D D D";
+    "S S S N N N N N N D D D";
   justify-content: start;
   align-items: start;
+  @media screen and (max-width: 1200px) {
+    padding: 41px 31px 50px 31px;
+  }
 }
 
 .container__logo {
@@ -63,6 +66,9 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  @media screen and (max-width: 1200px) {
+    padding-right: 32px;
+  }
 }
 
 .container__footer__button {
@@ -77,6 +83,17 @@
 .container__footer__nav {
   grid-area: N;
   align-self: end;
+  padding-left: 98px;
+  @media screen and (max-width: 1200px) {
+    padding-left: 63px;
+    &_main {
+      padding-left: 50px;
+    }
+  }
+  
+.footer__nav {
+  padding-left: 7px;
+}
 }
 
 .container__desiner {
