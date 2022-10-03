@@ -1,0 +1,2 @@
+(()=>{"use strict";var e,r;e=document.querySelector(".hamburger"),r=document.querySelector(".header__nav"),e.addEventListener("click",(function(){null==e||e.classList.toggle("hamburger_open"),null==r||r.classList.toggle("header__nav_open")}))})();
+//# sourceMappingURL=main.js.map
