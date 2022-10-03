@@ -15,5 +15,13 @@
     height: 369px;
     background-position: -273px bottom;
     background-size: 215%;
-  } 
+  }
+  @media screen and (max-width: 638px) {
+    height: 340px;
+  }
+  @media screen and (max-width: 600px) {
+    height: 221px;
+    background-size: 240%;
+    background-position: -150px bottom;
+  }
 }
