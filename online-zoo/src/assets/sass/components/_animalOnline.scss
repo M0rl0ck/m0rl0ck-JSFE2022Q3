@@ -21,7 +21,10 @@
   } 
   @media screen and (max-width: 880px) {
     padding-right: 8px;
-  } 
+  }
+  @media screen and (max-width: 400px) {
+    padding-right: 10px;
+  }
 }
 .animalOnline__button {
   padding-right: 100px;
@@ -35,8 +38,15 @@
     padding-bottom: 31px;
     .button {
       transform: translateY(-9px);
-
     }
+  }
+  @media screen and (max-width: 580px) {
+    .button {
+      transform: translateY(0);
+    }
+  }
+  @media screen and (max-width: 470px) {
+    display: none;
   }
 }
 .watchBlock {
@@ -92,15 +102,27 @@
   @media screen and (max-width: 880px) {
     font-size: 55px;
     width: 272px;
-    padding-top: 48px;
+    padding-top: 82px;
     &::before {
       width: 238px;
       height: 238px;
       left: -29px;
-      top: 10px;
+      top: 44px;
     }
     p {
       padding-bottom: 0;
+    }
+  }
+  @media screen and (max-width: 580px) {
+    font-size: 28px;
+    width: 128px;
+    padding-top: 75px;
+    padding-bottom: 41px;
+    &::before {
+      width: 120px;
+      height: 120px;
+      left: -20px;
+      top: 56px;
     }
   } 
 }

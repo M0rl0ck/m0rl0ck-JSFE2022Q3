@@ -12,6 +12,9 @@
     padding-left: 20px;
     padding-right: 20px;
   }
+  @media screen and (max-width: 610px) {
+    padding-top: 12px;
+  }   
 }
 
 .wrapper__pet {
@@ -33,6 +36,10 @@
     padding-top: 61px;
     padding-bottom: 100px;
   }
+  @media screen and (max-width: 610px) {
+    padding-top: 20px;
+    padding-bottom: 60px;
+  }  
 }
 
 .pet__flowers {
@@ -103,6 +110,23 @@
       }
     }
   }
+  @media screen and (max-width: 610px) {
+    .left_flower {
+      height: 72px;
+      img {
+        width: auto;
+        height: 104px;
+        transform: translateX(-84px);
+      }
+    }
+    .right_flower {
+      img {
+        height: 70px;
+        transform: translate(21px, 4px) ;
+
+      }
+    }
+  } 
 }
 
 .carousel {
@@ -130,6 +154,11 @@
       }
     }
   }
+  @media screen and (max-width: 610px) {
+    flex-direction: column;
+    row-gap: 20px;
+    
+  } 
 }
 
 .carousel__container__buttons {
@@ -155,5 +184,8 @@
   @media screen and (max-width: 980px)  {
     padding-left: 223px;
     padding-right: 223px;
+  }
+  @media screen and (max-width: 620px) {
+    display: none;
   }
 }

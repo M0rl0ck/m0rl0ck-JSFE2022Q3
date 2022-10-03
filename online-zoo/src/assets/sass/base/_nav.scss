@@ -36,7 +36,7 @@
   padding-left: 0px;
   display: flex;
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 140%;
 
   .nav__link_active {
@@ -97,6 +97,12 @@
   @media screen and (max-width: 950px) {
     li {
       padding-left: 37px;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    padding-left: 10px;
+    li {
+      padding-left: 30px;
     }
   }
 }

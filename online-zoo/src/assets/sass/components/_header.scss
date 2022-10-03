@@ -24,4 +24,7 @@
     padding-left: 19px;
     padding-right: 20px;
   }
+  @media screen and (max-width: 400px) {
+    padding: 0 10px;
+  }
 }

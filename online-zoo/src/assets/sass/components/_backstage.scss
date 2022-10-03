@@ -9,9 +9,19 @@
   @media screen and (max-width: 880px) {
     padding: 60px 0 40px;
   }
+  @media screen and (max-width: 470px) {
+    padding: 20px 0;
+  }
 }
 .wrapper__backstage {
   display: flex;
+  .backstage__button {
+    display: none;
+    @media screen and (max-width: 470px) {
+      display: block;
+      align-self: center;
+    }
+  }
   .backstage__foto {
     width: 609px;
     height: 403px;
@@ -81,8 +91,33 @@
         padding-top: 8px;
       }
     }
+    @media screen and (max-width: 550px) {
+      padding-left: 10px;
+      max-width: 310px;
+      h2 {
+        font-size: 2.4rem;
+        padding-top: 30px;
+        padding-left: 0;
+      }
+      p {
+        padding: 10px 0;
+      }
+      h4 {
+        padding-left: 2px;
+        padding-top: 11px;
+        padding-bottom: 4px;
+      }
+      p:nth-last-child(1) {
+        line-height: 135%;
+      }
+    }
   }
-
+  @media screen and (max-width: 550px) {
+    padding-left: 0;  
+  }
+  @media screen and (max-width: 470px) {
+    flex-direction: column;
+  }
 }
 
 .flower1__container {
@@ -116,4 +151,24 @@
       }
     }
   }
+  @media screen and (max-width: 630px) {
+    .flower1 {
+      height: 277px;
+      img {
+        width: auto;
+        height: 277px;
+      }
+    }
+  } 
+  @media screen and (max-width: 550px) {
+    top: 40px;
+    .flower1 {
+      height: 217px;
+      img {
+        width: auto;
+        height: 217px;
+        object-position: 40px;
+      }
+    }
+  } 
 }

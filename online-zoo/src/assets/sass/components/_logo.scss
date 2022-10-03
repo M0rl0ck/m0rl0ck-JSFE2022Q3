@@ -71,6 +71,23 @@
       left: 9px;
     }
   }
+  @media screen and (max-width: 610px) {
+    .container__logo {
+      padding-top: 10px;
+    }
+    .logo__container {
+      border: 0;
+      width: 128px;
+      height: 23px;
+      margin: 0 auto;
+      .logo__title {
+        &::before {
+          left: 72px;
+          bottom: 4px;
+        }
+      }
+    }
+  }
 }
 
 .header__nav .logo_header_nav {
