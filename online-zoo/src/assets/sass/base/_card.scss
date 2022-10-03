@@ -5,9 +5,9 @@
   background: linear-gradient(to top left, #fa6f32 1.49%, #fe9013 101.44%);
   border: 0;
   border-radius: 5px;
-  @include transit;
+
   @media screen and (max-width: 1220px) {
-    @include transit;
+
     width: 294px;
     height: 354px;
   }
@@ -51,7 +51,6 @@
     border-radius: 5px;
     position: relative;
     overflow: hidden;
-    @include transit;
     img {
       width: 364;
       height: 366;
@@ -69,7 +68,7 @@
       height: 100%;
       bottom: -100%;
       color: #ffffff;
-      // text-align: center;
+
       transition: all 0.5s;
       background: rgba($color: #000000, $alpha: 0.5);
       h4 {
@@ -83,7 +82,6 @@
     @media screen and (max-width: 1220px) {
       width: 292px;
       height: 294px;
-      @include transit;
       img {
         width: 292px;
         height: 294px;

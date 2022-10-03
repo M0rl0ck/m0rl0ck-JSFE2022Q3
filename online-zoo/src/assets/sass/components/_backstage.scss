@@ -1,10 +1,10 @@
 .backstage {
   padding: 140px 0;
   position: relative;
-  transition: all 0.5s;
+
   @media screen and (max-width: 1570px) {
     padding: 100px 0 105px 30px;
-    transition: all 0.5s;
+
   }
   @media screen and (max-width: 880px) {
     padding: 60px 0 40px;
@@ -26,7 +26,7 @@
     width: 609px;
     height: 403px;
     overflow: hidden;
-    transition: all 0.5s;
+
     img {
       width: auto;
       height: 100%;
@@ -37,7 +37,7 @@
       margin-top: 9px;
       width: 455px;
       height: 408px;
-      transition: all 0.5s;
+
       img {
         object-position: -81px;
       }
@@ -52,7 +52,7 @@
     padding-left: 87px;
     color: #333b41;
     font-weight: 400;
-    transition: all 0.5s;
+
     h2 {
       font-size: 48px;
       font-weight: 400;
@@ -75,7 +75,7 @@
     @media screen and (max-width: 1220px) {
       padding-left: 31px;
       width: 485px;
-      transition: all 0.5s;
+
     }
     @media screen and (max-width: 880px) {
       padding-left: 20px;
@@ -128,12 +128,12 @@
   top: 12px;
   left: 0;
   .flower1 {
-    transition: all 0.5s;
+
     font-size: 0;
   }
   @media screen and (max-width: 1570px) {
     width: 1570px;
-    transition: all 0.5s;
+
   }
   @media screen and (max-width: 1220px) {
     display: none;

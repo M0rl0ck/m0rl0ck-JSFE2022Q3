@@ -179,6 +179,7 @@
     left: 0;
     padding-left: 323px;
     padding-right: 323px;
+    z-index: 1;
     @include transit-delay;
   }
   @media screen and (max-width: 980px)  {

@@ -4,10 +4,10 @@
   background-position: bottom;
   background-size: cover;
   overflow: hidden;
-  transition: all 0.5s;
+
   @media screen and (max-width: 1200px) {
     background-size: 120% auto;
-    transition: all 0.5s;
+
   }
 
 }
@@ -64,7 +64,7 @@
   text-align: center;
   text-transform: uppercase;
   z-index: 0;
-  transition: all 0.5s;
+
   &::before {
     content: "";
     position: absolute;
@@ -75,7 +75,7 @@
     left: -74px;
     top: 11px;
     z-index: -1;
-    transition: all 0.5s;
+
   }
   p {
     padding-bottom: 61px;
@@ -86,17 +86,17 @@
   @media screen and (max-width: 1200px) {
     padding-top: 43px;
     font-size: 85px;
-    transition: all 0.5s;
+
     &::before {
      width: 367px;
      height: 367px;
      left: -8px;
      top: -11px;
-     transition: all 0.5s;
+
     }
     p {
       padding-bottom: 41px;
-      transition: all 0.5s;
+
     }
   }
   @media screen and (max-width: 880px) {
