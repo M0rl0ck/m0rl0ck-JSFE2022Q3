@@ -11,6 +11,9 @@
     padding: 30px 30px 50px 30px;
     @include transit;
   }
+  @media screen and (max-width: 880px) {
+    padding: 20px 0;
+  }
 }
 
 .wrapper__feed {
@@ -80,6 +83,24 @@
       padding-right: 40px;
     }
   }
+  @media screen and (max-width: 880px) {
+    padding: 10px 0 0 20px;
+    @include transit;
+    h2 {
+      font-size: 4.2rem;
+      padding-right: 20px;
+    }
+    &_large {
+      font-size: 2.2rem;
+      // padding: 23px 0 14px;
+    }
+    &_medium {
+      padding-right: 20px;
+    }
+    &_small {
+      padding-right: 0;
+    }
+  } 
 }
 
 .feed_how {
@@ -102,6 +123,11 @@
       @include transit;
     }
   }
+  @media screen and (max-width: 880px) {
+    h3 {
+      padding-top: 28px;
+    }
+  }
 }
 
 .feed__cards {
@@ -111,6 +137,9 @@
   max-width: 764px;
   justify-content: space-between;
   position: relative;
+  @media screen and (max-width: 880px) {
+    padding: 20px 32px 20px 20px;
+  }
 }
 
 .feed__card {
@@ -182,6 +211,27 @@
       width: 94px;
     }
   }
+  @media screen and (max-width: 880px) {
+    top: -56px;
+    .feed__arrow_black {
+      display: none;
+    }
+    .feed__arrow_green {
+      display: block;
+      svg {
+        width: 90px;
+      }
+    }
+    .feed__arrow:nth-child(1) {
+      padding-right: 0;
+      padding-left: 4px;
+    }
+  
+    .feed__arrow:nth-child(2) {
+      padding-left: 0;
+      transform: translate(-33px);
+    }
+  }
 }
 
 .feed__button {
@@ -190,5 +240,8 @@
   @media screen and (max-width: 1220px) {
     padding: 49px 0 50px;
     @include transit;
+  }
+  @media screen and (max-width: 880px) {
+    padding: 39px 0 60px;
   }
 }

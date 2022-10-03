@@ -37,13 +37,29 @@
 }
 
 .header {
-
   .logo__title {
     padding-top: 4px;
     padding-left: 2px;
     &::before {
       bottom: 6px;
       left: 9px;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .logo__container{
+      width: 47px;
+      height: 29px;
+      border: 0;
+      .logo__title_header {
+        font-size: 12px;
+        padding-top: 0;
+        &::before {
+          width: 8px;
+          height: 15px;
+          bottom: 2px;
+          left: 4px;
+        }
+      }
     }
   }
 }
@@ -57,6 +73,27 @@
   }
 }
 
-.header__nav .logo {
+.header__nav .logo_header_nav {
   display: none;
+  margin-right: auto;
+  @media screen and (max-width: 800px) {
+    display: block;
+    color: $TEXT-ORANGE-COLOR;
+    .logo__container {
+      width: 66px;
+      height: 42px;
+      border: 1px solid $TEXT-ORANGE-COLOR;
+      .logo__title {
+        font-size: 1.5rem;
+        padding-top: 2px;
+        padding-left: 0;
+        &::before {
+          bottom: 4px;
+          left: 6px;
+          background-image: url("../../assets/icons/bamboo_orange.png");
+        }
+      }
+    }
+    
+  }
 }

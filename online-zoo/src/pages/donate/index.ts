@@ -1,3 +1,4 @@
+import { hamburger, openMenu } from '../../assets/scripts/base/hamburger';
 import {curentWithType} from '../../assets/scripts/infostructure/type';
 import { DESKTOPWITH, TABLETWITH } from '../../assets/scripts/infostructure/constans';
 
@@ -13,8 +14,8 @@ function editeRang(): void {
    if (screnWith > DESKTOPWITH && curentWith != 'max') {
     range.setAttribute('min', '1');
     curentWith = 'max';
-   } else if (screnWith < TABLETWITH && curentWith != 'min') {
-     range.setAttribute('min', '3');
+   } else if (screnWith <= TABLETWITH && curentWith != 'min') {
+     range.setAttribute('min', '4');
      curentWith = 'min';
    } else if (screnWith > TABLETWITH && screnWith <= DESKTOPWITH && curentWith != 'medium') {
     range.setAttribute('min', '2');
@@ -62,6 +63,7 @@ function setRang(e: Event): void {
   }
 
 editeRang();
+hamburger.addEventListener('click', openMenu);
 window.addEventListener(`resize`, editeRang);
 inputNumber.addEventListener('input', changeInputNumber)
 sum.addEventListener('click', setRang);

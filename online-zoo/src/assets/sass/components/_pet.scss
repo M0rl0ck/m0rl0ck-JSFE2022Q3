@@ -4,6 +4,14 @@
     padding-left: 30px;
     padding-right: 30px;
   }
+  @media screen and (max-width: 920px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @media screen and (max-width: 740px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .wrapper__pet {
@@ -20,6 +28,10 @@
   @media screen and (max-width: 1594px) {
     padding-bottom: 140px;
     @include transit;
+  }
+  @media screen and (max-width: 920px) {
+    padding-top: 61px;
+    padding-bottom: 100px;
   }
 }
 
@@ -79,6 +91,18 @@
       }
     }
   }
+  @media screen and (max-width: 920px) {
+    .left_flower {
+      img {
+        transform: translateX(-126px);
+      }
+    }
+    .right_flower {
+      img {
+        height: 130px;
+      }
+    }
+  }
 }
 
 .carousel {
@@ -95,6 +119,16 @@
   @media screen and (max-width: 1594px) {
     row-gap: 92px;
     @include transit;
+  }
+  @media screen and (max-width: 920px) {
+    .cart__border {
+      &:nth-child(5) {
+        display: none;
+      }
+      &:nth-child(6) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -117,5 +151,9 @@
     padding-left: 323px;
     padding-right: 323px;
     @include transit-delay;
+  }
+  @media screen and (max-width: 980px)  {
+    padding-left: 223px;
+    padding-right: 223px;
   }
 }

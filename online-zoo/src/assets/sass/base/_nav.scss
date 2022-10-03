@@ -3,10 +3,31 @@
   width: 100%;
   padding-left: 10px;
   transition: all 0.5s;
+  z-index: 4;
   @media screen and (max-width: 1200px) {
     padding-left: 15px;
     transition: all 0.5s;
   }
+  @media screen and (max-width: 800px) {
+    padding-top: 10px;
+    padding-left: 10px;
+    position: absolute;
+    right: 0;
+    top: -400px;
+    z-index: 0;
+    width: 100vw;
+    height: 329px;
+    flex-direction: column;
+    background: #FFFFFF;
+    color: #000000;
+    @include transit;
+    &_open {
+      top: 0;
+      right: 0;
+      @include transit;
+    }
+  }
+
 }
 
 
@@ -54,12 +75,28 @@
       }
     }
   }
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    padding-top: 15px;
+    li {
+      padding-left: 0;
+      padding-top: 15px;
+      &:nth-last-child(1) {
+        margin-left: 0;
+      }
+    }
+  }
 }
 
 .footer__nav__ul {
   li {
     &:nth-child(1) {
       padding-left: 0;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    li {
+      padding-left: 37px;
     }
   }
 }

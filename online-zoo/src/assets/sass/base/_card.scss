@@ -11,6 +11,10 @@
     width: 294px;
     height: 354px;
   }
+  @media screen and (max-width: 980px) {
+    width: 285px;
+    height: 332px;
+  }
 }
 
 .pet__text {
@@ -24,6 +28,14 @@
     font-weight: 300;
     font-size: 1.5rem;
     line-height: 110%;
+  }
+  @media screen and (max-width: 980px) {
+    h4 {
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -45,7 +57,6 @@
       height: 366;
       display: block;
       object-fit:contain;
-      // object-position: -40px 0;
       transition: all 0.5s;
     }
     .pet__foto__title {
@@ -78,16 +89,24 @@
         height: 294px;
       }
     }
+    @media screen and (max-width: 980px) {
+      width: 283px;
+      height: 285px;
+    }
    }
   .pet__title {
     display: flex;
     justify-content: space-between;
     padding-top: 8px;
+    @media screen and (max-width: 980px) {
+      padding-top: 6px;
+    }
     .pet__text {
       padding-left: 15px;
-   
+      @media screen and (max-width: 980px) {
+        padding-left: 11px;
+      }
     }
-
     .pet__food__ico {
       padding-right: 7px;
       .svg_banana {
@@ -97,6 +116,16 @@
       .svg_meet {
         width: 48px;
         height: 38px;
+      }
+      @media screen and (max-width: 980px) {
+        .svg_banana {
+          width: 28px;
+          height: 31px;
+        }
+        .svg_meet {
+          width: 37px;
+          height: 31px;
+        }
       }
     }
   }

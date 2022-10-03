@@ -25,6 +25,10 @@
       padding-left: 30px;
       padding-right: 30px;
   }
+    @media screen and (max-width: 880px) {
+      padding-left: 20px;
+      padding-right: 20px;
+  }
 }
 
 .wrapper__pickAndFeed {
@@ -60,6 +64,19 @@
     }
     h3 {
       padding-bottom: 38px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding-top: 30px;
+    h2 {
+      font-size: 2.4rem;
+      line-height: 120%;
+      padding-right: 30px;
+      padding-bottom: 10px;
+    }
+    h3 {
+      padding-top: 20px;
+      padding-bottom: 28px;
     }
   }
 }
@@ -102,6 +119,17 @@
     }
     .pickAndFeed__top__text {
       padding-left: 27px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding: 30px 0 36px;
+    h2 {
+      padding-right: 0;
+    }
+    .pickAndFeed__top__text {
+      padding-top: 20px;
+      padding-left: 0;
+      text-align: center;
     }
   }
 }
@@ -151,6 +179,9 @@
       height: 246px;
     }
   }
+  @media screen and (max-width: 880px) {
+    padding: 40px 0;
+  }
 }
 
 .input__num__container {
@@ -162,6 +193,9 @@
     top: -47px;
     width: 10px;
     fill: #929699;
+    @media screen and (max-width: 880px) {
+      top: -53px;
+    }
   }
   input[type="number"] {
     width: 268px;
@@ -176,16 +210,20 @@
       line-height: 140%;
       color: #929699;
     }
+    @media screen and (max-width: 880px) {
+      width: 180px;
+      height: 42px;
+    }
   }
 }
 
 .radio__container {
-  margin-top: 28px;
-  margin-bottom: 28px;
+  margin: 28px 0;
   width: 268px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: start;
+
   div {
     padding-left: 28px;
   }
@@ -215,8 +253,17 @@
       background: $ACTIV-COLOR;
     }
   }
+  @media screen and (max-width: 880px) {
+    margin-top: 33px;
+    div {
+      padding-left: 26px;
+    }
+  }
 }
 
 .pickAndFeed__button {
   padding-left: 6px;
+  @media screen and (max-width: 880px) {
+    padding-left: 2px;
+  }
 }

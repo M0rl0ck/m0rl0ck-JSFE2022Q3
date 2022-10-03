@@ -1,0 +1,46 @@
+.hamburger {
+  padding-bottom: 2px;
+  width: 18px;
+  height: 12px;
+  display: none;
+  margin-left: auto;
+  z-index: 5;
+  cursor: pointer;
+  @media screen and (max-width: 800px)  {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    @include transit;
+    &_open {
+      .hamburger-line {
+        background: #000000;
+        @include transit;
+        &:nth-child(1) {
+          transform: rotate(40deg) translateY(5px);
+          @include transit;
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          transform: rotate(-40deg) translateY(-5px);
+          @include transit;
+        }
+      }
+    }
+  }
+  &:hover {
+    .hamburger-line {
+      background: $TEXT-HOVER-COLOR;
+    }
+  }
+}
+
+.hamburger-line {
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: #FFFFFF;
+  @include transit;
+}

@@ -11,4 +11,9 @@
     background-position: -172px bottom;
     @include transit;
   }
+  @media screen and (max-width: 800px) {
+    height: 369px;
+    background-position: -273px bottom;
+    background-size: 215%;
+  } 
 }

@@ -6,6 +6,9 @@
     @media screen and (max-width: 1200px) {
       padding-left: 30px;
     }
+    @media screen and (max-width: 970px) {
+      padding-left: 0;
+    }
   }
   label {
     padding-left: 5px;
@@ -40,7 +43,7 @@
       width: 40px;
       height: 40px;
       -webkit-appearance: none;
-      background-image: url('../../assets/images/roller_icon.png');
+      background-image: url("../../assets/images/roller_icon.png");
       margin-top: -20px;
     }
     @media screen and (max-width: 1200px) {
@@ -50,6 +53,10 @@
     }
     @media screen and (max-width: 1200px) {
       padding: 0;
+    }
+    @media screen and (max-width: 970px) {
+      width: 100%;
+      padding: 0 20px;
     }
   }
   datalist {
@@ -67,15 +74,15 @@
       position: relative;
       user-select: none;
       &_active {
-        color: #FE9013;
+        color: #fe9013;
       }
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: #FFEE2E;
+        background: #ffee2e;
         top: -32px;
         pointer-events: none;
       }
@@ -109,7 +116,29 @@
           display: none;
         }
       }
-  
+      @media screen and (max-width: 970px) {
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+        &:nth-child(4) {
+          padding-right: 30px;
+        }
+        &:nth-child(5) {
+          padding-right: 10px;
+        }
+        &:nth-child(6) {
+          padding-left: 6px;
+        }
+        &:nth-child(7) {
+          padding-left: 10px;
+        }
+        &:nth-child(8) {
+          padding-left: 32px;
+        }
+      }
     }
 
     @media screen and (max-width: 1200px) {
@@ -141,12 +170,39 @@
         }
       }
     }
-
+    @media screen and (max-width: 970px) {
+      grid-template-columns: repeat(5, 1fr);
+      .option {
+        &:nth-child(4)::before {
+          left: 20px;
+        }
+        &:nth-child(5)::before {
+          left: 20px;
+        }
+        &:nth-child(6)::before {
+          left: 28px;
+        }
+        &:nth-child(7)::before {
+          left: 32px;
+        }
+        &:nth-child(8)::before {
+          left: 52px;
+        }
+      }
+    }
   }
   @media screen and (max-width: 1200px) {
     width: 890px;
     margin-left: 20px;
     @include transit;
   }
-
+  @media screen and (max-width: 970px) {
+    max-width: 600px;
+    width: 100%;
+    margin-left: 0;
+    label {
+      padding-left: 10px;
+      padding-bottom: 5px;
+    }
+  }
 }
