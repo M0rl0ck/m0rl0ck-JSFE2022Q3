@@ -1,5 +1,20 @@
 .pet {
   padding-top: 14px;
+  @media screen and (max-width: 1220px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media screen and (max-width: 920px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @media screen and (max-width: 740px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (max-width: 610px) {
+    padding-top: 12px;
+  }   
 }
 
 .wrapper__pet {
@@ -12,6 +27,19 @@
 .pet__buttons {
   padding-top: 80px;
   padding-bottom: 102px;
+  @include transit;
+  @media screen and (max-width: 1594px) {
+    padding-bottom: 140px;
+    @include transit;
+  }
+  @media screen and (max-width: 920px) {
+    padding-top: 61px;
+    padding-bottom: 100px;
+  }
+  @media screen and (max-width: 610px) {
+    padding-top: 20px;
+    padding-bottom: 60px;
+  }  
 }
 
 .pet__flowers {
@@ -23,6 +51,82 @@
   align-items: end;
   font-size: 0;
   z-index: -1;
+  .left_flower {
+    overflow: hidden;
+    img {
+      width: 292px;
+      height: 460px;
+      object-fit: none;
+      object-position: right top;
+      @include transit;
+    }
+  }
+  @media screen and (max-width: 1594px) {
+    .left_flower {
+      img {
+        width: 292px;
+        height: 300px;
+        @include transit;
+      }
+    }
+    .right_flower {
+      img {
+        width: auto;
+        height: 260px;
+        @include transit;
+      }
+    }
+  }
+  @media screen and (max-width: 1110px) {
+    .left_flower {
+      width: 192px;
+      height: 202px;
+      
+      img {
+        width: 260px;
+        height:284px;
+        object-fit: cover;
+        transform: translateX(-66px);
+        @include transit;
+      }
+    }
+    .right_flower {
+      img {
+        width: auto;
+        height: 180px;
+        @include transit;
+      }
+    }
+  }
+  @media screen and (max-width: 920px) {
+    .left_flower {
+      img {
+        transform: translateX(-126px);
+      }
+    }
+    .right_flower {
+      img {
+        height: 130px;
+      }
+    }
+  }
+  @media screen and (max-width: 610px) {
+    .left_flower {
+      height: 72px;
+      img {
+        width: auto;
+        height: 104px;
+        transform: translateX(-84px);
+      }
+    }
+    .right_flower {
+      img {
+        height: 70px;
+        transform: translate(21px, 4px) ;
+
+      }
+    }
+  } 
 }
 
 .carousel {
@@ -35,6 +139,26 @@
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 20px;
+  @include transit-delay;
+  @media screen and (max-width: 1594px) {
+    row-gap: 92px;
+    @include transit;
+  }
+  @media screen and (max-width: 920px) {
+    .cart__border {
+      &:nth-child(5) {
+        display: none;
+      }
+      &:nth-child(6) {
+        display: none;
+      }
+    }
+  }
+  @media screen and (max-width: 610px) {
+    flex-direction: column;
+    row-gap: 20px;
+    
+  } 
 }
 
 .carousel__container__buttons {
@@ -46,7 +170,23 @@
   display: flex;
   justify-content: space-between;
   z-index: -1;
+  @include transit;
   .button {
     z-index: 1;
+  }
+  @media screen and (max-width: 1594px) {
+    width: 100%;
+    left: 0;
+    padding-left: 323px;
+    padding-right: 323px;
+    z-index: 1;
+    @include transit-delay;
+  }
+  @media screen and (max-width: 980px)  {
+    padding-left: 223px;
+    padding-right: 223px;
+  }
+  @media screen and (max-width: 620px) {
+    display: none;
   }
 }

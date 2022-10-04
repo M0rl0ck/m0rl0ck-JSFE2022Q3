@@ -5,7 +5,16 @@
   background: linear-gradient(to top left, #fa6f32 1.49%, #fe9013 101.44%);
   border: 0;
   border-radius: 5px;
-  // border-image-source: linear-gradient(113.96deg, #FA6F32 1.49%, #FE9013 101.44%);
+
+  @media screen and (max-width: 1220px) {
+
+    width: 294px;
+    height: 354px;
+  }
+  @media screen and (max-width: 980px) {
+    width: 285px;
+    height: 332px;
+  }
 }
 
 .pet__text {
@@ -20,6 +29,14 @@
     font-size: 1.5rem;
     line-height: 110%;
   }
+  @media screen and (max-width: 980px) {
+    h4 {
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .container__cart {
@@ -29,13 +46,16 @@
   border-radius: 5px;
   background: #ffffff;
   .pet__foto {
-    width: 100%;
+    width: 364;
+    height: 366;
     border-radius: 5px;
     position: relative;
     overflow: hidden;
     img {
+      width: 364;
+      height: 366;
       display: block;
-      object-fit: contain;
+      object-fit:contain;
       transition: all 0.5s;
     }
     .pet__foto__title {
@@ -48,7 +68,7 @@
       height: 100%;
       bottom: -100%;
       color: #ffffff;
-      // text-align: center;
+
       transition: all 0.5s;
       background: rgba($color: #000000, $alpha: 0.5);
       h4 {
@@ -59,21 +79,51 @@
         padding-top: 1.5rem;
       }
     }
-  }
+    @media screen and (max-width: 1220px) {
+      width: 292px;
+      height: 294px;
+      img {
+        width: 292px;
+        height: 294px;
+      }
+    }
+    @media screen and (max-width: 980px) {
+      width: 283px;
+      height: 285px;
+    }
+   }
   .pet__title {
     display: flex;
     justify-content: space-between;
     padding-top: 8px;
+    @media screen and (max-width: 980px) {
+      padding-top: 6px;
+    }
     .pet__text {
       padding-left: 15px;
-   
+      @media screen and (max-width: 980px) {
+        padding-left: 11px;
+      }
     }
-
     .pet__food__ico {
-      padding-right: 12px;
-      svg {
-        width: 33px;
-        height: 37px;
+      padding-right: 7px;
+      .svg_banana {
+        width: 42px;
+        height: 38px;
+      }
+      .svg_meet {
+        width: 48px;
+        height: 38px;
+      }
+      @media screen and (max-width: 980px) {
+        .svg_banana {
+          width: 28px;
+          height: 31px;
+        }
+        .svg_meet {
+          width: 37px;
+          height: 31px;
+        }
       }
     }
   }

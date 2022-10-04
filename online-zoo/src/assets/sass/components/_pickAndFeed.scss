@@ -21,6 +21,18 @@
       #eaf7fe 127.9%,
       #eaf7fe 149.54%
     );
+  @media screen and (max-width: 1220px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media screen and (max-width: 880px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (max-width: 610px) {
+    padding-left: 10px;
+    padding-right: 9px;
+  }
 }
 
 .wrapper__pickAndFeed {
@@ -47,6 +59,42 @@
     font-size: 36px;
     line-height: 130%;
     color: $TEXT-ORANGE-COLOR;
+  }
+  @media screen and (max-width: 1220px) {
+    padding-bottom: 30px;
+    h2 {
+      padding-right: 100px;
+      padding-bottom: 20px;
+    }
+    h3 {
+      padding-bottom: 38px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding-top: 30px;
+    h2 {
+      font-size: 2.4rem;
+      line-height: 120%;
+      padding-right: 30px;
+      padding-bottom: 10px;
+    }
+    h3 {
+      padding-top: 20px;
+      padding-bottom: 28px;
+    }
+  }
+  @media screen and (max-width: 610px) {
+    padding-bottom: 21px;
+    h2 {
+      padding-right: 10px;
+    }
+    p {
+      line-height: 138%;
+    }
+    h3 {
+      font-size: 2.4rem;
+      padding-bottom: 27px;
+    }
   }
 }
 
@@ -79,6 +127,38 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
+  }
+  @media screen and (max-width: 1220px) {
+    padding-top: 20px;
+    padding-bottom: 35px;
+    h2 {
+      padding-bottom: 0;
+    }
+    .pickAndFeed__top__text {
+      padding-left: 27px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding: 30px 0 36px;
+    h2 {
+      padding-right: 0;
+    }
+    .pickAndFeed__top__text {
+      padding-top: 20px;
+      padding-left: 0;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 610px) {
+    padding: 21px 0 9px;
+    h2 {
+      font-size: 2.4rem;
+    }
+    .pickAndFeed__top__text {
+      padding-top: 10px;
+      font-size: 1.6rem;
+      line-height: 140%;
+    }
   }
 }
 
@@ -117,8 +197,6 @@
       svg {
         width: 14px;
         height: 14px;
-        use {
-        }
       }
     }
   }
@@ -127,6 +205,41 @@
     svg {
       width: 284px;
       height: 246px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding: 40px 0;
+  }
+  @media screen and (max-width: 610px) {
+    padding: 0;
+    column-gap: 0;
+    justify-content: space-between;
+    .countDiet {
+      .countDiet__text {
+        padding-top: 38px;
+        padding-right: 6px;
+        h2 {
+          font-size: 40px;
+        }
+        p {
+          padding-top: 8px;
+          font-size: 9px;
+        }
+      }
+      .countDiet__multiply {
+        padding-top: 14px;
+        svg {
+          width: 9px;
+          height: 9px;
+        }
+      }
+    }
+    .pandaImg {
+      transform: translateX(5px);
+      svg {
+        width: 170px;
+        height: 140px;
+      }
     }
   }
 }
@@ -140,6 +253,9 @@
     top: -47px;
     width: 10px;
     fill: #929699;
+    @media screen and (max-width: 880px) {
+      top: -53px;
+    }
   }
   input[type="number"] {
     width: 268px;
@@ -154,16 +270,23 @@
       line-height: 140%;
       color: #929699;
     }
+    @media screen and (max-width: 880px) {
+      width: 180px;
+      height: 42px;
+    }
+  }
+  @media screen and (max-width: 610px) {
+    margin-top: 25px;
   }
 }
 
 .radio__container {
-  margin-top: 28px;
-  margin-bottom: 28px;
+  margin: 28px 0;
   width: 268px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: start;
+
   div {
     padding-left: 28px;
   }
@@ -177,7 +300,7 @@
     line-height: 140%;
     color: #333b41;
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       width: 14px;
       height: 14px;
@@ -193,8 +316,24 @@
       background: $ACTIV-COLOR;
     }
   }
+  @media screen and (max-width: 880px) {
+    margin-top: 33px;
+    div {
+      padding-left: 26px;
+    }
+  }
+  @media screen and (max-width: 610px) {
+    margin-top: 28px;
+    margin-bottom: 24px;
+  }
 }
 
 .pickAndFeed__button {
   padding-left: 6px;
+  @media screen and (max-width: 880px) {
+    padding-left: 2px;
+  }
+  @media screen and (max-width: 610px) {
+    padding: 0;
+  }
 }

@@ -6,6 +6,17 @@
     #febdab 100.95%,
     rgba(254, 210, 144, 0.7) 106.36%
   );
+  @include transit;
+  @media screen and (max-width: 1220px) {
+    padding: 30px 30px 50px 30px;
+    @include transit;
+  }
+  @media screen and (max-width: 880px) {
+    padding: 20px 0;
+  }
+  @media screen and (max-width: 560px) {
+    padding: 20px 10px;
+  }
 }
 
 .wrapper__feed {
@@ -23,6 +34,7 @@
   font-size: 1.6rem;
   line-height: 130%;
   color: #333b41;
+  @include transit;
   h2 {
     padding-right: 50px;
     font-weight: 400;
@@ -58,6 +70,58 @@
       bottom: -3px;
     }
   }
+  @media screen and (max-width: 1220px) {
+    padding: 30px 40px 0 50px;
+    @include transit;
+    h2 {
+      padding-right: 10px;
+    }
+    &_large {
+      padding: 23px 0 14px;
+    }
+    &_medium {
+      padding-right: 40px;
+    }
+    &_small {
+      padding-right: 40px;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    padding: 10px 0 0 20px;
+    @include transit;
+    h2 {
+      font-size: 4.2rem;
+      padding-right: 20px;
+    }
+    &_large {
+      font-size: 2.2rem;
+    }
+    &_medium {
+      padding-right: 20px;
+    }
+    &_small {
+      padding-right: 0;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    padding: 0;
+    h2 {
+      padding-right: 0;
+      padding-top: 20px;
+      font-size: 2.4rem;
+    }
+    &_large {
+      padding: 10px 0;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    &_medium {
+      display: none;
+    }
+    &_small {
+      display: none;
+    }
+  }
 }
 
 .feed_how {
@@ -72,6 +136,25 @@
     font-size: 3.6rem;
     line-height: 130%;
     color: #333b41;
+    @include transit;
+  }
+  @media screen and (max-width: 1220px) {
+    h3 {
+      padding-top: 40px;
+      @include transit;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    h3 {
+      padding-top: 28px;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    h3 {
+      padding-top: 11px;
+      font-size: 2.4rem;
+      line-height: 120%;
+    }
   }
 }
 
@@ -82,6 +165,15 @@
   max-width: 764px;
   justify-content: space-between;
   position: relative;
+  @media screen and (max-width: 880px) {
+    padding: 20px 32px 20px 20px;
+  }
+  @media screen and (max-width: 560px) {
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+  }
 }
 
 .feed__card {
@@ -125,6 +217,12 @@
     color: #333b41;
     padding-top: 30px;
   }
+  @media screen and (max-width: 560px) {
+    height: 222px;
+    p {
+      padding-top: 10px;
+    }
+  }
 }
 
 .arrow__container {
@@ -153,8 +251,62 @@
       width: 94px;
     }
   }
+  @media screen and (max-width: 880px) {
+    top: -56px;
+    .feed__arrow_black {
+      display: none;
+    }
+    .feed__arrow_green {
+      display: block;
+      svg {
+        width: 90px;
+      }
+    }
+    .feed__arrow:nth-child(1) {
+      padding-right: 0;
+      padding-left: 4px;
+    }
+  
+    .feed__arrow:nth-child(2) {
+      padding-left: 0;
+      transform: translate(-33px);
+    }
+  }
+  @media screen and (max-width: 560px) {
+    width: 60px;
+    height: 400px;
+    flex-direction: column;
+    justify-content: space-between;
+    left: auto;
+    right: 36px;
+    top: 150px;
+    .feed__arrow_green {
+      svg {
+        transform: rotate(80deg);
+      }
+    }
+    .feed__arrow:nth-child(1) {
+      padding: 0;
+    }
+  
+    .feed__arrow:nth-child(2) {
+      padding: 0;
+      transform: translate(0);
+    }
+  }
 }
 
 .feed__button {
   padding: 40px 0 60px;
+  @include transit;
+  @media screen and (max-width: 1220px) {
+    padding: 49px 0 50px;
+    @include transit;
+  }
+  @media screen and (max-width: 880px) {
+    padding: 39px 0 60px;
+  }
+  @media screen and (max-width: 560px) {
+    padding: 20px 0 40px;
+  }
 }
