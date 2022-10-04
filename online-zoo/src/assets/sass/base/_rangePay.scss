@@ -84,13 +84,16 @@
     line-height: 140%;
     text-transform: uppercase;
     color: $DEFAULT-BORDER-COLOR;
+    
     .option {
       font-weight: 500;
       cursor: pointer;
       position: relative;
       user-select: none;
+      @include transit;
       &_active {
         color: #fe9013;
+        @include transit;
       }
       &::before {
         content: "";
