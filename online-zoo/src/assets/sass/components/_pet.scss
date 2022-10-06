@@ -14,6 +14,8 @@
   }
   @media screen and (max-width: 610px) {
     padding-top: 12px;
+    padding-left: 17px;
+    padding-right: 17px;
   }   
 }
 
@@ -130,20 +132,64 @@
 }
 
 .carousel {
+  width: 100%;
   position: relative;
   z-index: 0;
 }
 
+.carousel__hidder {
+  width: 100%;
+  position: relative;
+  // width: 1160px;
+  height: 872px;
+  overflow: hidden;
+  @media screen and (max-width: 1594px) {
+    height: 944px;
+  }
+  @media screen and (max-width: 1220px) {
+    height: 800px;
+  }
+  @media screen and (max-width: 980px) {
+    height: 756px;
+  }
+  @media screen and (max-width: 610px) {
+    height: 1388px;
+  }
+
+}
+
 .carousel__container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  // width: 1160px;
+  height: 872px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 20px;
-  @include transit-delay;
-  @media screen and (max-width: 1594px) {
-    row-gap: 92px;
-    @include transit;
+  transition: row-gap 0.5s 0.3s, left 1s 0s;
+  &_prev {
+    left: -102%;
+    transition: left 1s 0s;
   }
+  &_next {
+    left: 102%;
+    transition: left 1s 0s;
+  }
+  @media screen and (max-width: 1594px) {
+    height: 944px;
+    row-gap: 92px;
+    transition: row-gap 0.5s 0.2s, left 1s 0s;
+  }
+  @media screen and (max-width: 1220px) {
+    height: 800px;
+  }
+  @media screen and (max-width: 980px) {
+    height: 756px;
+  }
+  
   @media screen and (max-width: 920px) {
     .cart__border {
       &:nth-child(5) {
@@ -155,9 +201,11 @@
     }
   }
   @media screen and (max-width: 610px) {
+    height: 1388px;
     flex-direction: column;
+    align-items: center;
     row-gap: 20px;
-    
+    transition: row-gap 0s 0s, transform 1s 0s;
   } 
 }
 
@@ -180,7 +228,7 @@
     padding-left: 323px;
     padding-right: 323px;
     z-index: 1;
-    @include transit-delay;
+    transition: all 0.5s 0.4s;
   }
   @media screen and (max-width: 980px)  {
     padding-left: 223px;
