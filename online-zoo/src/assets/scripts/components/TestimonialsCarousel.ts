@@ -48,12 +48,18 @@ class TestimonialsCarousel {
     return card;
   }
 
-  private closedPopUp = (): void => {
-    this.popUp.remove();
-    const scrool = document.body.style.top;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    window.scrollTo(0, parseInt(scrool || '0') * -1)
+  private closedPopUp = (e: Event): void => {
+    const el = e.target as HTMLElement;
+    if (
+      el.classList.contains("popUpCard__shaddow") ||
+      el.closest(".popUp_x")
+    ) {
+      this.popUp.remove();
+      const scrool = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrool || "0") * -1);
+    }
   };
 
   private createPopUp = (data: ITestimonialsCard): void => {
@@ -75,9 +81,9 @@ class TestimonialsCarousel {
       const el = e.target as HTMLElement;
       const id = el.closest(".testimonials__card_border").id;
       this.createPopUp(this.cards[Number(id)]);
-      
+
       document.body.style.top = `-${window.scrollY}px`;
-      document.body.style.position = 'fixed';
+      document.body.style.position = "fixed";
     }
   };
 
