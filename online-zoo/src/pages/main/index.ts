@@ -4,10 +4,12 @@ import {
   openMenu,
 } from "../../assets/scripts/base/hamburger";
 import { carousel } from "../../assets/scripts/components/carousel";
+import testimonials from '../../assets/scripts/components/TestimonialsCarousel';
 import { nextCarousel, prevCarousel } from '../../assets/scripts/funcs/initCarousel'
 
-carousel.init();
 
+carousel.init();
+testimonials.init();
 
 carousel.buttonPrev.addEventListener("click", prevCarousel);
 carousel.buttonNext.addEventListener("click", nextCarousel);

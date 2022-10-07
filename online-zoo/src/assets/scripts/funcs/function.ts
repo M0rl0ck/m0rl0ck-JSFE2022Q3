@@ -27,4 +27,4 @@ function shuffle(array: any[]):void {
   }
 }
 
-export {createHtmlElement ,shuffle};
+export {createHtmlElement, shuffle};

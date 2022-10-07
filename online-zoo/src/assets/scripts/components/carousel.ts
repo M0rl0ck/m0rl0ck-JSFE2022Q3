@@ -1,4 +1,4 @@
-import IPetCard from "../infostructure/interfaces/petCard";
+import IPetCard from "../infostructure/interfaces/IPetCard";
 import createPetCard from "../../scripts/base/petCard";
 import { createHtmlElement, shuffle } from "../funcs/function";
 import { petCardsData } from "../infostructure/data/petCardsData";

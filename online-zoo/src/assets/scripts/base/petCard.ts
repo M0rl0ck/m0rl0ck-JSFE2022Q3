@@ -1,5 +1,5 @@
 import { createHtmlElement } from "../funcs/function";
-import IPetCard from "../infostructure/interfaces/petCard";
+import IPetCard from "../infostructure/interfaces/IPetCard";
 
 export default function createPetCard(pet: IPetCard): HTMLElement {
   const template = `

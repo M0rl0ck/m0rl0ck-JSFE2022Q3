@@ -1,4 +1,4 @@
-import IPetCard from '../interfaces/petCard';
+import IPetCard from '../interfaces/IPetCard';
 
 export const petCardsData: IPetCard[] = [
   {
