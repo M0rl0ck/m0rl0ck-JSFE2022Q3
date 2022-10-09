@@ -11,13 +11,23 @@ const inputNumber: HTMLInputElement = document.querySelector(".input__num") as H
 
 let curentWith: curentWithType = "max";
 
-function setActiveLable(value: string) {
+function setActiveLable(value: string): void {
   options.forEach((item) => {
     if (item.value === value) {
       item.classList.add("option_active");
       inputNumber.value = item.label.slice(1);
     } else {
       item.classList.remove("option_active");
+    }
+  });
+}
+
+function setRangActiv(el: HTMLInputElement): void  {
+  options.forEach((input) => {
+    if (input.label.slice(1) === el.value && input.value >= range.min) {
+      input.classList.add("option_active");
+      range.classList.remove('payRange_non');
+      range.value = input.value;
     }
   });
 }
@@ -48,12 +58,14 @@ function editeRang(): void {
     range.setAttribute("min", "2");
     curentWith = "medium";
   }
+  setRangActiv(inputNumber);
 }
 
 function setRang(e: Event): void {
   const el = e.target as HTMLOptionElement;
 
   if (el.classList.contains("option")) {
+    range.classList.remove('payRange_non');
     range.value = el.value;
     inputNumber.value = el.label.slice(1);
     options.forEach((item) => {
@@ -66,6 +78,7 @@ function setRang(e: Event): void {
 function setLableRang(e: Event): void {
   const el = e.target as HTMLElement;
   if (el.classList.contains("payRange")) {
+    range.classList.remove('payRange_non');
     const value = range.value;
     setActiveLable(value);
   }
@@ -73,15 +86,11 @@ function setLableRang(e: Event): void {
 
 function changeInputNumber(e: Event) {
   const el = e.target as HTMLInputElement;
-  options.forEach((input) => {
-    if (input.label.slice(1) === el.value) {
-      options.forEach((item) => {
-        item.classList.remove("option_active");
-      });
-      input.classList.add("option_active");
-      range.value = input.value;
-    }
+  options.forEach((item) => {
+    item.classList.remove("option_active");
   });
+  range.classList.add("payRange_non");
+  setRangActiv(el);
 }
 
 window.addEventListener(`resize`, editeRang);

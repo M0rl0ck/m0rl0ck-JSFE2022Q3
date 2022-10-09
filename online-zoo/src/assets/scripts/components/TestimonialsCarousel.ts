@@ -1,6 +1,6 @@
 import ITestimonialsCard from "../infostructure/interfaces/ITestimonialsCard";
 
-import { createHtmlElement } from "../funcs/function";
+import { createHtmlElement, startScroll, stopScroll } from "../funcs/function";
 import {
   MAINDESKTOPWIDTH,
   MAINTABLETWITH,
@@ -55,10 +55,7 @@ class TestimonialsCarousel {
       el.closest(".popUp_x")
     ) {
       this.popUp.remove();
-      const scrool = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      window.scrollTo(0, parseInt(scrool || "0") * -1);
+      startScroll();
     }
   };
 
@@ -81,9 +78,7 @@ class TestimonialsCarousel {
       const el = e.target as HTMLElement;
       const id = el.closest(".testimonials__card_border").id;
       this.createPopUp(this.cards[Number(id)]);
-
-      document.body.style.top = `-${window.scrollY}px`;
-      document.body.style.position = "fixed";
+      stopScroll();
     }
   };
 

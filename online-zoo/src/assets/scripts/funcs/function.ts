@@ -27,4 +27,16 @@ function shuffle(array: any[]):void {
   }
 }
 
-export {createHtmlElement, shuffle};
+function stopScroll() {
+	document.body.style.top = `-${window.scrollY}px`;
+	document.body.style.position = "fixed";
+}
+
+function startScroll() {
+	const scrool = document.body.style.top;
+	document.body.style.position = "";
+	document.body.style.top = "";
+	window.scrollTo(0, parseInt(scrool || "0") * -1);
+}
+
+export {createHtmlElement, shuffle, stopScroll,startScroll};
