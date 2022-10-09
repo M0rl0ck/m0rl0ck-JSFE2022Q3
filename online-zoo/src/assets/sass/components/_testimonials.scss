@@ -94,7 +94,10 @@
     padding-top: 18px;
     padding-bottom: 80px;
     align-self: center;
-    .button {
+    .button,
+    .button::before,
+    .button:hover,
+    .button:hover::before {
       width: 240px;
     }
   }
