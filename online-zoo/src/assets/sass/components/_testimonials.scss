@@ -49,64 +49,36 @@
   }
 }
 
-.testimonials__container {
+.testimonials__container__header {
   margin-bottom: 21px;
+  position: relative;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  height: 391px;
+  overflow: hidden;
+  @media screen and (max-width: 1220px) {
+    width: 940px;
+  }
   @media screen and (max-width: 950px) {
-    flex-direction: column;
-    align-items: center;
-    row-gap: 15px;
+    width: 100%;
+    height: 357px;
   }
 }
 
-.progress__container_border {
-  width: 599px;
-  height: 8px;
-  padding: 1px;
-  background: linear-gradient(
-    315.75deg,
-    rgba(254, 189, 171, 0.74) 30.06%,
-    rgba(243, 169, 248, 0.66) 50.74%,
-    #e0d8f0 80.49%,
-    #eaf7fe 127.9%,
-    #eaf7fe 149.54%
-  );
-  border-radius: 5px;
-  @include transit;
-  @media screen and (max-width: 950px) {
-    display: none;
-  }
-
-  .progress__container {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, #f5f7f6, #f5f7f6);
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      .progress__container_fill {
-        background: $ACTIV-COLOR;
-        transition: all 0.5s;
-      }
-    }
-  }
-
-  .progress__container_fill {
-    width: 115px;
-    height: 100%;
-    background: $TEXT-ORANGE-COLOR;
-    border-radius: 5px;
-    @include transit;
-  }
+.testimonials__container {
+  margin-bottom: 21px;
+  width: 3238px;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.8s;
+  transform: translateX(0px);
   @media screen and (max-width: 1220px) {
-    width: 390px;
-    @include transit;
-    .progress__container_fill {
-      width: 75px;
-      @include transit;
-    }
+    width: 3523px;
+  }
+  @media screen and (max-width: 950px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
   }
 }
 

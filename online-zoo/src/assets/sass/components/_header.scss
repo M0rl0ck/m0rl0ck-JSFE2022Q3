@@ -9,6 +9,23 @@
     z-index: 1;
     // right: 0;
   }
+  .shadow_nav {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba($color: #000000, $alpha: 0.6);
+    z-index: -5;
+    &_open {
+      display: block;
+    }
+    // @media screen and (max-width: 800px) {
+    //   display: block;
+    // }
+  }
+  
 }
 
 .wrapper__header, .wrapper__donate {

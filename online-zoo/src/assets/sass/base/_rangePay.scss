@@ -9,6 +9,11 @@
     @media screen and (max-width: 970px) {
       padding-left: 0;
     }
+    .payRange_non {
+      &::-webkit-slider-thumb {
+        background: rgba($color: #000000, $alpha: 0);
+      }
+    }
   }
   label {
     padding-left: 5px;
@@ -20,7 +25,7 @@
     color: #000000;
     cursor: pointer;
   }
-  input[type="range"] {
+  .payRange {
     width: 976px;
     height: 27px;
     padding-left: 6px;
@@ -84,13 +89,16 @@
     line-height: 140%;
     text-transform: uppercase;
     color: $DEFAULT-BORDER-COLOR;
+    
     .option {
       font-weight: 500;
       cursor: pointer;
       position: relative;
       user-select: none;
+      @include transit;
       &_active {
         color: #fe9013;
+        @include transit;
       }
       &::before {
         content: "";
