@@ -1,0 +1,46 @@
+{
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/m0rl0ck-JSFE2022Q3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/m0rl0ck-JSFE2022Q3/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/m0rl0ck-JSFE2022Q3#readme",
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
+    "@webpack-cli/generators": "^2.5.0",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.8",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.1"
+  }
+}
