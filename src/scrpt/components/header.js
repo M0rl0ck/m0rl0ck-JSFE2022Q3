@@ -29,7 +29,7 @@ const buttonResults = createHtmlElement(
 );
 const buttonSound = createHtmlElement(
   "div",
-  "checkSound active",
+  "checkSound checkSound_active",
   "<p>Sound: </p><div></div>",
   buttons
 );

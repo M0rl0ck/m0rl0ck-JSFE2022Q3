@@ -1,0 +1,54 @@
+.header {
+  background-color: darkblue;
+  color: bisque;
+  border-radius: 0 0 20px 20px;
+}
+
+
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkSound {
+  margin-left: 50px;
+  display: flex;
+  div {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border: 1px solid bisque;
+  }
+  &_active {
+    div::before {
+      content: '';
+      position: absolute;
+      width: 7px;
+      height: 12px;
+      border-bottom: 4px solid chartreuse;
+      border-right: 4px solid chartreuse;
+      transform: rotate(45deg);
+      left: 3px;
+      top: -1px
+    }
+  }
+}
+
+.hamburger {
+  width: 26px;
+  height: 18px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // z-index: 5;
+  display: none;
+  span {
+    display: inline-block;
+    width: 26px;
+    height: 2px;
+    background-color: bisque;
+  }
+}
