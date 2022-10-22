@@ -1,4 +1,9 @@
 import { buttonStart } from "./scrpt/components/header";
-import { timer } from './scrpt/components/main';
+import Field from './scrpt/base/field';
 
-buttonStart.addEventListener('click', () => {timer.textContent = '10:20'});
+
+  const gameField = new Field(6);
+  function start() {
+  gameField.start();
+}
+buttonStart.addEventListener('click', start);

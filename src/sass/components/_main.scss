@@ -14,14 +14,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 10px auto;
   border-radius: 10px;
   background: linear-gradient(-45deg, chocolate, #4f2202);
 }
 
 .field {
-  width: 400px;
-  height: 400px;
+  position: relative;
+  aspect-ratio: 1 / 1;
   background: aqua;
 }
 

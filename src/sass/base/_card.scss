@@ -1,0 +1,14 @@
+.cardContainer {
+  aspect-ratio: 1 / 1;
+  padding: 2px;
+  position: absolute;
+  background: linear-gradient(-45deg, chocolate, #4f2202);
+}
+
+.cardContent {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
