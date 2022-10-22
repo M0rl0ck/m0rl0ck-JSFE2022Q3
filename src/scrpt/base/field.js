@@ -1,9 +1,9 @@
 import Card from "./card";
-import { field } from "../components/main";
+import { moves, timer, field, formField } from "../components/main";
 import { genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
-import swap from '../../assets/sound/swipe.mp3';
-import sound from '../../assets/sound/click.mp3';
+import swap from "../../assets/sound/swipe.mp3";
+import sound from "../../assets/sound/click.mp3";
 
 class Field {
   constructor(size) {
@@ -20,10 +20,22 @@ class Field {
     this.isMouseDown = false;
     this.zerroIndex = 0;
     this.prevIndex = 0;
+    this.moves = 0;
+    this.time = 0;
+    this.timerId = 0;
   }
 
   isWin() {
     return !this.fieldArr.some((el, index) => el > 0 && el - 1 !== index);
+  }
+
+  startTimer() {
+    this.timerId = setInterval(() => {
+      this.time += 1;
+      const min = (Math.floor(this.time / 60)).toString().padStart(2, "0");
+      const sec = (this.time % 60).toString().padStart(2, "0");
+      timer.innerHTML = `${min}:${sec}`;
+    }, 1000);
   }
 
   isCanMove(id) {
@@ -93,13 +105,30 @@ class Field {
         this.currentEl.addEventListener("transitionend", () =>
           this.field.addEventListener("mousedown", this.mouseDown)
         );
-        //
+        this.moves += 1;
+        moves.innerHTML = this.moves.toString().padStart(2, "0");
+      }
+      if (this.isWin()) {
+        this.win();
       }
     }
   };
 
+  win() {
+    clearInterval(this.timerId);
+    this.field.removeEventListener("mousedown", this.mouseDown);
+    console.log(
+      `Hooray! You solved the puzzle in ${timer.innerHTML} and ${moves.innerHTML} moves!`
+    );
+  }
+
   start() {
     const audio = new Audio();
+    clearInterval(this.timerId);
+    timer.innerHTML = '00:00';
+    moves.innerHTML = '00';
+    this.time = 0;
+    this.moves = 0;
     audio.src = swap;
     audio.play();
     this.fieldArr = genFieldArr(this.size * this.size);
@@ -121,6 +150,7 @@ class Field {
     this.cards.map((card) => this.field.append(card.cardContainer));
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
+    this.startTimer();
   }
 }
 
