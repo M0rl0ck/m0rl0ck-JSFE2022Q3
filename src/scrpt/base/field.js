@@ -2,6 +2,8 @@ import Card from "./card";
 import { field } from "../components/main";
 import { genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
+import swap from '../../assets/sound/swipe.mp3';
+import sound from '../../assets/sound/click.mp3';
 
 class Field {
   constructor(size) {
@@ -73,6 +75,9 @@ class Field {
   mouseUp = () => {
     if (this.isMouseDown) {
       this.isMouseDown = false;
+      const audio = new Audio();
+      audio.src = sound;
+      audio.play();
       if (this.isMove) {
         this.isMove = false;
       } else {
@@ -94,6 +99,9 @@ class Field {
   };
 
   start() {
+    const audio = new Audio();
+    audio.src = swap;
+    audio.play();
     this.fieldArr = genFieldArr(this.size * this.size);
     this.cards = [];
     this.fieldArr.forEach((el, index) => {
