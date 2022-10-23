@@ -1,11 +1,24 @@
 import Card from "./card";
 import { moves, timer, field, formField } from "../components/main";
 import { buttonSound } from "../components/header";
-import { genFieldArr } from "../function";
+import { createHtmlElement, genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
 import swap from "../../assets/sound/swipe.mp3";
 import sound from "../../assets/sound/click.mp3";
 import soundWin from "../../assets/sound/win.mp3";
+
+function createWinMessage() {
+  const shadow = createHtmlElement('div', 'shadow', '', document.body);
+  createHtmlElement(
+    "div",
+    "winMessage",
+    `Hooray! You solved the puzzle in ${timer.innerHTML} and ${moves.innerHTML} moves!`,
+    shadow
+  );
+  shadow.addEventListener('click', () => {
+    shadow.remove();
+  })
+}
 
 class Field {
   constructor(size) {
@@ -27,12 +40,12 @@ class Field {
     this.moves = 0;
     this.time = 0;
     this.timerId = 0;
-    buttonSound.addEventListener('click', () => {
-      buttonSound.classList.toggle('checkSound_active');
+    buttonSound.addEventListener("click", () => {
+      buttonSound.classList.toggle("checkSound_active");
       this.isSound = !this.isSound;
     });
     formField.addEventListener("change", this.newSize);
-    this.media.addEventListener('change', this.reSize);
+    this.media.addEventListener("change", this.reSize);
   }
 
   isWin() {
@@ -116,10 +129,10 @@ class Field {
         const top = Math.floor(this.zerroIndex / this.size) * this.cardWidth;
         this.currentEl.style.left = `${left}px`;
         this.currentEl.style.top = `${top}px`;
-        this.field.removeEventListener("mousedown", this.mouseDown);
-        this.currentEl.addEventListener("transitionend", () =>
-          this.field.addEventListener("mousedown", this.mouseDown)
-        );
+        // this.field.removeEventListener("mousedown", this.mouseDown);
+        // this.currentEl.addEventListener("transitionend", () =>
+        // this.field.addEventListener("mousedown", this.mouseDown)
+        // );
         this.moves += 1;
         moves.innerHTML = this.moves.toString().padStart(2, "0");
       }
@@ -136,32 +149,29 @@ class Field {
       audio.src = soundWin;
       audio.play();
     }
-
+    createWinMessage();
     this.field.removeEventListener("mousedown", this.mouseDown);
-    console.log(
-      `Hooray! You solved the puzzle in ${timer.innerHTML} and ${moves.innerHTML} moves!`
-    );
   }
 
   newSize = (e) => {
     this.size = Number(e.target.value);
-    this.field.innerHTML = '';
+    this.field.innerHTML = "";
     this.cardWidth =
-    window.innerWidth > SCREENWIDTH.max
-      ? PUZZLEWIDTH.max[this.size]
-      : PUZZLEWIDTH.min[this.size];
+      window.innerWidth > SCREENWIDTH.max
+        ? PUZZLEWIDTH.max[this.size]
+        : PUZZLEWIDTH.min[this.size];
     this.field.style.width = `${this.cardWidth * this.size}px`;
     this.start();
   };
 
   reSize = () => {
     this.cardWidth =
-    window.innerWidth > SCREENWIDTH.max
-    ? PUZZLEWIDTH.max[this.size]
-    : PUZZLEWIDTH.min[this.size];
+      window.innerWidth > SCREENWIDTH.max
+        ? PUZZLEWIDTH.max[this.size]
+        : PUZZLEWIDTH.min[this.size];
     this.field.style.width = `${this.cardWidth * this.size}px`;
     this.moveCards();
-  }
+  };
 
   moveCards() {
     this.cards = [];
@@ -201,4 +211,6 @@ class Field {
   }
 }
 
-export default Field;
+const gameField = new Field(4);
+
+export default gameField;

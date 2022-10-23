@@ -2,7 +2,6 @@ import { createHtmlElement } from "../function";
 
 
 const header = createHtmlElement("header", "header", "", document.body);
-const shadow = createHtmlElement('div', 'shadow', '', document.body);
 const wrapper = createHtmlElement("div", "wrapper wrapper__header", "", header);
 const buttons = createHtmlElement("div", "buttons", "", wrapper);
 const buttonStart = createHtmlElement(
@@ -42,22 +41,32 @@ const hamburger = createHtmlElement(
   wrapper
 );
 
+let shadow;
+
 function closeMenu() {
   buttons.classList.remove('buttons_open');
-  shadow.classList.remove('shadow_open');
   hamburger.classList.remove('hamburger_open');
   buttons.removeEventListener('click', closeMenu);
+  shadow.remove();
+  shadow = null;
 }
 
 function openMenu() {
   buttons.classList.toggle('buttons_open');
-  shadow.classList.toggle('shadow_open');
+  
   hamburger.classList.toggle('hamburger_open');
   buttons.addEventListener('click', closeMenu);
+  if (shadow) {
+    shadow.remove();
+    shadow = null;
+  }else {
+    shadow = createHtmlElement('div', 'shadow', '', document.body);
+  }
+  
 }
 
 
 
 hamburger.addEventListener('click', openMenu);
 
-export { buttonStart, buttonContinue, buttonSave, buttonResults, buttonSound, hamburger, shadow };
+export { buttonStart, buttonContinue, buttonSave, buttonResults, buttonSound, hamburger };

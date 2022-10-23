@@ -1,8 +1,6 @@
 import { buttonStart } from "./scrpt/components/header";
-import Field from './scrpt/base/field';
+import gameField from './scrpt/base/field';
 
-
-  const gameField = new Field(4);
   function start() {
   gameField.start();
 }
