@@ -19,9 +19,9 @@
 }
 
 const SCREENWIDTH = {
-  max: 1280,
-  medium: 760,
-  min: 320,
+  max: 700,
+  // medium: 760,
+  // min: 320,
 }
 
 export { PUZZLEWIDTH, SCREENWIDTH }

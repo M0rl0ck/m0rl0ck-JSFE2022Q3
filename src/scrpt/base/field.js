@@ -13,9 +13,10 @@ class Field {
     this.size = size;
     this.fieldArr = [];
     this.cardWidth =
-      window.innerWidth >= SCREENWIDTH.max
+      window.innerWidth > SCREENWIDTH.max
         ? PUZZLEWIDTH.max[size]
         : PUZZLEWIDTH.min[size];
+    this.media = window.matchMedia(`(max-width: ${SCREENWIDTH.max}px)`);
     this.field.style.width = `${this.cardWidth * this.size}px`;
     this.isSound = !!buttonSound.classList.contains("checkSound_active");
     this.cards = [];
@@ -30,7 +31,8 @@ class Field {
       buttonSound.classList.toggle('checkSound_active');
       this.isSound = !this.isSound;
     });
-    formField.addEventListener("change", this.resize);
+    formField.addEventListener("change", this.newSize);
+    this.media.addEventListener('change', this.reSize);
   }
 
   isWin() {
@@ -141,29 +143,27 @@ class Field {
     );
   }
 
-  resize = (e) => {
+  newSize = (e) => {
     this.size = Number(e.target.value);
     this.field.innerHTML = '';
     this.cardWidth =
-    window.innerWidth >= SCREENWIDTH.max
+    window.innerWidth > SCREENWIDTH.max
       ? PUZZLEWIDTH.max[this.size]
       : PUZZLEWIDTH.min[this.size];
     this.field.style.width = `${this.cardWidth * this.size}px`;
     this.start();
   };
 
-  start() {
-    if (this.isSound) {
-      const audio = new Audio();
-      audio.src = swap;
-      audio.play();
-    }
-    clearInterval(this.timerId);
-    timer.innerHTML = "00:00";
-    moves.innerHTML = "00";
-    this.time = 0;
-    this.moves = 0;
-    this.fieldArr = genFieldArr(this.size * this.size);
+  reSize = () => {
+    this.cardWidth =
+    window.innerWidth > SCREENWIDTH.max
+    ? PUZZLEWIDTH.max[this.size]
+    : PUZZLEWIDTH.min[this.size];
+    this.field.style.width = `${this.cardWidth * this.size}px`;
+    this.moveCards();
+  }
+
+  moveCards() {
     this.cards = [];
     this.fieldArr.forEach((el, index) => {
       if (el) {
@@ -180,6 +180,21 @@ class Field {
     });
     this.field.innerHTML = "";
     this.cards.map((card) => this.field.append(card.cardContainer));
+  }
+
+  start() {
+    if (this.isSound) {
+      const audio = new Audio();
+      audio.src = swap;
+      audio.play();
+    }
+    clearInterval(this.timerId);
+    timer.innerHTML = "00:00";
+    moves.innerHTML = "00";
+    this.time = 0;
+    this.moves = 0;
+    this.fieldArr = genFieldArr(this.size * this.size);
+    this.moveCards();
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
     this.startTimer();

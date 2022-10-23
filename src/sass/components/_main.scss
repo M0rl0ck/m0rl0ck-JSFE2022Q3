@@ -2,6 +2,11 @@
   color: azure;
 }
 
+.wrapper__main {
+  flex-direction: column;
+  align-items: center;
+}
+
 .container__timer {
   display: flex;
   gap: 60px;
@@ -10,7 +15,7 @@
 
 .fieldContainer {
   width: 440px;
-  height: 440px;
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,6 +23,9 @@
   border-radius: 10px;
   background: linear-gradient(-45deg, chocolate, #4f2202);
   user-select: none;
+  @media screen and (max-width: 700px) {
+    width: 300px;
+  }
 }
 
 .field {
