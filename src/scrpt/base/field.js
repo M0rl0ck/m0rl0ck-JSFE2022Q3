@@ -29,7 +29,8 @@ class Field {
     buttonSound.addEventListener('click', () => {
       buttonSound.classList.toggle('checkSound_active');
       this.isSound = !this.isSound;
-    })
+    });
+    formField.addEventListener("change", this.resize);
   }
 
   isWin() {
@@ -141,7 +142,14 @@ class Field {
   }
 
   resize = (e) => {
-    console.log(e.target.value);
+    this.size = Number(e.target.value);
+    this.field.innerHTML = '';
+    this.cardWidth =
+    window.innerWidth >= SCREENWIDTH.max
+      ? PUZZLEWIDTH.max[this.size]
+      : PUZZLEWIDTH.min[this.size];
+    this.field.style.width = `${this.cardWidth * this.size}px`;
+    this.start();
   };
 
   start() {
@@ -174,7 +182,6 @@ class Field {
     this.cards.map((card) => this.field.append(card.cardContainer));
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
-    formField.addEventListener("change", this.resize);
     this.startTimer();
   }
 }
