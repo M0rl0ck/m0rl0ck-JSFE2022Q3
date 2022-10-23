@@ -1,9 +1,11 @@
 import Card from "./card";
 import { moves, timer, field, formField } from "../components/main";
+import { buttonSound } from "../components/header";
 import { genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
 import swap from "../../assets/sound/swipe.mp3";
 import sound from "../../assets/sound/click.mp3";
+import soundWin from "../../assets/sound/win.mp3";
 
 class Field {
   constructor(size) {
@@ -15,6 +17,7 @@ class Field {
         ? PUZZLEWIDTH.max[size]
         : PUZZLEWIDTH.min[size];
     this.field.style.width = `${this.cardWidth * this.size}px`;
+    this.isSound = !!buttonSound.classList.contains("checkSound_active");
     this.cards = [];
     this.isMove = false;
     this.isMouseDown = false;
@@ -23,6 +26,10 @@ class Field {
     this.moves = 0;
     this.time = 0;
     this.timerId = 0;
+    buttonSound.addEventListener('click', () => {
+      buttonSound.classList.toggle('checkSound_active');
+      this.isSound = !this.isSound;
+    })
   }
 
   isWin() {
@@ -32,7 +39,9 @@ class Field {
   startTimer() {
     this.timerId = setInterval(() => {
       this.time += 1;
-      const min = (Math.floor(this.time / 60)).toString().padStart(2, "0");
+      const min = Math.floor(this.time / 60)
+        .toString()
+        .padStart(2, "0");
       const sec = (this.time % 60).toString().padStart(2, "0");
       timer.innerHTML = `${min}:${sec}`;
     }, 1000);
@@ -87,9 +96,12 @@ class Field {
   mouseUp = () => {
     if (this.isMouseDown) {
       this.isMouseDown = false;
-      const audio = new Audio();
-      audio.src = sound;
-      audio.play();
+      if (this.isSound) {
+        const audio = new Audio();
+        audio.src = sound;
+        audio.play();
+      }
+
       if (this.isMove) {
         this.isMove = false;
       } else {
@@ -116,21 +128,33 @@ class Field {
 
   win() {
     clearInterval(this.timerId);
+    if (this.isSound) {
+      const audio = new Audio();
+      audio.src = soundWin;
+      audio.play();
+    }
+
     this.field.removeEventListener("mousedown", this.mouseDown);
     console.log(
       `Hooray! You solved the puzzle in ${timer.innerHTML} and ${moves.innerHTML} moves!`
     );
   }
 
+  resize = (e) => {
+    console.log(e.target.value);
+  };
+
   start() {
-    const audio = new Audio();
+    if (this.isSound) {
+      const audio = new Audio();
+      audio.src = swap;
+      audio.play();
+    }
     clearInterval(this.timerId);
-    timer.innerHTML = '00:00';
-    moves.innerHTML = '00';
+    timer.innerHTML = "00:00";
+    moves.innerHTML = "00";
     this.time = 0;
     this.moves = 0;
-    audio.src = swap;
-    audio.play();
     this.fieldArr = genFieldArr(this.size * this.size);
     this.cards = [];
     this.fieldArr.forEach((el, index) => {
@@ -150,6 +174,7 @@ class Field {
     this.cards.map((card) => this.field.append(card.cardContainer));
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
+    formField.addEventListener("change", this.resize);
     this.startTimer();
   }
 }
