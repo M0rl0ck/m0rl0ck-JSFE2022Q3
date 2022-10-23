@@ -1,0 +1,62 @@
+.main {
+  color: azure;
+}
+
+.wrapper__main {
+  flex-direction: column;
+  align-items: center;
+}
+
+.container__timer {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+}
+
+.fieldContainer {
+  width: 440px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, chocolate, #4f2202);
+  user-select: none;
+  @media screen and (max-width: 700px) {
+    width: 300px;
+  }
+}
+
+.field {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: aqua;
+}
+
+.movesContainer,
+.timerContainer {
+  display: flex;
+  gap: 6px;
+}
+
+.frameSizeForm {
+  margin-top: 10px;
+  fieldset {
+    border: 0;
+    padding: 6px 0;
+    ul {
+      display: flex;
+      gap: 20px;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        input,
+        label {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
