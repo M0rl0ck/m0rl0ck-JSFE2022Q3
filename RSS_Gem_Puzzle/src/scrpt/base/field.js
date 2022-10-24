@@ -1,6 +1,12 @@
 import Card from "./card";
 import { moves, timer, field, formField } from "../components/main";
-import { buttonSound, hamburger, buttonResults } from "../components/header";
+import {
+  buttonSound,
+  hamburger,
+  buttonResults,
+  buttonSave,
+  buttonContinue,
+} from "../components/header";
 import { createHtmlElement, genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
 import swap from "../../assets/sound/swipe.mp3";
@@ -49,7 +55,8 @@ class Field {
     });
     formField.addEventListener("change", this.newSize);
     this.media.addEventListener("change", this.reSize);
-    buttonResults.addEventListener('click', this.showResult);
+    buttonResults.addEventListener("click", this.showResult);
+    buttonContinue.addEventListener("click", this.loadGame);
   }
 
   isWin() {
@@ -59,20 +66,25 @@ class Field {
   showResult = () => {
     if (this.records && this.records.length) {
       const shadow = createHtmlElement("div", "shadow", "", document.body);
-      const rec = createHtmlElement('div', 'records', '<p>Moves</p><p>Time</p>', shadow);
-      this.records.forEach(el => {
+      const rec = createHtmlElement(
+        "div",
+        "records",
+        "<p>Moves</p><p>Time</p>",
+        shadow
+      );
+      this.records.forEach((el) => {
         const min = Math.floor(el.time / 60)
-        .toString()
-        .padStart(2, "0");
-      const sec = (el.time % 60).toString().padStart(2, "0");
-        createHtmlElement('p', '', `${el.moves}`, rec);
-        createHtmlElement('p', '', `${min}:${sec}`, rec);
+          .toString()
+          .padStart(2, "0");
+        const sec = (el.time % 60).toString().padStart(2, "0");
+        createHtmlElement("p", "", `${el.moves}`, rec);
+        createHtmlElement("p", "", `${min}:${sec}`, rec);
       });
       shadow.addEventListener("click", () => {
         shadow.remove();
       });
     }
-  }
+  };
 
   startTimer() {
     this.isTimer = true;
@@ -97,7 +109,7 @@ class Field {
     } else {
       this.startTimer();
     }
-  }
+  };
 
   isCanMove(id) {
     let zerroIndex;
@@ -180,7 +192,8 @@ class Field {
 
   win() {
     this.stopTimer();
-    hamburger.removeEventListener('click', this.timerPause);
+    hamburger.removeEventListener("click", this.timerPause);
+    buttonSave.removeEventListener("click", this.saveGame);
     if (this.isSound) {
       const audio = new Audio();
       audio.src = soundWin;
@@ -188,12 +201,51 @@ class Field {
     }
     createWinMessage();
     this.field.removeEventListener("mousedown", this.mouseDown);
-    this.records.push({time: this.time, moves: this.moves});
+    this.records.push({ time: this.time, moves: this.moves });
     this.records.sort((a, b) => a.moves - b.moves);
     if (this.records.length > 10) {
       this.records.pop();
     }
   }
+
+  saveGame = () => {
+    this.save.size = this.size;
+    this.save.fieldArr = this.fieldArr;
+    this.save.moves = this.moves;
+    this.save.time = this.time;
+  };
+
+  loadGame = () => {
+    if (this.loadGame) {
+      if (this.isSound) {
+        const audio = new Audio();
+        audio.src = swap;
+        audio.play();
+      }
+      this.stopTimer();
+      this.size = this.save.size;
+      this.fieldArr = this.save.fieldArr;
+      this.moves = this.save.moves;
+      this.time = this.save.time;
+      moves.innerHTML = this.moves.toString().padStart(2, "0");
+      const min = Math.floor(this.time / 60)
+        .toString()
+        .padStart(2, "0");
+      const sec = (this.time % 60).toString().padStart(2, "0");
+      timer.innerHTML = `${min}:${sec}`;
+      this.cardWidth =
+      window.innerWidth > SCREENWIDTH.max
+        ? PUZZLEWIDTH.max[this.size]
+        : PUZZLEWIDTH.min[this.size];
+      this.field.style.width = `${this.cardWidth * this.size}px`;  
+      this.moveCards();
+      this.field.addEventListener("mousedown", this.mouseDown);
+      this.field.addEventListener("mouseup", this.mouseUp);
+      hamburger.addEventListener("click", this.timerPause);
+      buttonSave.addEventListener("click", this.saveGame);
+      this.startTimer();
+    }
+  };
 
   newSize = (e) => {
     this.size = Number(e.target.value);
@@ -249,7 +301,8 @@ class Field {
     this.moveCards();
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
-    hamburger.addEventListener('click', this.timerPause);
+    hamburger.addEventListener("click", this.timerPause);
+    buttonSave.addEventListener("click", this.saveGame);
     this.startTimer();
   }
 }
