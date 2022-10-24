@@ -1,6 +1,6 @@
 import Card from "./card";
 import { moves, timer, field, formField } from "../components/main";
-import { buttonSound, hamburger } from "../components/header";
+import { buttonSound, hamburger, buttonResults } from "../components/header";
 import { createHtmlElement, genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
 import swap from "../../assets/sound/swipe.mp3";
@@ -49,10 +49,29 @@ class Field {
     });
     formField.addEventListener("change", this.newSize);
     this.media.addEventListener("change", this.reSize);
+    buttonResults.addEventListener('click', this.showResult);
   }
 
   isWin() {
     return !this.fieldArr.some((el, index) => el > 0 && el - 1 !== index);
+  }
+
+  showResult = () => {
+    if (this.records && this.records.length) {
+      const shadow = createHtmlElement("div", "shadow", "", document.body);
+      const rec = createHtmlElement('div', 'records', '<p>Moves</p><p>Time</p>', shadow);
+      this.records.forEach(el => {
+        const min = Math.floor(el.time / 60)
+        .toString()
+        .padStart(2, "0");
+      const sec = (el.time % 60).toString().padStart(2, "0");
+        createHtmlElement('p', '', `${el.moves}`, rec);
+        createHtmlElement('p', '', `${min}:${sec}`, rec);
+      });
+      shadow.addEventListener("click", () => {
+        shadow.remove();
+      });
+    }
   }
 
   startTimer() {
@@ -169,6 +188,11 @@ class Field {
     }
     createWinMessage();
     this.field.removeEventListener("mousedown", this.mouseDown);
+    this.records.push({time: this.time, moves: this.moves});
+    this.records.sort((a, b) => a.moves - b.moves);
+    if (this.records.length > 10) {
+      this.records.pop();
+    }
   }
 
   newSize = (e) => {

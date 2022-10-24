@@ -1,0 +1,12 @@
+.records {
+  display:  grid;
+  width: 300px;
+  padding: 5px;
+  background-color: blue;
+  grid-template-columns: 1fr 1fr;
+  color: bisque;
+  p {
+    border: 1px solid bisque;
+    padding: 5px 10px;
+  }
+}
