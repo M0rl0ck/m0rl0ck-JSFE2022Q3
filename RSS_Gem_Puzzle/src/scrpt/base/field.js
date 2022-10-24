@@ -1,6 +1,6 @@
 import Card from "./card";
 import { moves, timer, field, formField } from "../components/main";
-import { buttonSound } from "../components/header";
+import { buttonSound, hamburger } from "../components/header";
 import { createHtmlElement, genFieldArr } from "../function";
 import { PUZZLEWIDTH, SCREENWIDTH } from "../constans/constans";
 import swap from "../../assets/sound/swipe.mp3";
@@ -8,16 +8,16 @@ import sound from "../../assets/sound/click.mp3";
 import soundWin from "../../assets/sound/win.mp3";
 
 function createWinMessage() {
-  const shadow = createHtmlElement('div', 'shadow', '', document.body);
+  const shadow = createHtmlElement("div", "shadow", "", document.body);
   createHtmlElement(
     "div",
     "winMessage",
     `Hooray! You solved the puzzle in ${timer.innerHTML} and ${moves.innerHTML} moves!`,
     shadow
   );
-  shadow.addEventListener('click', () => {
+  shadow.addEventListener("click", () => {
     shadow.remove();
-  })
+  });
 }
 
 class Field {
@@ -35,11 +35,14 @@ class Field {
     this.cards = [];
     this.isMove = false;
     this.isMouseDown = false;
+    this.save = {};
+    this.records = [];
     this.zerroIndex = 0;
     this.prevIndex = 0;
     this.moves = 0;
     this.time = 0;
     this.timerId = 0;
+    this.isTimer = false;
     buttonSound.addEventListener("click", () => {
       buttonSound.classList.toggle("checkSound_active");
       this.isSound = !this.isSound;
@@ -53,6 +56,7 @@ class Field {
   }
 
   startTimer() {
+    this.isTimer = true;
     this.timerId = setInterval(() => {
       this.time += 1;
       const min = Math.floor(this.time / 60)
@@ -61,6 +65,19 @@ class Field {
       const sec = (this.time % 60).toString().padStart(2, "0");
       timer.innerHTML = `${min}:${sec}`;
     }, 1000);
+  }
+
+  stopTimer() {
+    this.isTimer = false;
+    clearInterval(this.timerId);
+  }
+
+  timerPause = () => {
+    if (this.isTimer) {
+      this.stopTimer();
+    } else {
+      this.startTimer();
+    }
   }
 
   isCanMove(id) {
@@ -112,15 +129,15 @@ class Field {
   mouseUp = () => {
     if (this.isMouseDown) {
       this.isMouseDown = false;
-      if (this.isSound) {
-        const audio = new Audio();
-        audio.src = sound;
-        audio.play();
-      }
 
       if (this.isMove) {
         this.isMove = false;
       } else {
+        if (this.isSound) {
+          const audio = new Audio();
+          audio.src = sound;
+          audio.play();
+        }
         [this.fieldArr[this.prevIndex], this.fieldArr[this.zerroIndex]] = [
           this.fieldArr[this.zerroIndex],
           this.fieldArr[this.prevIndex],
@@ -143,7 +160,8 @@ class Field {
   };
 
   win() {
-    clearInterval(this.timerId);
+    this.stopTimer();
+    hamburger.removeEventListener('click', this.timerPause);
     if (this.isSound) {
       const audio = new Audio();
       audio.src = soundWin;
@@ -198,7 +216,7 @@ class Field {
       audio.src = swap;
       audio.play();
     }
-    clearInterval(this.timerId);
+    this.stopTimer();
     timer.innerHTML = "00:00";
     moves.innerHTML = "00";
     this.time = 0;
@@ -207,6 +225,7 @@ class Field {
     this.moveCards();
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
+    hamburger.addEventListener('click', this.timerPause);
     this.startTimer();
   }
 }

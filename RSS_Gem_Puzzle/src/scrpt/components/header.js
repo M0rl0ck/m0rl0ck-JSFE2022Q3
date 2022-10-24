@@ -41,6 +41,7 @@ const hamburger = createHtmlElement(
   wrapper
 );
 
+
 let shadow;
 
 function closeMenu() {
@@ -53,7 +54,6 @@ function closeMenu() {
 
 function openMenu() {
   buttons.classList.toggle('buttons_open');
-  
   hamburger.classList.toggle('hamburger_open');
   buttons.addEventListener('click', closeMenu);
   if (shadow) {
