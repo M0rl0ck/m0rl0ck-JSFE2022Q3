@@ -41,8 +41,12 @@ class Field {
     this.cards = [];
     this.isMove = false;
     this.isMouseDown = false;
-    this.save = {};
-    this.records = [];
+    this.save = localStorage.saveGameGemPuzzle
+      ? JSON.parse(localStorage.saveGameGemPuzzle)
+      : {};
+    this.records = localStorage.gameGemPuzzleRecords
+      ? JSON.parse(localStorage.gameGemPuzzleRecords)
+      : [];
     this.zerroIndex = 0;
     this.prevIndex = 0;
     this.moves = 0;
@@ -57,7 +61,20 @@ class Field {
     this.media.addEventListener("change", this.reSize);
     buttonResults.addEventListener("click", this.showResult);
     buttonContinue.addEventListener("click", this.loadGame);
+    window.addEventListener("beforeunload", this.setLocalStorage);
   }
+
+  setLocalStorage = () => {
+    if (this.save && this.save.fieldArr) {
+      localStorage.setItem("saveGameGemPuzzle", JSON.stringify(this.save));
+    }
+    if (this.records && this.records.length) {
+      localStorage.setItem(
+        "gameGemPuzzleRecords",
+        JSON.stringify(this.records)
+      );
+    }
+  };
 
   isWin() {
     return !this.fieldArr.some((el, index) => el > 0 && el - 1 !== index);
@@ -239,10 +256,10 @@ class Field {
       const sec = (this.time % 60).toString().padStart(2, "0");
       timer.innerHTML = `${min}:${sec}`;
       this.cardWidth =
-      window.innerWidth > SCREENWIDTH.max
-        ? PUZZLEWIDTH.max[this.size]
-        : PUZZLEWIDTH.min[this.size];
-      this.field.style.width = `${this.cardWidth * this.size}px`;  
+        window.innerWidth > SCREENWIDTH.max
+          ? PUZZLEWIDTH.max[this.size]
+          : PUZZLEWIDTH.min[this.size];
+      this.field.style.width = `${this.cardWidth * this.size}px`;
       this.moveCards();
       this.field.addEventListener("mousedown", this.mouseDown);
       this.field.addEventListener("mouseup", this.mouseUp);
