@@ -210,13 +210,18 @@ class Field {
 
   saveGame = () => {
     this.save.size = this.size;
-    this.save.fieldArr = this.fieldArr;
+    this.save.fieldArr = [...this.fieldArr];
     this.save.moves = this.moves;
     this.save.time = this.time;
+    if (this.isSound) {
+      const audio = new Audio();
+      audio.src = soundWin;
+      audio.play();
+    }
   };
 
   loadGame = () => {
-    if (this.loadGame) {
+    if (this.save && this.save.fieldArr) {
       if (this.isSound) {
         const audio = new Audio();
         audio.src = swap;
@@ -224,7 +229,7 @@ class Field {
       }
       this.stopTimer();
       this.size = this.save.size;
-      this.fieldArr = this.save.fieldArr;
+      this.fieldArr = [...this.save.fieldArr];
       this.moves = this.save.moves;
       this.time = this.save.time;
       moves.innerHTML = this.moves.toString().padStart(2, "0");
