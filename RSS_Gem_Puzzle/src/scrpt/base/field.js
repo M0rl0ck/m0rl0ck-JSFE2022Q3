@@ -1,5 +1,5 @@
 import Card from "./card";
-import { moves, timer, field, formField } from "../components/main";
+import { moves, timer, field, formField, arrRadio } from "../components/main";
 import {
   buttonSound,
   hamburger,
@@ -261,6 +261,13 @@ class Field {
           : PUZZLEWIDTH.min[this.size];
       this.field.style.width = `${this.cardWidth * this.size}px`;
       this.moveCards();
+      arrRadio.forEach(el => {
+        const radio = el.querySelector('input');
+        if (radio.value === this.size.toString()) {
+          radio.checked = true;
+        }
+      })
+      // formField.value = this.size;
       this.field.addEventListener("mousedown", this.mouseDown);
       this.field.addEventListener("mouseup", this.mouseUp);
       hamburger.addEventListener("click", this.timerPause);

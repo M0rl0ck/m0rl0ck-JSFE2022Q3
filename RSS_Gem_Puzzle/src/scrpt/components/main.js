@@ -44,8 +44,11 @@ const formField = createHtmlElement(
   frameSizeForm
 );
 const listRadio = createHtmlElement('ul', 'listRadio', '', formField);
+const arrRadio = [];
 for (let i = 3; i<=8; i +=1) {
-  listRadio.append(createRadio(i, `${i}x${i}`, i === 4))
+  const radio = createRadio(i, `${i}x${i}`, i === 4);
+  arrRadio.push(radio);
+  listRadio.append(radio);
 }
 
-export { moves, timer, field, formField };
+export { moves, timer, field, formField, arrRadio };
