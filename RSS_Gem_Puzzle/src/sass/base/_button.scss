@@ -1,15 +1,20 @@
 .button {
   min-width: 90px;
   height: 30px;
-  background-color: mediumspringgreen;
+  background-color: #845139;
   border-radius: 6px;
   border: 0;
-  color: #00008b;
+  color: bisque;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.5s;
+  transition: background-color 0.5s;
+  box-shadow: -2px -1px 2px #3f1f11;
   &:hover {
-    background-color: #06d606;
+    background-color: #67341c;
+  }
+  &:active {
+    box-shadow: none;
+    transform: scale(0.95);
   }
 }
