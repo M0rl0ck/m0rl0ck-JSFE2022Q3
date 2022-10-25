@@ -2,7 +2,7 @@ import Card from "./card";
 import { moves, timer, field, formField, arrRadio } from "../components/main";
 import {
   buttonSound,
-  hamburger,
+  // hamburger,
   buttonResults,
   buttonSave,
   buttonContinue,
@@ -41,6 +41,7 @@ class Field {
     this.cards = [];
     this.isMove = false;
     this.isMouseDown = false;
+    this.mousePosition = { x: 0, y: 0 };
     this.save = localStorage.saveGameGemPuzzle
       ? JSON.parse(localStorage.saveGameGemPuzzle)
       : {};
@@ -49,6 +50,7 @@ class Field {
       : [];
     this.zerroIndex = 0;
     this.prevIndex = 0;
+    this.ofset = 0;
     this.moves = 0;
     this.time = 0;
     this.timerId = 0;
@@ -120,13 +122,13 @@ class Field {
     clearInterval(this.timerId);
   }
 
-  timerPause = () => {
-    if (this.isTimer) {
-      this.stopTimer();
-    } else {
-      this.startTimer();
-    }
-  };
+  // timerPause = () => {
+  //   if (this.isTimer) {
+  //     this.stopTimer();
+  //   } else {
+  //     this.startTimer();
+  //   }
+  // };
 
   isCanMove(id) {
     let zerroIndex;
@@ -161,18 +163,117 @@ class Field {
     const el = e.target.closest(".cardContainer");
     if (el) {
       if (this.isCanMove(el.dataset.id)) {
+        this.mousePosition.x = e.pageX;
+        this.mousePosition.y = e.pageY;
         this.isMouseDown = true;
-        this.field.addEventListener("mousemove", this.mouseMove);
         this.currentEl = el;
+        if (this.fieldArr[this.prevIndex - this.size] === 0) {
+          document.addEventListener("mousemove", this.mouseMoveUp);
+        }
+        if (this.fieldArr[this.prevIndex + this.size] === 0) {
+          this.field.addEventListener("mousemove", this.mouseMoveDown);
+        }
+        if (this.fieldArr[this.prevIndex - 1] === 0) {
+          this.field.addEventListener("mousemove", this.mouseMoveLeft);
+        }
+        if (this.fieldArr[this.prevIndex + 1] === 0) {
+          this.field.addEventListener("mousemove", this.mouseMoveRight);
+        }
       }
     }
   };
 
-  mouseMove = () => {
+  mouseMoveUp = (e) => {
     if (this.isMouseDown) {
+      const start = Math.floor(this.prevIndex / this.size) * this.cardWidth;
+      const end = Math.floor(this.zerroIndex / this.size) * this.cardWidth;
+      const ofset = this.mousePosition.y - e.pageY;
       this.isMove = true;
+      if (start - ofset >= end && ofset > 0) {
+        this.currentEl.style.top = `${start - ofset}px`;
+        this.ofset = ofset;
+      }
     }
   };
+
+  mouseMoveDown = (e) => {
+    if (this.isMouseDown) {
+      const start = Math.floor(this.prevIndex / this.size) * this.cardWidth;
+      const end = Math.floor(this.zerroIndex / this.size) * this.cardWidth;
+      const ofset = this.mousePosition.y - e.pageY;
+      this.isMove = true;
+      if (start - ofset <= end && ofset < 0) {
+        this.currentEl.style.top = `${start - ofset}px`;
+        this.ofset = ofset;
+      }
+    }
+  };
+
+  mouseMoveLeft = (e) => {
+    if (this.isMouseDown) {
+      const start = (this.prevIndex % this.size) * this.cardWidth;
+      const end = (this.zerroIndex % this.size) * this.cardWidth;
+      const ofset = this.mousePosition.x - e.pageX;
+      this.isMove = true;
+      if (start - ofset >= end && ofset > 0) {
+        this.currentEl.style.left = `${start - ofset}px`;
+        this.ofset = ofset;
+      }
+    }
+  };
+
+  mouseMoveRight = (e) => {
+    if (this.isMouseDown) {
+      const start = (this.prevIndex % this.size) * this.cardWidth;
+      const end = (this.zerroIndex % this.size) * this.cardWidth;
+      const ofset = this.mousePosition.x - e.pageX;
+      this.isMove = true;
+      if (start - ofset <= end && ofset < 0) {
+        this.currentEl.style.left = `${start - ofset}px`;
+        this.ofset = ofset;
+      }
+    }
+  };
+
+  // mouseMove = (e) => {
+  //   if (this.isMouseDown) {
+  //     if (
+  //       Math.abs(this.mousePosition.x - e.pageX) > 6 ||
+  //       Math.abs(this.mousePosition.y - e.pageY) > 6
+  //     ) {
+  //       this.isMove = true;
+  //     }
+  //   }
+  // };
+
+  moveCard() {
+    if (this.isSound) {
+      const audio = new Audio();
+      audio.src = sound;
+      audio.play();
+    }
+    [this.fieldArr[this.prevIndex], this.fieldArr[this.zerroIndex]] = [
+      this.fieldArr[this.zerroIndex],
+      this.fieldArr[this.prevIndex],
+    ];
+    const left = (this.zerroIndex % this.size) * this.cardWidth;
+    const top = Math.floor(this.zerroIndex / this.size) * this.cardWidth;
+    this.currentEl.style.left = `${left}px`;
+    this.currentEl.style.top = `${top}px`;
+    // this.field.removeEventListener("mousedown", this.mouseDown);
+    // this.currentEl.addEventListener("transitionend", () =>
+    // this.field.addEventListener("mousedown", this.mouseDown)
+    // );
+    this.moves += 1;
+    moves.innerHTML = this.moves.toString().padStart(2, "0");
+  }
+
+  reMoveCard() {
+    const left = (this.prevIndex % this.size) * this.cardWidth;
+    const top = Math.floor(this.prevIndex / this.size) * this.cardWidth;
+    this.currentEl.style.left = `${left}px`;
+    this.currentEl.style.top = `${top}px`;
+  }
 
   mouseUp = () => {
     if (this.isMouseDown) {
@@ -180,26 +281,13 @@ class Field {
 
       if (this.isMove) {
         this.isMove = false;
-      } else {
-        if (this.isSound) {
-          const audio = new Audio();
-          audio.src = sound;
-          audio.play();
+        if (Math.abs(this.ofset) > (this.cardWidth / 2)) {
+          this.moveCard();
+        } else {
+          this.reMoveCard();
         }
-        [this.fieldArr[this.prevIndex], this.fieldArr[this.zerroIndex]] = [
-          this.fieldArr[this.zerroIndex],
-          this.fieldArr[this.prevIndex],
-        ];
-        const left = (this.zerroIndex % this.size) * this.cardWidth;
-        const top = Math.floor(this.zerroIndex / this.size) * this.cardWidth;
-        this.currentEl.style.left = `${left}px`;
-        this.currentEl.style.top = `${top}px`;
-        // this.field.removeEventListener("mousedown", this.mouseDown);
-        // this.currentEl.addEventListener("transitionend", () =>
-        // this.field.addEventListener("mousedown", this.mouseDown)
-        // );
-        this.moves += 1;
-        moves.innerHTML = this.moves.toString().padStart(2, "0");
+      } else {
+        this.moveCard();
       }
       if (this.isWin()) {
         this.win();
@@ -209,7 +297,7 @@ class Field {
 
   win() {
     this.stopTimer();
-    hamburger.removeEventListener("click", this.timerPause);
+    // hamburger.removeEventListener("click", this.timerPause);
     buttonSave.removeEventListener("click", this.saveGame);
     if (this.isSound) {
       const audio = new Audio();
@@ -261,16 +349,16 @@ class Field {
           : PUZZLEWIDTH.min[this.size];
       this.field.style.width = `${this.cardWidth * this.size}px`;
       this.moveCards();
-      arrRadio.forEach(el => {
-        const radio = el.querySelector('input');
+      arrRadio.forEach((el) => {
+        const radio = el.querySelector("input");
         if (radio.value === this.size.toString()) {
           radio.checked = true;
         }
-      })
+      });
       // formField.value = this.size;
       this.field.addEventListener("mousedown", this.mouseDown);
       this.field.addEventListener("mouseup", this.mouseUp);
-      hamburger.addEventListener("click", this.timerPause);
+      // hamburger.addEventListener("click", this.timerPause);
       buttonSave.addEventListener("click", this.saveGame);
       this.startTimer();
     }
@@ -330,7 +418,8 @@ class Field {
     this.moveCards();
     this.field.addEventListener("mousedown", this.mouseDown);
     this.field.addEventListener("mouseup", this.mouseUp);
-    hamburger.addEventListener("click", this.timerPause);
+    this.field.addEventListener("mouseleave", this.mouseUp);
+    // hamburger.addEventListener("click", this.timerPause);
     buttonSave.addEventListener("click", this.saveGame);
     this.startTimer();
   }
