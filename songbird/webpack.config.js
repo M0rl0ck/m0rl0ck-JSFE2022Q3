@@ -12,7 +12,7 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: ["./src/index.js", "./src/index.js",],
+  entry: ["./src/index.js", "./src/style.scss",],
   output: {
     path: path.resolve(__dirname, "dist"),
   },

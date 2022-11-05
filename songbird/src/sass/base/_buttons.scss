@@ -1,0 +1,21 @@
+.button {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: goldenrod;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  cursor: pointer;
+  color: darkblue;
+  &:hover {
+    background-color: gold;
+    transition: all 0.5s;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
