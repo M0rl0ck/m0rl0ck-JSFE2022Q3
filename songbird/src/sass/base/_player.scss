@@ -1,0 +1,91 @@
+.play-button,
+.volume-button {
+  width: 35px;
+  height: 35px;
+  margin-right: 20px;
+  border: solid 2px gray;
+  border-radius: 50%;
+  cursor: pointer;
+  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px 15px;
+  &:hover {
+    background-size: 18px 18px;
+  }
+  
+}
+
+.play-button {
+  background-image: url("./assets/icons/play.svg");
+  &_active {
+    background-image: url("./assets/icons/pause.svg");
+  }
+}
+
+.volume-button {
+  background-image: url("./assets/icons/volume.svg");
+  &_mute {
+    background-image: url("./assets/icons/mute.svg");
+  }
+}
+
+.player {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.control,
+.volume-control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 6px 0;
+}
+
+.volume-control {
+  max-width: 300px;
+}
+
+.bar-container,
+.volume-bar-container {
+  flex-grow: 1;
+  padding-top: 5px;
+  position: relative;
+
+}
+
+.bar,
+.volume-bar {
+  height: 4px;
+  border-radius: 2px;
+  background-color: gray;
+  cursor: pointer;
+}
+
+.bar-thumb,
+.volume-bar-thumb {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 0;
+  border: gold 3px solid;
+  border-radius: 50%;
+  background-color: darkblue;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s, background-color 0.3s;
+    background-color: red;
+  }
+}
+
+.time-container {
+  display: flex;
+  width: 100%;
+  padding-top: 4px;
+  justify-content: space-between;
+}
