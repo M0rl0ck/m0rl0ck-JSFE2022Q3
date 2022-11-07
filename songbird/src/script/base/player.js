@@ -1,7 +1,3 @@
-import birdImgDefault from "../../assets/img/bird.jpg";
-import imgPlay from "../../assets/icons/play.svg";
-import imgPause from "../../assets/icons/pause.svg";
-import imgVolume from "../../assets/icons/volume.svg";
 import createHtmlElement from "../function/function";
 
 export default class Player {
@@ -52,6 +48,7 @@ export default class Player {
 
     this.playButton.addEventListener("click", this.play);
     this.player.addEventListener("timeupdate", this.updateTime);
+    this.player.addEventListener("ended", this.stop);
     this.bar.addEventListener("mousedown", this.setCurrentTime);
     this.barThumb.addEventListener("mousedown", () => {
       this.mouseDown = true;
@@ -186,5 +183,10 @@ export default class Player {
       this.player.pause();
       this.playButton.classList.remove("play-button_active");
     }
+  };
+
+  stop = () => {
+    this.player.pause();
+    this.playButton.classList.remove("play-button_active");
   };
 }
