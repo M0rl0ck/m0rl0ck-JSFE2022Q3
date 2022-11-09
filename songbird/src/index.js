@@ -27,5 +27,11 @@ const player = new Player(birdsData[0][1].audio);
 
 main.wrapper.append(question.el);
 const button = createHtmlElement('button', '', 'show', main.wrapper);
+const button1 = createHtmlElement('button', '', 'next', main.wrapper);
+
+const showNext = () => {
+  question.next(birdsData[0][2]);
+}
 
 button.addEventListener('click', question.show);
+button1.addEventListener('click', showNext);

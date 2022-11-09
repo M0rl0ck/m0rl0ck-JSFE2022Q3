@@ -8,11 +8,21 @@ export default class Question {
     this.el = createHtmlElement("div", "question-wrapper");
     const imgContainer = createHtmlElement("div", "img-container", "", this.el);
     this.image = createHtmlElement("img", "bird-img", "", imgContainer);
-    this.image.src = defaultImg;
     const div = createHtmlElement("div", "container-player", "", this.el);
     this.name = createHtmlElement("p", "bird-name", "****", div);
-    this.player = new Player(this.data.audio);
+    this.player = new Player();
     div.append(this.player.playerContainer);
+    this.init();
+  }
+
+  init = () => {
+     this.image.src = defaultImg;
+     this.player.player.src = this.data.audio;
+  }
+
+  next = (data) => {
+    this.data = data;
+    this.init();
   }
 
   show = () => {

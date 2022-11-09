@@ -1,19 +1,28 @@
 import createHtmlElement from "../function/function";
 
 export default class Player {
-  constructor(sound) {
-    this.player = new Audio(sound);
+  constructor() {
+    this.player = new Audio();
     this.playerContainer = createHtmlElement("div", "player");
     this.mouseDown = false;
     this.volumeMouseDown = false;
+    this.player.volume = 0.6;
 
     this.player.addEventListener("loadedmetadata", this.init);
   }
 
   init = () => {
+    this.playerContainer.innerHTML = '';
     this.createControlTime();
     this.createControlVolume();
+    this.player.removeEventListener("loadedmetadata", this.init);
+    this.player.addEventListener("loadedmetadata", this.next);
   };
+
+  next = () => {
+    this.fullTime.innerHTML = `${this.getTime(this.player.duration)}`;
+    this.updateTime();
+  }
 
   createControlTime() {
     const control = createHtmlElement(
@@ -31,7 +40,7 @@ export default class Player {
       "",
       this.barContainer
     );
-    this.barThumb.style.left = "0%";
+    // this.barThumb.style.left = "0%";
     const time = createHtmlElement(
       "div",
       "time-container",
@@ -45,10 +54,12 @@ export default class Player {
       `${this.getTime(this.player.duration)}`,
       time
     );
+    this.updateTime();
 
     this.playButton.addEventListener("click", this.play);
     this.player.addEventListener("timeupdate", this.updateTime);
     this.player.addEventListener("ended", this.stop);
+
     this.bar.addEventListener("mousedown", this.setCurrentTime);
     this.barThumb.addEventListener("mousedown", () => {
       this.mouseDown = true;
@@ -101,6 +112,7 @@ export default class Player {
     this.updateVolume();
 
     this.volumeButton.addEventListener("click", this.setMute);
+
     this.volumeBar.addEventListener("mousedown", this.setVolume);
     this.volumeBarThumb.addEventListener("mousedown", () => {
       this.volumeMouseDown = true;
@@ -114,7 +126,7 @@ export default class Player {
       }
     });
     this.volumeBarContainer.addEventListener("mouseleave", () => {
-      this.mouseDown = false;
+      this.volumeMouseDown = false;
     });
   }
 
