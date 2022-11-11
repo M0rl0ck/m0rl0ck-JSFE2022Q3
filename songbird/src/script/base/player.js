@@ -1,7 +1,8 @@
 import createHtmlElement from "../function/function";
 
 export default class Player {
-  constructor() {
+  constructor(observer) {
+    this.observer = observer;
     this.player = new Audio();
     this.playerContainer = createHtmlElement("div", "player");
     this.mouseDown = false;
@@ -9,6 +10,11 @@ export default class Player {
     this.player.volume = 0.6;
 
     this.player.addEventListener("loadedmetadata", this.init);
+
+    this.observer.addEvent('setVolume', this.getAllVolume);
+    this.observer.addEvent('play', this.allStop);
+    this.observer.addEvent('mute', this.setMute);
+
   }
 
   init = () => {
@@ -111,7 +117,7 @@ export default class Player {
     this.volumeBarThumb.style.left = "0%";
     this.updateVolume();
 
-    this.volumeButton.addEventListener("click", this.setMute);
+    this.volumeButton.addEventListener("click",  () => this.observer.startEvents('mute'));
 
     this.volumeBar.addEventListener("mousedown", this.setVolume);
     this.volumeBarThumb.addEventListener("mousedown", () => {
@@ -165,6 +171,7 @@ export default class Player {
     this.volumeBarThumb.style.left = `${procent - offsetThumb}%`;
     this.volumeBar.style.backgroundImage = `linear-gradient(to right, goldenrod 0%,
       goldenrod ${procent}%, gray ${procent}%, gray 100% )`;
+      
   };
 
   setVolume = (e) => {
@@ -175,6 +182,7 @@ export default class Player {
     const volume = e.offsetX / this.volumeBarContainer.offsetWidth;
     this.player.volume = volume;
     this.updateVolume();
+    this.observer.startEvents('setVolume', this, this.player.volume);
   };
 
   setMute = () => {
@@ -189,6 +197,7 @@ export default class Player {
 
   play = () => {
     if (this.player.paused) {
+      this.observer.startEvents('play', this)
       this.player.play();
       this.playButton.classList.add("play-button_active");
     } else {
@@ -201,4 +210,18 @@ export default class Player {
     this.player.pause();
     this.playButton.classList.remove("play-button_active");
   };
+
+  getAllVolume = (obj, volume) => {
+    if (obj !== this) {
+      this.player.volume = volume;
+      this.updateVolume();
+    }
+  }
+
+  allStop = (obj) => {
+    if (obj !== this) {
+      this.player.pause();
+      this.playButton.classList.remove("play-button_active");
+    }
+  }
 }

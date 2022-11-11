@@ -13,7 +13,7 @@ export default class Question {
     this.image = createHtmlElement("img", "bird-img", "", imgContainer);
     const div = createHtmlElement("div", "container-player", "", this.el);
     this.name = createHtmlElement("p", "bird-name", "****", div);
-    this.player = new Player();
+    this.player = new Player(this.observer);
     div.append(this.player.playerContainer);
     this.init();
     this.observer.addEvent('changeLang', this.changeLang);

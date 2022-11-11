@@ -25,7 +25,7 @@ const header = new Header(dataLang, lang, observer);
 const main = new Main;
 const footer = new Footer;
 const question = new Question(birdsData[0][1], lang, observer);
-const player = new Player();
+const player = new Player(observer);
 player.player.src = birdsData[4][2].audio;
 
 main.wrapper.append(question.el);

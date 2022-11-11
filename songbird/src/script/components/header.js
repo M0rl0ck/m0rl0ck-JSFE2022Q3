@@ -39,7 +39,6 @@ export default class Header {
       this.langContainer
     );
 
-    // this.observer.addEvent("changeLang", this.changeLang);
     this.langContainer.addEventListener('click', this.changeLang);
   }
 
