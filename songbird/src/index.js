@@ -3,8 +3,10 @@ import Main from './script/components/main';
 import Footer from './script/components/footer';
 import Player from "./script/base/player";
 import birdsData from "./script/data/constans/dataBird";
+import dataLang from "./script/data/constans/dataLang";
 import Question from "./script/base/question";
 import createHtmlElement from "./script/function/function";
+import observer from './script/base/observer';
 
 // function preload() {
 //   birdsData.forEach(arr => {
@@ -18,20 +20,24 @@ import createHtmlElement from "./script/function/function";
 // }
 
 // preload();
-
-const header = new Header;
+let lang = 'Rus';
+const header = new Header(dataLang, lang, observer);
 const main = new Main;
 const footer = new Footer;
-const question = new Question(birdsData[0][1])
-const player = new Player(birdsData[0][1].audio);
+const question = new Question(birdsData[0][1], lang, observer);
+const player = new Player();
+player.player.src = birdsData[4][2].audio;
 
 main.wrapper.append(question.el);
+main.wrapper.append(player.playerContainer);
 const button = createHtmlElement('button', '', 'show', main.wrapper);
 const button1 = createHtmlElement('button', '', 'next', main.wrapper);
+// const button2 = createHtmlElement('button', '', 'eng', main.wrapper);
 
 const showNext = () => {
-  question.next(birdsData[0][2]);
+  question.next(birdsData[5][3]);
 }
 
 button.addEventListener('click', question.show);
 button1.addEventListener('click', showNext);
+// button2.addEventListener('click', changeLang);
