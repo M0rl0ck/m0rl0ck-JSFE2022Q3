@@ -9,9 +9,6 @@ export default class Header {
     const wrapper = createHtmlElement("div", "wrapper header__wrapper", "", el);
     createHtmlElement("div", "header__logo", "", wrapper);
     this.nav = createHtmlElement("nav", "nav", "", wrapper);
-    // const scoreContainer = createHtmlElement('div', 'scoreContainer', '', wrapper);
-    // this.score = createHtmlElement('p', '', 'Очки: ', scoreContainer);
-    // this.scoreNum = createHtmlElement('span', 'scoreNum', '0', scoreContainer);
     this.buttonMain = this.createButton(
       "main",
       `${this.dataLang.buttonMain[this.lang]}`

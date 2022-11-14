@@ -7,6 +7,7 @@ import dataLang from "./script/data/constans/dataLang";
 import Question from "./script/base/question";
 import createHtmlElement from "./script/function/function";
 import observer from './script/base/observer';
+import Answer from './script/base/controlers/answer';
 
 // function preload() {
 //   birdsData.forEach(arr => {
@@ -25,17 +26,18 @@ const header = new Header(dataLang, lang, observer);
 const main = new Main;
 const footer = new Footer;
 const question = new Question(birdsData[0][1], lang, observer);
-const player = new Player(observer);
-player.player.src = birdsData[4][2].audio;
+
+const answer = new Answer(birdsData[0], dataLang, lang, observer);
 
 main.wrapper.append(question.el);
-main.wrapper.append(player.playerContainer);
+
 const button = createHtmlElement('button', '', 'show', main.wrapper);
 const button1 = createHtmlElement('button', '', 'next', main.wrapper);
 // const button2 = createHtmlElement('button', '', 'eng', main.wrapper);
-
+main.wrapper.append(answer.answerContainer);
 const showNext = () => {
   question.next(birdsData[5][3]);
+  answer.next(birdsData[5])
 }
 
 button.addEventListener('click', question.show);

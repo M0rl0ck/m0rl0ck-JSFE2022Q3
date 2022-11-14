@@ -1,4 +1,4 @@
-const dataHeaderLang = {
+const dataLang = {
   buttonMain: {
     Rus: 'Главная',
     Eng: 'Main',
@@ -11,6 +11,14 @@ const dataHeaderLang = {
     Rus: 'Галерея',
     Eng: 'Gallery',
   },
+  buttonNext: {
+    Rus: 'Дальше',
+    Eng: 'Next Level',
+  },
+  score: {
+    Rus: 'Очки',
+    Eng: 'Score',
+  },
   langRu: {
     Rus: 'Рус',
     Eng: 'Rus',
@@ -19,6 +27,14 @@ const dataHeaderLang = {
     Rus: 'Анг',
     Eng: 'Eng',
   },
+  firstInstuction: {
+    Rus: 'Послушайте плеер.',
+    Eng: 'Listen to the player.',
+  },
+  secondInstuction: {
+    Rus: 'Выберите птицу из списка.',
+    Eng: 'Select a bird from the list.',
+  },
 };
 
-export default dataHeaderLang;
+export default dataLang;
