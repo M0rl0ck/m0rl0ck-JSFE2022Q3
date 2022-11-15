@@ -1,4 +1,4 @@
-import pelicanImg from "../../../assets/img/pelican.jpg";
+import pelicanImg from "../../assets/img/pelican.jpg";
 
 const birdsData = [
   [
