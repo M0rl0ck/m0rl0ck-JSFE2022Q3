@@ -1,12 +1,13 @@
 import createHtmlElement from "../../function/function";
 
 export default class AnswerViewer {
-  constructor(data, dataLang, lang, player) {
+  constructor(data, dataLang, lang, player, observer) {
     this.data = data;
     this.dataLang = dataLang;
-    this.dataDetails = '';
+    this.dataDetails = "";
     this.lang = lang;
-    this.player = player
+    this.player = player;
+    this.observer = observer;
     this.answerContainer = createHtmlElement("div", "answer-container");
     const answerWrapperRow = createHtmlElement(
       "div",
@@ -30,9 +31,12 @@ export default class AnswerViewer {
       "",
       answerListWrapper
     );
+
+    // Answer List ::::::::::::::::::::::::::;
+
     this.answerList = [];
     this.data.forEach((item) => {
-      const bird = {}; 
+      const bird = {};
       bird.el = createHtmlElement(
         "li",
         "list-bird-name",
@@ -43,6 +47,10 @@ export default class AnswerViewer {
       bird.name = createHtmlElement("span", "", item.name[this.lang], bird.el);
       bird.id = item.id;
       this.answerList.push(bird);
+
+      bird.el.addEventListener("click", () => {
+        this.observer.startEvents("showDetails", bird.id);
+      });
     });
 
     // Details //////////////////////////////////////////////
@@ -53,7 +61,7 @@ export default class AnswerViewer {
       "",
       answerWrapperRow
     );
-    
+
     this.startDetails = createHtmlElement(
       "div",
       "start-details",
@@ -76,16 +84,41 @@ export default class AnswerViewer {
       this.startDetails
     );
 
-    this.birdDetail = createHtmlElement('div', 'detail-wrapper', '', birdsDetailsWrapper);
-    this.birdDetail.style.display = 'none';
-    const birdDetailContainerRow = createHtmlElement('div', 'detail-container-row', '', this.birdDetail)
-    const imgContainer = createHtmlElement("div", "img-container", "", birdDetailContainerRow);
+    this.birdDetail = createHtmlElement(
+      "div",
+      "detail-wrapper",
+      "",
+      birdsDetailsWrapper
+    );
+    this.birdDetail.style.display = "none";
+    const birdDetailContainerRow = createHtmlElement(
+      "div",
+      "detail-container-row",
+      "",
+      this.birdDetail
+    );
+    const imgContainer = createHtmlElement(
+      "div",
+      "img-container",
+      "",
+      birdDetailContainerRow
+    );
     this.image = createHtmlElement("img", "bird-img", "", imgContainer);
-    const div = createHtmlElement("div", "container-player", "", birdDetailContainerRow);
+    const div = createHtmlElement(
+      "div",
+      "container-player",
+      "",
+      birdDetailContainerRow
+    );
     this.name = createHtmlElement("p", "bird-name-detail", "", div);
     this.latinName = createHtmlElement("p", "bird-latine-name", "", div);
     div.append(this.player.playerContainer);
-    this.description = createHtmlElement('p', 'bird-descriptions', '', this.birdDetail);
+    this.description = createHtmlElement(
+      "p",
+      "bird-descriptions",
+      "",
+      this.birdDetail
+    );
 
     // BUTTON NEXT /////////////////////////
 
@@ -139,23 +172,21 @@ export default class AnswerViewer {
     this.name.innerHTML = this.dataDetails.name[this.lang];
     this.latinName.innerHTML = this.dataDetails.species;
     this.description.innerHTML = this.dataDetails.description[this.lang];
-  }
+  };
 
   next = (data) => {
+    this.startDetails.style.display = "";
+    this.birdDetail.style.display = "none";
     this.data = data;
     this.newList();
-
-    //?????????????????????????????????????/////////////////////////////
-
-    this.showDetails(this.data[0]);
-
-    //?????????????????????????????????????/////////////////////////////
   };
 
   showDetails = (data) => {
+    this.startDetails.style.display = "none";
+    this.birdDetail.style.display = "";
     this.dataDetails = data;
     this.image.src = data.image;
     this.player.player.src = data.audio;
     this.newLangDetails();
-  } 
+  };
 }

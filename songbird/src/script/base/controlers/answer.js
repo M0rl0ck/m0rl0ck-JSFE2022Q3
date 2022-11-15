@@ -1,4 +1,3 @@
-import createHtmlElement from "../../function/function";
 import AnswerViewer from "../viewers/answerViewer";
 import Player from "../player";
 
@@ -9,10 +8,11 @@ export default class Answer {
     this.lang = lang;
     this.observer = observer;
     this.player = new Player(this.observer);
-    this.viewer = new AnswerViewer(this.data, this.dataLang, this.lang, this.player);
+    this.viewer = new AnswerViewer(this.data, this.dataLang, this.lang, this.player, this.observer);
     this.answerContainer = this.viewer.answerContainer;
 
     this.observer.addEvent("changeLang", this.changeLang);
+    this.observer.addEvent("showDetails", this.showDetails);
   }
 
   changeLang = (lang) => {
@@ -24,4 +24,9 @@ export default class Answer {
     this.data = data;
     this.viewer.next(this.data);
   }
+
+  showDetails = (id) => {
+    const dataDetails = this.data.find(el => el.id === id);
+    this.viewer.showDetails(dataDetails);
+  } 
 }
