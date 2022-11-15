@@ -4,6 +4,7 @@ export default class AnswerViewer {
   constructor(data, dataLang, lang, player) {
     this.data = data;
     this.dataLang = dataLang;
+    this.dataDetails = '';
     this.lang = lang;
     this.player = player
     this.answerContainer = createHtmlElement("div", "answer-container");
@@ -34,7 +35,7 @@ export default class AnswerViewer {
       const bird = {}; 
       bird.el = createHtmlElement(
         "li",
-        "bird-name",
+        "list-bird-name",
         "",
         answerListContainer
       );
@@ -59,6 +60,9 @@ export default class AnswerViewer {
       "",
       birdsDetailsWrapper
     );
+
+    // this.startDetails.style.display = 'none';
+
     this.firstInstuction = createHtmlElement(
       "p",
       "",
@@ -73,13 +77,13 @@ export default class AnswerViewer {
     );
 
     this.birdDetail = createHtmlElement('div', 'detail-wrapper', '', birdsDetailsWrapper);
-    // this.birdDetail.style.display = 'none';
+    this.birdDetail.style.display = 'none';
     const birdDetailContainerRow = createHtmlElement('div', 'detail-container-row', '', this.birdDetail)
     const imgContainer = createHtmlElement("div", "img-container", "", birdDetailContainerRow);
     this.image = createHtmlElement("img", "bird-img", "", imgContainer);
     const div = createHtmlElement("div", "container-player", "", birdDetailContainerRow);
-    this.name = createHtmlElement("p", "bird-name", "", div);
-    this.latinName = createHtmlElement("p", "bird-name", "", div);
+    this.name = createHtmlElement("p", "bird-name-detail", "", div);
+    this.latinName = createHtmlElement("p", "bird-latine-name", "", div);
     div.append(this.player.playerContainer);
     this.description = createHtmlElement('p', 'bird-descriptions', '', this.birdDetail);
 
@@ -115,7 +119,9 @@ export default class AnswerViewer {
   changeLang = (lang) => {
     this.lang = lang;
     this.newList();
-
+    if (this.dataDetails) {
+      this.newLangDetails();
+    }
     this.buttonNext.innerHTML = this.dataLang.buttonNext[this.lang];
     this.score.innerHTML = `${this.dataLang.score[this.lang]}: `;
     this.firstInstuction.innerHTML = this.dataLang.firstInstuction[this.lang];
@@ -125,9 +131,15 @@ export default class AnswerViewer {
   newList = () => {
     this.answerList.forEach((bird) => {
       const data = this.data.find((el) => el.id === bird.id);
-      bird.el.innerHTML = data.name[this.lang];
+      bird.name.innerHTML = data.name[this.lang];
     });
   };
+
+  newLangDetails = () => {
+    this.name.innerHTML = this.dataDetails.name[this.lang];
+    this.latinName.innerHTML = this.dataDetails.species;
+    this.description.innerHTML = this.dataDetails.description[this.lang];
+  }
 
   next = (data) => {
     this.data = data;
@@ -141,10 +153,9 @@ export default class AnswerViewer {
   };
 
   showDetails = (data) => {
+    this.dataDetails = data;
     this.image.src = data.image;
     this.player.player.src = data.audio;
-    this.name.innerHTML = data.name[this.lang];
-    this.latinName.innerHTML = data.species;
-    this.description.innerHTML = data.description[this.lang];
+    this.newLangDetails();
   } 
 }
