@@ -65,6 +65,7 @@ export default class Header {
     } else if (this.lang === 'Eng') {
       this.lang = 'Rus';
     }
+    localStorage.setItem('lang', this.lang)
     this.observer.startEvents('changeLang', this.lang);
     this.setLang();
   };
