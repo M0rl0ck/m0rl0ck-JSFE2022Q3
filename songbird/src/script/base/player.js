@@ -92,7 +92,7 @@ export default class Player {
     );
     this.volumeButton = createHtmlElement(
       "div",
-      "volume-button",
+      this.player.muted ? "volume-button volume-button_mute" : "volume-button",
       "",
       volumeControl
     );
@@ -188,10 +188,14 @@ export default class Player {
   setMute = () => {
     if (this.player.muted) {
       this.player.muted = false;
-      this.volumeButton.classList.remove("volume-button_mute");
+      if (this.volumeButton) {
+        this.volumeButton.classList.remove("volume-button_mute");
+      }
     } else {
       this.player.muted = true;
-      this.volumeButton.classList.add("volume-button_mute");
+      if (this.volumeButton) {
+        this.volumeButton.classList.add("volume-button_mute");
+      }
     }
   };
 
@@ -214,14 +218,18 @@ export default class Player {
   getAllVolume = (obj, volume) => {
     if (obj !== this) {
       this.player.volume = volume;
-      this.updateVolume();
+      if (this.volumeBar) {
+        this.updateVolume();
+      }
     }
   }
 
   allStop = (obj) => {
     if (obj !== this) {
       this.player.pause();
-      this.playButton.classList.remove("play-button_active");
+      if (this.playButton) {
+        this.playButton.classList.remove("play-button_active");
+      }
     }
   }
 }
