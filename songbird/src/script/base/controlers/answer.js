@@ -14,7 +14,6 @@ export default class Answer {
     this.answerContainer = this.viewer.answerContainer;
 
     this.observer.addEvent("changeLang", this.changeLang);
-    this.observer.addEvent("showDetails", this.showDetails);
   }
 
   changeLang = (lang) => {
@@ -22,13 +21,17 @@ export default class Answer {
     this.viewer.changeLang(lang);
   };
 
-  next = (data) => {
+  next = (data, index) => {
     this.data = data;
-    this.viewer.next(this.data);
+    this.viewer.next(index);
   }
 
   showDetails = (id) => {
     const dataDetails = this.data.find(el => el.id === id);
     this.viewer.showDetails(dataDetails);
-  } 
+  }
+
+  addClassToBird = (id, className) => {
+      this.viewer.addClassToBird(id, className);
+  }
 }

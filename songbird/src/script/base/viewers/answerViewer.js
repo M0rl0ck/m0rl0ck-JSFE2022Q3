@@ -68,13 +68,14 @@ export default class AnswerViewer {
         "",
         answerListContainer
       );
-      createHtmlElement("span", "bird-name-check", "", bird.el);
+      bird.isChecked = false;
+      bird.check = createHtmlElement("span", "bird-name-check", "", bird.el);
       bird.name = createHtmlElement("span", "", item.name[this.lang], bird.el);
       bird.id = item.id;
       this.answerList.push(bird);
 
       bird.el.addEventListener("click", () => {
-        this.observer.startEvents("showDetails", bird.id);
+        this.observer.startEvents("checkAnswer", bird.id, bird.isChecked);
       });
     });
 
@@ -93,8 +94,6 @@ export default class AnswerViewer {
       "",
       birdsDetailsWrapper
     );
-
-    // this.startDetails.style.display = 'none';
 
     this.firstInstuction = createHtmlElement(
       "p",
@@ -174,6 +173,10 @@ export default class AnswerViewer {
     this.scoreNum = createHtmlElement("span", "scoreNum", "0", scoreContainer);
   }
 
+  changeScore = (score) => {
+    this.scoreNum.innerHTML = score;
+  };
+
   changeLang = (lang) => {
     this.lang = lang;
     this.newList();
@@ -203,11 +206,28 @@ export default class AnswerViewer {
   };
 
   next = (index) => {
+    this.index = index;
     this.startDetails.style.display = "";
     this.birdDetail.style.display = "none";
-    this.data = this.birdsData[index];
+    this.data = this.birdsData[this.index].data;
     this.newList();
+    this.newQustionsList();
   };
+
+  newQustionsList = () => {
+    this.qustionsLinks.forEach((button, index) => {
+      button.classList.remove("qustion-button_past");
+      if (index === this.index) {
+        button.classList.add("qustion-button_active");
+      } else {
+        button.classList.remove("qustion-button_active");
+        if (index < this.index) {
+          button.classList.add("qustion-button_past");
+        }
+      }
+      ;
+    });
+  }
 
   showDetails = (data) => {
     this.startDetails.style.display = "none";
@@ -216,5 +236,37 @@ export default class AnswerViewer {
     this.image.src = data.image;
     this.player.player.src = data.audio;
     this.newLangDetails();
+  };
+
+  addClassToBird = (id, className) => {
+    this.answerList.forEach((bird) => {
+      if (bird.id === id) {
+        bird.isChecked = true;
+        bird.check.classList.add(`bird-name-check_${className}`);
+      }
+    });
+  };
+
+  removeClassBird = () => {
+    this.answerList.forEach((bird) => {
+      bird.isChecked = false;
+      bird.check.classList.remove("bird-name-check_false");
+      bird.check.classList.remove("bird-name-check_true");
+    });
+  };
+
+  setActiveNext = () => {
+    this.buttonNext.classList.remove("button_disabled");
+    this.buttonNext.addEventListener("click", this.goNext);
+  };
+
+  disableNext = () => {
+    this.buttonNext.classList.add("button_disabled");
+    this.buttonNext.removeEventListener("click", this.goNext);
+  };
+
+  goNext = () => {
+    this.observer.startEvents("next");
+    console.log("hi");
   };
 }
