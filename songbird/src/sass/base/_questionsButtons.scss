@@ -1,0 +1,20 @@
+.questions-list-wrapper {
+  display: flex;
+  width: 100%;
+  font-size: 22px;
+  border-radius: 5px;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  overflow: hidden;
+  .qustion-button {
+    padding: 5px 15px;
+    flex-grow: 1;
+    text-align: center;
+    &_active {
+      background-color: goldenrod;
+      color: #ffffff;
+    }
+    &_past {
+      background-color: rgba($color: #ffffff, $alpha: 0.2);
+    }
+  }
+}

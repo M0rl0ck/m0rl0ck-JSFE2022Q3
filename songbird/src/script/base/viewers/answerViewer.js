@@ -1,14 +1,39 @@
 import createHtmlElement from "../../function/function";
 
 export default class AnswerViewer {
-  constructor(data, dataLang, lang, player, observer) {
-    this.data = data;
+  constructor(birdsdata, index, dataLang, lang, player, observer) {
+    this.birdsData = birdsdata;
+    this.index = index;
+    this.data = this.birdsData[index].data;
     this.dataLang = dataLang;
     this.dataDetails = "";
     this.lang = lang;
     this.player = player;
     this.observer = observer;
     this.answerContainer = createHtmlElement("div", "answer-container");
+
+    // LIST QUESTIONS >>>>>>>>>>>>>>>>>>>>>>
+
+    const questionsListWrapper = createHtmlElement(
+      "div",
+      "questions-list-wrapper",
+      "",
+      this.answerContainer
+    );
+
+    this.qustionsLinks = [];
+    this.birdsData.forEach((data, index) => {
+      const button = createHtmlElement(
+        "div",
+        index === this.index
+          ? "qustion-button qustion-button_active"
+          : "qustion-button",
+        this.birdsData[index].questionsName[this.lang],
+        questionsListWrapper
+      );
+      this.qustionsLinks.push(button);
+    });
+
     const answerWrapperRow = createHtmlElement(
       "div",
       "answer-wrapper__row",
@@ -166,6 +191,9 @@ export default class AnswerViewer {
       const data = this.data.find((el) => el.id === bird.id);
       bird.name.innerHTML = data.name[this.lang];
     });
+    this.qustionsLinks.forEach((button, index) => {
+      button.innerHTML = this.birdsData[index].questionsName[this.lang];
+    });
   };
 
   newLangDetails = () => {
@@ -174,10 +202,10 @@ export default class AnswerViewer {
     this.description.innerHTML = this.dataDetails.description[this.lang];
   };
 
-  next = (data) => {
+  next = (index) => {
     this.startDetails.style.display = "";
     this.birdDetail.style.display = "none";
-    this.data = data;
+    this.data = this.birdsData[index];
     this.newList();
   };
 
