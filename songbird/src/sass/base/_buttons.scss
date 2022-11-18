@@ -36,12 +36,6 @@
   &_checked {
     color: beige;
     background-color: #0c9e0c;
-    cursor: auto;
-    &:hover {
-      background: #0c9e0c;
-    }
-    &:active {
-      transform: none;
-    }
+    pointer-events: none;
   }
 }

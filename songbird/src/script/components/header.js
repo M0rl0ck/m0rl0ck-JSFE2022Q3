@@ -7,7 +7,7 @@ export default class Header {
     this.lang = lang;
     const el = createHtmlElement("header", "header", "", document.body);
     const wrapper = createHtmlElement("div", "wrapper header__wrapper", "", el);
-    createHtmlElement("div", "header__logo", "", wrapper);
+    createHtmlElement("div", "logo", "", wrapper);
     this.nav = createHtmlElement("nav", "nav", "", wrapper);
 
     this.buttonMain = this.createButton(
@@ -44,6 +44,7 @@ export default class Header {
     );
 
     this.langContainer.addEventListener("click", this.changeLang);
+    this.observer.addEvent('checkGame', this.checkGame)
   }
 
   createButton(className, name) {
