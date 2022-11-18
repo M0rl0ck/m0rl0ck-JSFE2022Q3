@@ -43,4 +43,4 @@ import start from './script/app';
 // button.addEventListener('click', show);
 // button1.addEventListener('click', showNext);
 // button2.addEventListener('click', changeLang);
-start()
+new start();

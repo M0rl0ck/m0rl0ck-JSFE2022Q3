@@ -27,7 +27,6 @@ export default class Result {
 
   newGame = () => {
     this.observer.startEvents("newGame");
-    this.container.style.display = "none";
   }
 
   getText = () => {

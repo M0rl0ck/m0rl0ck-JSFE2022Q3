@@ -4,6 +4,8 @@ import Footer from "./components/footer";
 import dataLang from "./data/dataLang";
 import langList from "./data/constans/langList";
 import observer from "./base/observer";
+import MainPage from "./components/pages/mainPage";
+import Galerry from "./components/pages/galerry";
 import Game from "./components/pages/game";
 
 let lang = localStorage.getItem("lang") ?? "Rus";
@@ -11,16 +13,51 @@ if (!langList.includes(lang)) {
   lang = "Rus";
 }
 
-const start = () => {
-  const header = new Header(dataLang, lang, observer);
-  const main = new Main();
-  const footer = new Footer();
+class Start {
+  constructor() {
+    this.header = new Header(dataLang, lang, observer);
+    this.main = new Main();
+    this.footer = new Footer();
 
-  const wrapper = main.wrapper;
+    this.wrapper = this.main.wrapper;
 
-  const game = new Game(lang, observer);
+    this.mainPage = new MainPage();
+    this.gallery = new Galerry();
+    this.game = new Game(lang, observer);
 
-  wrapper.append(game.container, game.result.container);
+    this.wrapper.append(
+      this.mainPage.container,
+      this.game.container,
+      this.game.result.container,
+      this.gallery.container
+    );
 
-};
-export default start;
+    observer.addEvent("startPage", this.startPage);
+    observer.addEvent("newGame", this.newGame);
+    observer.addEvent("slider", this.slider);
+  }
+
+  startPage = () => {
+    this.displayNone();
+    this.mainPage.container.style.display = '';
+  }
+
+  newGame = () => {
+    this.displayNone();
+    this.game.container.style.display = '';
+  }
+
+  slider = () => {
+    this.displayNone();
+    this.gallery.container.style.display = '';
+  }
+
+  displayNone = () => {
+    this.mainPage.container.style.display = 'none';
+    this.game.container.style.display = 'none';
+    this.game.result.container.style.display = 'none';
+    this.gallery.container.style.display = 'none';
+  }
+}
+
+export default Start;

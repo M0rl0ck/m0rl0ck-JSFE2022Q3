@@ -26,7 +26,8 @@ export default class Game {
     this.score = minCurrentScore;
     this.maxScore = maxScore;
     this.currentScore = maxCurrentScore;
-    this.container = createHtmlElement('section', 'game-container');;
+    this.container = createHtmlElement('section', 'game-container');
+    this.container.style.display = 'none';
 
     this.init();
     this.observer.addEvent("checkAnswer", this.checkAnswer);
@@ -124,6 +125,5 @@ export default class Game {
     this.question.next(this.questionData);
     this.answer.next(this.birdsData[this.currentIndex].data, this.currentIndex);
     this.answer.viewer.disableNext();
-    this.container.style.display = '';
   };
 }

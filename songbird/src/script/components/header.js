@@ -9,18 +9,25 @@ export default class Header {
     const wrapper = createHtmlElement("div", "wrapper header__wrapper", "", el);
     createHtmlElement("div", "header__logo", "", wrapper);
     this.nav = createHtmlElement("nav", "nav", "", wrapper);
+
     this.buttonMain = this.createButton(
-      "main",
+      "checked",
       `${this.dataLang.buttonMain[this.lang]}`
     );
+    this.buttonMain.addEventListener("click", this.checkMain);
+
     this.buttonGaim = this.createButton(
-      "gaim",
+      "",
       `${this.dataLang.buttonGaim[this.lang]}`
     );
+    this.buttonGaim.addEventListener("click", this.checkGame);
+
     this.buttonSlaider = this.createButton(
-      "slaider",
+      "",
       `${this.dataLang.buttonSlaider[this.lang]}`
     );
+    this.buttonSlaider.addEventListener("click", this.checkSlaider);
+
     this.langContainer = createHtmlElement("div", "lang", "", wrapper);
     this.langRu = createHtmlElement(
       "span",
@@ -36,13 +43,13 @@ export default class Header {
       this.langContainer
     );
 
-    this.langContainer.addEventListener('click', this.changeLang);
+    this.langContainer.addEventListener("click", this.changeLang);
   }
 
   createButton(className, name) {
     const button = createHtmlElement(
       "div",
-      `button header__button header__button_${className}`,
+      `button button_${className}`,
       name,
       this.nav
     );
@@ -60,13 +67,35 @@ export default class Header {
   };
 
   changeLang = (lang) => {
-    if (this.lang === 'Rus') {
-      this.lang = 'Eng';
-    } else if (this.lang === 'Eng') {
-      this.lang = 'Rus';
+    if (this.lang === "Rus") {
+      this.lang = "Eng";
+    } else if (this.lang === "Eng") {
+      this.lang = "Rus";
     }
-    localStorage.setItem('lang', this.lang)
-    this.observer.startEvents('changeLang', this.lang);
+    localStorage.setItem("lang", this.lang);
+    this.observer.startEvents("changeLang", this.lang);
     this.setLang();
   };
+
+  checkMain = () => {
+    this.uncheckButton();
+    this.buttonMain.classList.add('button_checked')
+    this.observer.startEvents("startPage");
+  }
+  checkGame = () => {
+    this.uncheckButton();
+    this.buttonGaim.classList.add('button_checked')
+    this.observer.startEvents("newGame");
+  }
+  checkSlaider = () => {
+    this.uncheckButton();
+    this.buttonSlaider.classList.add('button_checked')
+    this.observer.startEvents("slider");
+  }
+
+  uncheckButton = () => {
+    this.buttonMain.classList.remove('button_checked');
+    this.buttonGaim.classList.remove('button_checked');
+    this.buttonSlaider.classList.remove('button_checked');
+  }
 }
