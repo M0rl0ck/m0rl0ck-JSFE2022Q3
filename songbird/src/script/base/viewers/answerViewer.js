@@ -267,6 +267,7 @@ export default class AnswerViewer {
 
   goNext = () => {
     this.observer.startEvents("next");
+    this.player.stop();
     console.log("hi");
   };
 }

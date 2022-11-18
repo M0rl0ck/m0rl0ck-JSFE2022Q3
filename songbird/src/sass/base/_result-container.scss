@@ -1,0 +1,15 @@
+.result-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 60px;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
+  background: rgba($color: #ffffff, $alpha: 0.1);
+  .button-result {
+    width: 300px;
+  }
+}

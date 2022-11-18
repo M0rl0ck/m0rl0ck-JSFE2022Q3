@@ -1,4 +1,4 @@
-import GameViewer from "../viewers/gameViewer";
+import createHtmlElement from "../../function/function";
 import birdsData from "../../data/dataBird";
 import Question from "../../base/question";
 import Answer from "../../base/controlers/answer";
@@ -10,7 +10,9 @@ import {
   minCurrentScore,
   startIndex,
   volumeError,
+  maxScore,
 } from "../../data/constans/constans";
+import Result from "./result";
 
 export default class Game {
   constructor(lang, observer) {
@@ -22,13 +24,14 @@ export default class Game {
     this.endIndex = this.birdsData.length - 1;
     this.isWin = false;
     this.score = minCurrentScore;
+    this.maxScore = maxScore;
     this.currentScore = maxCurrentScore;
-    this.gameViewer = new GameViewer();
-    this.container = this.gameViewer.gameContainer;
+    this.container = createHtmlElement('section', 'game-container');;
 
     this.init();
     this.observer.addEvent("checkAnswer", this.checkAnswer);
     this.observer.addEvent("next", this.next);
+    this.observer.addEvent("newGame", this.restart);
   }
 
   init = () => {
@@ -44,6 +47,8 @@ export default class Game {
       this.observer
     );
     this.container.append(this.answer.answerContainer);
+    this.result = new Result(this.lang, this.score, this.observer, this.maxScore);
+
   };
 
   getRandomIndex = () => {
@@ -51,6 +56,10 @@ export default class Game {
   };
 
   checkAnswer = (id, isChecked) => {
+    if (!this.answer.player.player.paused) {
+      this.answer.player.stop();
+    }
+    
     this.answer.showDetails(id);
     if (!this.isWin && !isChecked) {
       const player = new Audio();
@@ -64,9 +73,11 @@ export default class Game {
         this.answer.addClassToBird(id, "false");
         player.src = soundError;
         player.play();
+
       } else if (id === this.questionData.id) {
         this.isWin = true;
         this.score += this.currentScore;
+        this.question.player.stop();
         this.answer.viewer.changeScore(this.score);
         this.answer.viewer.setActiveNext();
         this.answer.viewer.addClassToBird(id, "true");
@@ -96,16 +107,23 @@ export default class Game {
     }
   };
 
+  showResult = () => {
+    this.result.showResult(this.score === this.maxScore, this.score);
+    this.container.style.display = 'none';
+  }
+
   restart = () => {
     this.currentIndex = startIndex;
     this.score = minCurrentScore;
     this.currentScore = maxCurrentScore;
     this.isWin = false;
     this.answer.viewer.removeClassBird();
+    this.answer.viewer.changeScore(this.score);
     const index = this.getRandomIndex();
     this.questionData = this.birdsData[this.currentIndex].data[index];
     this.question.next(this.questionData);
     this.answer.next(this.birdsData[this.currentIndex].data, this.currentIndex);
     this.answer.viewer.disableNext();
+    this.container.style.display = '';
   };
 }

@@ -4,7 +4,7 @@ import Footer from "./components/footer";
 import dataLang from "./data/dataLang";
 import langList from "./data/constans/langList";
 import observer from "./base/observer";
-import Game from "./components/controlers/game";
+import Game from "./components/pages/game";
 
 let lang = localStorage.getItem("lang") ?? "Rus";
 if (!langList.includes(lang)) {
@@ -20,6 +20,7 @@ const start = () => {
 
   const game = new Game(lang, observer);
 
-  wrapper.append(game.container)
+  wrapper.append(game.container, game.result.container);
+
 };
 export default start;
