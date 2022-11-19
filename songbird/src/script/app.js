@@ -36,15 +36,12 @@ class Start {
     observer.addEvent("newGame", this.newGame);
     observer.addEvent("slider", this.slider);
 
-    ////////////////////////////////////////////////////////
     this.routes = {
       '/': this.startPage,
       '/game': this.newGame,
       '/slider': this.slider,
       '/result': this.result,
     }
-
-    
 
     observer.addEvent("navigate", this.navigate);
     window.addEventListener("popstate", () => {
@@ -53,7 +50,6 @@ class Start {
     window;addEventListener("DOMContentLoaded", () => {
       this.routes[window.location.pathname]();
     })
-    //////////////////////////////////////////////////////////
   }
 
   navigate = (path) => {
