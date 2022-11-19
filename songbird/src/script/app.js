@@ -22,7 +22,7 @@ class Start {
     this.wrapper = this.main.wrapper;
 
     this.mainPage = new MainPage(lang, observer);
-    this.gallery = new Galerry();
+    this.gallery = new Galerry(lang, observer);
     this.game = new Game(lang, observer);
 
     this.wrapper.append(

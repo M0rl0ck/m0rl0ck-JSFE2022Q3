@@ -1,0 +1,106 @@
+.carousel-button {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border-radius: 50%;
+  border: goldenrod 2px solid;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    transition: all 0.5s;
+    border: gold 2px solid;
+    background: rgba($color: #ffffff, $alpha: 0.2);
+  }
+  &:active {
+    transition: all 0.5s;
+    transform: scale(0.95);
+  }
+  &_left,
+  &_right {
+    &::before {
+      content: "";
+      position: absolute;
+
+      top: 12px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-bottom: goldenrod 2px solid;
+    }
+  }
+  &_left {
+    &::before {
+      left: 16px;
+      border-left: goldenrod 2px solid;
+      transform: rotate(45deg);
+    }
+  }
+  &_right {
+    &::before {
+      left: 10px;
+      border-right: goldenrod 2px solid;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.carousel-container {
+  min-height: 240px;
+  transition: all 0.5s;
+
+  &_hidden {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s;
+  }
+}
+
+.carousel-bird-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 15px;
+  border-radius: 5px;
+  background: rgba($color: #ffffff, $alpha: 0.1);
+
+  .img-container {
+    flex-shrink: 0;
+  }
+  .bird-detail-container {
+    flex-shrink: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.bird-name-detail,
+.bird-latine-name {
+  padding: 10px;
+  font-size: 28px;
+  border-bottom: #ffffff 1px solid;
+}
+.bird-descriptions {
+  padding: 10px;
+}
+
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 5px;
+  background: rgba($color: #ffffff, $alpha: 0.1);
+}
+
+.player-container {
+  padding: 15px;
+  border-radius: 5px;
+  background: rgba($color: #ffffff, $alpha: 0.1);
+}
