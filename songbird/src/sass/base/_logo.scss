@@ -5,4 +5,9 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  flex-shrink: 0;
+  @media screen and (max-width: 740px) {
+    width: 78px;
+    height: 25px;
+  }
 }

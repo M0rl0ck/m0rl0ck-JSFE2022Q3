@@ -78,17 +78,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    .bird-name-detail,
+    .bird-latine-name {
+      padding: 10px;
+      font-size: 28px;
+      border-bottom: #ffffff 1px solid;
+    }
+    .bird-descriptions {
+      padding: 10px;
+      font-size: 20px;
+    }
   }
-}
 
-.bird-name-detail,
-.bird-latine-name {
-  padding: 10px;
-  font-size: 28px;
-  border-bottom: #ffffff 1px solid;
-}
-.bird-descriptions {
-  padding: 10px;
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+  }
 }
 
 .carousel-buttons {

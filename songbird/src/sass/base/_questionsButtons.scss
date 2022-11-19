@@ -1,5 +1,6 @@
 .questions-list-wrapper {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   font-size: 22px;
   border-radius: 5px;
@@ -15,6 +16,13 @@
     }
     &_past {
       background-color: rgba($color: #ffffff, $alpha: 0.2);
+    }
+  }
+
+  @media screen and (max-width: 970px) {
+    font-size: 18px;
+    .qustion-button {
+      padding: 5px 5px;
     }
   }
 }
