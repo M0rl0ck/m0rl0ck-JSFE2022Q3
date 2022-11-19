@@ -12,12 +12,9 @@ export default class MainPage {
     this.text2 = createHtmlElement('p', 'main-page__text', dataMainPage.text2[this.lang], this.container);
     this.button = createHtmlElement('div', 'button button_main-page', dataMainPage.button[this.lang], this.container);
 
-    this.button.addEventListener('click', this.newGame);
+    // this.button.addEventListener('click', this.newGame);
+    this.button.addEventListener("click", () => this.observer.startEvents("newGame"));
     this.observer.addEvent("changeLang", this.changeLang);
-  }
-
-  newGame = () => {
-    this.observer.startEvents("checkGame");
   }
 
   changeLang = (lang) => {

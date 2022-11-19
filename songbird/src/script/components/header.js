@@ -14,19 +14,19 @@ export default class Header {
       "checked",
       `${this.dataLang.buttonMain[this.lang]}`
     );
-    this.buttonMain.addEventListener("click", this.checkMain);
+    this.buttonMain.addEventListener("click", () => this.observer.startEvents("navigate", '/'));
 
     this.buttonGaim = this.createButton(
       "",
       `${this.dataLang.buttonGaim[this.lang]}`
     );
-    this.buttonGaim.addEventListener("click", this.checkGame);
+    this.buttonGaim.addEventListener("click", () => this.observer.startEvents("navigate", '/game'));
 
     this.buttonSlaider = this.createButton(
       "",
       `${this.dataLang.buttonSlaider[this.lang]}`
     );
-    this.buttonSlaider.addEventListener("click", this.checkSlaider);
+    this.buttonSlaider.addEventListener("click", () => this.observer.startEvents("navigate", '/slider'));
 
     this.langContainer = createHtmlElement("div", "lang", "", wrapper);
     this.langRu = createHtmlElement(
@@ -44,7 +44,7 @@ export default class Header {
     );
 
     this.langContainer.addEventListener("click", this.changeLang);
-    this.observer.addEvent('checkGame', this.checkGame)
+    this.observer.addEvent('checkGame', this.checkGame);
   }
 
   createButton(className, name) {
@@ -81,17 +81,14 @@ export default class Header {
   checkMain = () => {
     this.uncheckButton();
     this.buttonMain.classList.add('button_checked')
-    this.observer.startEvents("startPage");
   }
   checkGame = () => {
     this.uncheckButton();
     this.buttonGaim.classList.add('button_checked')
-    this.observer.startEvents("newGame");
   }
   checkSlaider = () => {
     this.uncheckButton();
     this.buttonSlaider.classList.add('button_checked')
-    this.observer.startEvents("slider");
   }
 
   uncheckButton = () => {

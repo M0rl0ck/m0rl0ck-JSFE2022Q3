@@ -104,7 +104,7 @@ export default class Game {
       );
       this.answer.viewer.disableNext();
     } else {
-      this.showResult();
+      this.observer.startEvents("navigate", '/result');
     }
   };
 

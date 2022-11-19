@@ -35,21 +35,58 @@ class Start {
     observer.addEvent("startPage", this.startPage);
     observer.addEvent("newGame", this.newGame);
     observer.addEvent("slider", this.slider);
+
+    ////////////////////////////////////////////////////////
+    this.routes = {
+      '/': this.startPage,
+      '/game': this.newGame,
+      '/slider': this.slider,
+      '/result': this.result,
+    }
+
+    
+
+    observer.addEvent("navigate", this.navigate);
+    window.addEventListener("popstate", () => {
+      this.routes[window.location.pathname]();
+    });
+    window;addEventListener("DOMContentLoaded", () => {
+      this.routes[window.location.pathname]();
+    })
+    //////////////////////////////////////////////////////////
+  }
+
+  navigate = (path) => {
+    window.history.pushState(
+      {},
+      'path',
+      window.location.origin + path
+    );
+    this.routes[path]();
   }
 
   startPage = () => {
     this.displayNone();
     this.mainPage.container.style.display = '';
+    this.header.checkMain();
   }
 
   newGame = () => {
     this.displayNone();
     this.game.container.style.display = '';
+    this.header.checkGame();
   }
 
   slider = () => {
     this.displayNone();
     this.gallery.container.style.display = '';
+    this.header.checkSlaider();
+  }
+
+  result = () => {
+    this.displayNone();
+    this.header.uncheckButton();
+    this.game.showResult();
   }
 
   displayNone = () => {
