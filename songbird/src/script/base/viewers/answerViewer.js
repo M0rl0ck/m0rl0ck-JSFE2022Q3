@@ -14,24 +14,22 @@ export default class AnswerViewer {
 
     // LIST QUESTIONS >>>>>>>>>>>>>>>>>>>>>>
 
-    const questionsListWrapper = createHtmlElement(
+    this.questionsListWrapper = createHtmlElement(
       "div",
-      "questions-list-wrapper",
-      "",
-      this.answerContainer
+      "questions-list-wrapper"
     );
 
-    this.qustionsLinks = [];
+    this.questionsLinks = [];
     this.birdsData.forEach((data, index) => {
       const button = createHtmlElement(
         "div",
         index === this.index
-          ? "qustion-button qustion-button_active"
-          : "qustion-button",
+          ? "question-button question-button_active"
+          : "question-button",
         this.birdsData[index].questionsName[this.lang],
-        questionsListWrapper
+        this.questionsListWrapper
       );
-      this.qustionsLinks.push(button);
+      this.questionsLinks.push(button);
     });
 
     const answerWrapperRow = createHtmlElement(
@@ -146,9 +144,9 @@ export default class AnswerViewer {
 
     // BUTTON NEXT /////////////////////////
 
-    const scoreWrapper = createHtmlElement(
+    const buttonWrapper = createHtmlElement(
       "div",
-      "score-wrapper",
+      "button-wrapper",
       "",
       this.answerContainer
     );
@@ -156,21 +154,20 @@ export default class AnswerViewer {
       "div",
       "button button_disabled",
       this.dataLang.buttonNext[this.lang],
-      scoreWrapper
+      buttonWrapper
     );
-    const scoreContainer = createHtmlElement(
+
+    this.scoreContainer = createHtmlElement(
       "div",
       "scoreContainer",
-      "",
-      scoreWrapper
     );
     this.score = createHtmlElement(
       "p",
       "",
       `${this.dataLang.score[this.lang]}: `,
-      scoreContainer
+      this.scoreContainer
     );
-    this.scoreNum = createHtmlElement("span", "scoreNum", "0", scoreContainer);
+    this.scoreNum = createHtmlElement("span", "scoreNum", "0", this.scoreContainer);
   }
 
   changeScore = (score) => {
@@ -194,7 +191,7 @@ export default class AnswerViewer {
       const data = this.data.find((el) => el.id === bird.id);
       bird.name.innerHTML = data.name[this.lang];
     });
-    this.qustionsLinks.forEach((button, index) => {
+    this.questionsLinks.forEach((button, index) => {
       button.innerHTML = this.birdsData[index].questionsName[this.lang];
     });
   };
@@ -211,18 +208,18 @@ export default class AnswerViewer {
     this.birdDetail.style.display = "none";
     this.data = this.birdsData[this.index].data;
     this.newList();
-    this.newQustionsList();
+    this.newQuestionsList();
   };
 
-  newQustionsList = () => {
-    this.qustionsLinks.forEach((button, index) => {
-      button.classList.remove("qustion-button_past");
+  newQuestionsList = () => {
+    this.questionsLinks.forEach((button, index) => {
+      button.classList.remove("question-button_past");
       if (index === this.index) {
-        button.classList.add("qustion-button_active");
+        button.classList.add("question-button_active");
       } else {
-        button.classList.remove("qustion-button_active");
+        button.classList.remove("question-button_active");
         if (index < this.index) {
-          button.classList.add("qustion-button_past");
+          button.classList.add("question-button_past");
         }
       }
       ;

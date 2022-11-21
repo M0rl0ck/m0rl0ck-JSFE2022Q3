@@ -1,7 +1,7 @@
 .answer-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
   padding-top: 10px;
 }
 
@@ -129,7 +129,7 @@
   }
 }
 
-.score-wrapper {
+.button-wrapper {
   padding: 5px 15px;
   margin-top: auto;
   border-radius: 5px;

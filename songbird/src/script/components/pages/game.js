@@ -39,7 +39,7 @@ export default class Game {
     const index = this.getRandomIndex();
     this.questionData = this.birdsData[this.currentIndex].data[index];
     this.question = new Question(this.questionData, this.lang, this.observer);
-    this.container.append(this.question.el);
+    
     this.answer = new Answer(
       this.birdsData,
       this.currentIndex,
@@ -47,7 +47,9 @@ export default class Game {
       this.lang,
       this.observer
     );
-    this.container.append(this.answer.answerContainer);
+
+    this.container.append(this.answer.viewer.scoreContainer, this.answer.viewer.questionsListWrapper, this.question.el, this.answer.answerContainer);
+
     this.result = new Result(this.lang, this.score, this.observer, this.maxScore);
 
   };

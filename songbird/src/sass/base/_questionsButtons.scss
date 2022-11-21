@@ -1,12 +1,13 @@
 .questions-list-wrapper {
   display: flex;
   flex-wrap: wrap;
+  margin: 10px 0;
   width: 100%;
   font-size: 22px;
   border-radius: 5px;
   background-color: rgba($color: #ffffff, $alpha: 0.1);
   overflow: hidden;
-  .qustion-button {
+  .question-button {
     padding: 5px 15px;
     flex-grow: 1;
     text-align: center;
@@ -21,7 +22,7 @@
 
   @media screen and (max-width: 970px) {
     font-size: 18px;
-    .qustion-button {
+    .question-button {
       padding: 5px 5px;
     }
   }
