@@ -1,5 +1,5 @@
 import './sources.css';
-import { sources, err } from '../../../type/interface';
+import { sources, err, html } from '../../../type/interface';
 
 class Sources {
   public draw(data: sources[]): void {
@@ -10,16 +10,18 @@ class Sources {
     }
 
     data.forEach((item) => {
-      const sourceClone: HTMLElement = <HTMLElement>sourceItemTemp.content.cloneNode(true);
-
-      const sourceItemName = sourceClone.querySelector('.source__item-name');
+      const sourceClone = sourceItemTemp.content.cloneNode(true);
+if (!(sourceClone instanceof DocumentFragment)) {
+  throw new Error(err.notEllement);
+}
+      const sourceItemName: html = sourceClone.querySelector('.source__item-name');
       if (sourceItemName) {
         sourceItemName.textContent = item.name;
       } else {
         throw new Error(err.notEllement);
       }
       
-      const sourceItem = sourceClone.querySelector('.source__item');
+      const sourceItem: html = sourceClone.querySelector('.source__item');
       if (sourceItem) {
         sourceItem.setAttribute('data-source-id', item.id);
       } else {
