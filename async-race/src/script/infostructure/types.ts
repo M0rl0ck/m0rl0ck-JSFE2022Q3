@@ -5,3 +5,5 @@ export type StartEngine = 'started' | 'stopped';
 export type Order = 'ASC' | 'DESC';
 
 export type PagesList = 'garage' | 'winners';
+
+export type PageName = 'garage' | 'winners';

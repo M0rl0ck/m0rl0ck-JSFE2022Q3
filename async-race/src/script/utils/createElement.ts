@@ -13,4 +13,4 @@ const createHtmlElement = (type: string, newclass?: string, innerText?: string, 
   return element;
 };
 
-export default { createHtmlElement };
+export default createHtmlElement;
