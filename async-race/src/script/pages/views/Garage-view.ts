@@ -5,7 +5,7 @@ import createInputElement from "../../utils/createInputElement";
 import GarageModel from "../models/Garage-model";
 import Trac from "../../base/Trac";
 
-type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar";
+type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar";
 type TracType = InstanceType<typeof Trac>;
 type GarageModelTType = InstanceType<typeof GarageModel>;
 
@@ -41,11 +41,11 @@ export default class GarageView extends EventEmitter {
 
   paginationText: HTMLElement;
 
-  emit(event: EmitsName, name?: string | TracType, color?: string) {
+  emit(event: EmitsName, name?: string | number | TracType, color?: string) {
     return super.emit(event, name, color);
   }
 
-  on(event: EmitsName, callback: ((name?: string, color?: string) => void) | ((trac: TracType) => void)) {
+  on(event: EmitsName, callback: ((name?: string | number, color?: string) => void) | ((trac: TracType) => void)) {
     return super.on(event, callback);
   }
 
@@ -102,7 +102,8 @@ export default class GarageView extends EventEmitter {
     this.tracksContainer.append(
       ...this.model.cars.map((car) => {
         const trac = new Trac(car);
-        trac.buttonEdit.addEventListener('click', () => this.emit('editCar', trac))
+        trac.buttonEdit.addEventListener('click', () => this.emit('editCar', trac));
+        trac.buttonDelete.addEventListener('click', () => this.emit('deleteCar', trac.id));
         return trac.render();
       })
     );

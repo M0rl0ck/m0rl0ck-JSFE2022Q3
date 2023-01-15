@@ -18,10 +18,11 @@ export default class Controller {
   constructor(garage: GarageType, winners: WinnersType) {
     this.garage = garage;
     this.winners = winners;
-    this.garage.view.on('createCar', (name, color) => this.garage.model.createCar(name, color))
+    this.garage.view.on('createCar', (name: string, color) => this.garage.model.createCar(name, color))
     this.garage.view.on('create100', () => this.garage.model.createCars());
     this.garage.view.on('prevPage', () => this.garage.model.prevPage());
     this.garage.view.on('nextPage', () => this.garage.model.nextPage());
     this.garage.view.on('editCar', (trac: TracType) => this.garage.model.setEditCar(trac));
+    this.garage.view.on('deleteCar', (id: number) => this.garage.model.deleteCar(id))
   }
 }
