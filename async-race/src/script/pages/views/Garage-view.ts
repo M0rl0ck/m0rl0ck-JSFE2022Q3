@@ -3,11 +3,16 @@ import createButton from "../../utils/createButton";
 import createHtmlElement from "../../utils/createElement";
 import createInputElement from "../../utils/createInputElement";
 import GarageModel from "../models/Garage-model";
-import { DEFAULTCAR } from "../../constants/constants";
 import Trac from "../../base/Trac";
 
-type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage";
+type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar";
+type TracType = InstanceType<typeof Trac>;
 type GarageModelTType = InstanceType<typeof GarageModel>;
+
+enum CreateButton {
+  Create = 'Create new car',
+  Edit = 'Edit car',
+}
 
 export default class GarageView extends EventEmitter {
   model: GarageModelTType;
@@ -36,11 +41,11 @@ export default class GarageView extends EventEmitter {
 
   paginationText: HTMLElement;
 
-  emit(event: EmitsName, name?: string, color?: string) {
+  emit(event: EmitsName, name?: string | TracType, color?: string) {
     return super.emit(event, name, color);
   }
 
-  on(event: EmitsName, callback: (name?: string, color?: string) => void) {
+  on(event: EmitsName, callback: ((name?: string, color?: string) => void) | ((trac: TracType) => void)) {
     return super.on(event, callback);
   }
 
@@ -49,13 +54,13 @@ export default class GarageView extends EventEmitter {
     this.model = model;
     this.element = createHtmlElement("div", "garage");
     this.buttonGenCar = createButton("button button__generateCars", "Generate 100 cars");
-    this.buttonCreateCar = createButton("button button__newCar", `Create new car`);
+    this.buttonCreateCar = createButton("button button__newCar", CreateButton.Create);
     this.buttonReset = createButton("button returnCars", "Reset", true);
     this.buttonStart = createButton("button startCars", "Start");
     this.inputName = createInputElement("inputText", "text");
-    this.inputName.value = DEFAULTCAR.name;
+    this.inputName.value = this.model.nameCar;
     this.inputColor = createInputElement("inputColor", "color");
-    this.inputColor.value = DEFAULTCAR.color;
+    this.inputColor.value = this.model.colorCar;
     this.coundCars = createHtmlElement("span", "", `${this.model.countCars}`);
     this.createGarageTitle();
     this.tracksContainer = createHtmlElement("div", "tracs__container", "", this.element);
@@ -65,6 +70,8 @@ export default class GarageView extends EventEmitter {
     this.createPagination();
     this.setListener();
     this.model.on("updateCars", this.updateCars);
+    this.model.on('updateButtons', this.updateButtons);
+    this.model.on('updateImput', this.updateInput);
   }
 
   private createGarageTitle = () => {
@@ -94,11 +101,22 @@ export default class GarageView extends EventEmitter {
     this.tracksContainer.innerHTML = "";
     this.tracksContainer.append(
       ...this.model.cars.map((car) => {
-        const el = new Trac(car).render();
-        return el;
+        const trac = new Trac(car);
+        trac.buttonEdit.addEventListener('click', () => this.emit('editCar', trac))
+        return trac.render();
       })
     );
   };
+
+  private updateButtons = () => {
+    this.buttonCreateCar.innerText = this.model.isEdit ? CreateButton.Edit : CreateButton.Create;
+    this.buttonGenCar.disabled = this.model.isGenCarsDisabled;
+  }
+
+  private updateInput = () => {
+    this.inputName.value = this.model.nameCar;
+    this.inputColor.value = this.model.colorCar;
+  }
 
   private setButtonsPagination = () => {
     this.buttonPrev.disabled = this.model.isPrevDisabled;

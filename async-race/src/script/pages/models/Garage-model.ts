@@ -1,9 +1,11 @@
 import EventEmitter from "events";
-import { CARSMODEL, CARSNAME, LIMITCAR } from "../../constants/constants";
-import ICar from '../../infostructure/ICar';
-import connector from '../../utils/Connector';
+import Trac from '../../base/Trac';
+import { CARSMODEL, CARSNAME, DEFAULTCAR, LIMITCAR } from "../../constants/constants";
+import ICar from "../../infostructure/ICar";
+import connector from "../../utils/Connector";
 
-type EmitsName = 'updateCars';
+type EmitsName = "updateCars" | "updateButtons" | "updateImput";
+type TracType = InstanceType<typeof Trac>;
 
 export default class GarageModel extends EventEmitter {
   cars: ICar[];
@@ -18,9 +20,21 @@ export default class GarageModel extends EventEmitter {
 
   countPages: number;
 
+  isGenCarsDisabled: boolean;
+
+  isCreateCarDisabled: boolean;
+
+  isResetDisabled: boolean;
+
+  isStartDisabled: boolean;
+
   isPrevDisabled: boolean;
 
   isNextDisabled: boolean;
+
+  nameCar: string;
+
+  colorCar: string;
 
   emit(event: EmitsName, data?: string) {
     return super.emit(event, data);
@@ -38,6 +52,12 @@ export default class GarageModel extends EventEmitter {
     this.editId = 0;
     this.currentPage = 1;
     this.countPages = 1;
+    this.nameCar = DEFAULTCAR.name;
+    this.colorCar = DEFAULTCAR.color;
+    this.isGenCarsDisabled = false;
+    this.isCreateCarDisabled = false;
+    this.isResetDisabled = true;
+    this.isStartDisabled = false;
     this.isPrevDisabled = true;
     this.isNextDisabled = true;
     this.getCars();
@@ -49,8 +69,8 @@ export default class GarageModel extends EventEmitter {
     this.countCars = Number(count);
     this.countPages = Math.ceil(this.countCars / LIMITCAR.cars);
     this.setButtonsPagination();
-    this.emit('updateCars');
-  }
+    this.emit("updateCars");
+  };
 
   private setButtonsPagination = () => {
     if (this.currentPage <= 1) {
@@ -64,20 +84,39 @@ export default class GarageModel extends EventEmitter {
     } else {
       this.isNextDisabled = false;
     }
-  }
+  };
 
   createCar = async (name: string, color: string) => {
-    await connector.createCar({name, color});
+    if (this.isEdit) {
+      await connector.updateCar(this.editId, { name, color });
+      this.isEdit = false;
+      this.isGenCarsDisabled = false;
+      this.emit("updateButtons");
+    } else {
+      await connector.createCar({ name, color });
+    }
     this.getCars();
-  }
+  };
 
   createCars = async () => {
+    this.isEdit = false;
+    this.isGenCarsDisabled = false;
+    this.emit("updateButtons");
     for (let i = 0; i < 100; i += 1) {
-      const color = `#${Math.floor(Math.random() * 0xFFFFFF).toString(16)}`;
-      const name = `${CARSNAME[Math.floor(Math.random() * CARSNAME.length)]
-      } ${CARSMODEL[Math.floor(Math.random() * CARSMODEL.length)]}`;
+      const color = `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+      const name = `${CARSNAME[Math.floor(Math.random() * CARSNAME.length)]} ${CARSMODEL[Math.floor(Math.random() * CARSMODEL.length)]}`;
       this.createCar(name, color);
     }
+  };
+
+  setEditCar = (trac: TracType) => {
+    this.isEdit = true;
+    this.editId = trac.id;
+    this.isGenCarsDisabled = true;
+    this.nameCar = trac.name;
+    this.colorCar = trac.color;
+    this.emit("updateImput");
+    this.emit("updateButtons");
   }
 
   nextPage = () => {
@@ -85,12 +124,12 @@ export default class GarageModel extends EventEmitter {
       this.currentPage += 1;
       this.getCars();
     }
-  }
- 
+  };
+
   prevPage = () => {
     if (this.currentPage > 1) {
       this.currentPage -= 1;
       this.getCars();
     }
-  }
+  };
 }

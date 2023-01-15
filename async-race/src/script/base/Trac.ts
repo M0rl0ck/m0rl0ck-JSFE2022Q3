@@ -16,8 +16,14 @@ export default class Trac {
 
   buttonDelete: HTMLButtonElement;
 
+  name: string;
+
+  color: string;
+
   constructor(car: ICar) {
     this.id = car.id;
+    this.name = car.name;
+    this.color = car.color;
     this.element = createHtmlElement('div', 'trac');
     this.buttonStart = this.createTracButton('start');
     this.buttonStop = this.createTracButton('stop');
