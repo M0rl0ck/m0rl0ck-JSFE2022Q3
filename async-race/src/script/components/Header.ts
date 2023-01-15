@@ -1,5 +1,6 @@
 import EventEmitter from "events";
 import createHtmlElement from "../utils/createElement";
+import createButton from '../utils/createButton';
 import { PageName } from "../infostructure/types";
 
 type EmitsName = "chagePage";
@@ -24,10 +25,9 @@ export default class Header extends EventEmitter {
     this.header = createHtmlElement("header", "header");
     const headerContainer = createHtmlElement("div", "header__container", "", this.header);
     const buttons = createHtmlElement("div", "header__buttons", "", headerContainer);
-    this.buttonGarage = createHtmlElement("button", "button button__garage active", "Garage", buttons) as HTMLButtonElement;
-    this.buttonGarage.disabled = true;
+    this.buttonGarage = createButton("button button__garage active", "Garage", true, buttons);
     this.buttonGarage.addEventListener("click", () => this.emit("chagePage", "garage"));
-    this.buttonWinners = createHtmlElement("button", "button button__winners", "Winners", buttons) as HTMLButtonElement;
+    this.buttonWinners = createButton("button button__winners", "Winners", false, buttons);
     this.buttonWinners.addEventListener("click", () => this.emit("chagePage", "winners"));
     createHtmlElement("h1", "", "ASYNC RACE", headerContainer);
   }

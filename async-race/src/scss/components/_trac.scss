@@ -1,0 +1,38 @@
+.trac {
+  margin: 12px 0;
+  padding: 0 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  p {
+    padding: 5px 20px ;
+    border-radius: 10px;
+    font-size: 2.4rem;
+    background-color: rgba($color: #000000, $alpha: .5);
+  }
+  &__buttons, &__road {
+    padding: 5px;
+    height: 90px;
+    border-radius: 8px;
+    background-color: rgba($color: #000000, $alpha: .5);
+  }
+
+  &__road {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: url('./assets/img/trac.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+
+  &__car {
+    svg {
+      width: 150px;
+      height: 50px;
+    }
+  }
+}

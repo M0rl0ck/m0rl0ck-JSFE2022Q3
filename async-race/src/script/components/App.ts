@@ -4,11 +4,13 @@ import Header from './Header';
 import { PageName } from '../infostructure/types';
 import Garage from '../pages/Garage';
 import Winners from '../pages/Winners';
+import Controller from '../pages/controllers/Controller';
 
 type HeaderType = InstanceType<typeof Header>;
 type FooterType = InstanceType<typeof Footer>;
 type GarageType = InstanceType<typeof Garage>;
 type WinnersType = InstanceType<typeof Winners>;
+type ControllerType = InstanceType<typeof Controller>
 
 export default class App {
   header: Header;
@@ -21,13 +23,16 @@ export default class App {
 
   winners: Winners;
 
-  constructor(header: HeaderType, footer: FooterType, garage: GarageType, winners: WinnersType) {
+  controller: Controller;
+
+  constructor(header: HeaderType, footer: FooterType, garage: GarageType, winners: WinnersType, controller: ControllerType) {
     this.header = header;
     this.main = createHtmlElement('main', 'main');
     this.footer = footer;
     this.header.on('chagePage', (data) => this.changePage(data));
     this.garage = garage;
     this.winners = winners;
+    this.controller = controller;
     this.main.appendChild(this.garage.render());
   }
 
