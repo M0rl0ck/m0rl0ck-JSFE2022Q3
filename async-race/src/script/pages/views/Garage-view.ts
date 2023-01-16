@@ -4,10 +4,11 @@ import createHtmlElement from "../../utils/createElement";
 import createInputElement from "../../utils/createInputElement";
 import GarageModel from "../models/Garage-model";
 import Trac from "../../base/Trac";
+import createPagination from '../../utils/createPagination';
 
 type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar";
 type TracType = InstanceType<typeof Trac>;
-type GarageModelTType = InstanceType<typeof GarageModel>;
+type GarageModelType = InstanceType<typeof GarageModel>;
 
 enum CreateButton {
   Create = 'Create new car',
@@ -15,7 +16,7 @@ enum CreateButton {
 }
 
 export default class GarageView extends EventEmitter {
-  model: GarageModelTType;
+  model: GarageModelType;
 
   element: HTMLElement;
 
@@ -49,7 +50,7 @@ export default class GarageView extends EventEmitter {
     return super.on(event, callback);
   }
 
-  constructor(model: GarageModelTType) {
+  constructor(model: GarageModelType) {
     super();
     this.model = model;
     this.element = createHtmlElement("div", "garage");
@@ -67,7 +68,7 @@ export default class GarageView extends EventEmitter {
     this.buttonPrev = createButton("button tracs__prev", "prev", this.model.isPrevDisabled);
     this.buttonNext = createButton("button tracs__next", "next", this.model.isNextDisabled);
     this.paginationText = createHtmlElement("div", "tracs__countPages", `${this.model.currentPage} / ${this.model.countPages}`);
-    this.createPagination();
+    this.element.appendChild(createPagination('tracs', this.buttonPrev, this.paginationText, this.buttonNext));
     this.setListener();
     this.model.on("updateCars", this.updateCars);
     this.model.on('updateButtons', this.updateButtons);
@@ -86,12 +87,6 @@ export default class GarageView extends EventEmitter {
     createCar.append(this.inputName, this.inputColor, this.buttonCreateCar);
     const startResetButtons = createHtmlElement("div", "startResetButtons", "", garageTitle);
     startResetButtons.append(this.buttonReset, this.buttonStart);
-  };
-
-  private createPagination = () => {
-    const el = createHtmlElement("div", "tracs__buttons", "", this.element);
-    const buttons = createHtmlElement("div", "pagination__buttons", "", el);
-    buttons.append(this.buttonPrev, this.paginationText, this.buttonNext);
   };
 
   private updateCars = () => {

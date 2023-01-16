@@ -1,9 +1,8 @@
 import EventEmitter from "events";
-import { LIMITCAR } from '../../constants/constants';
 import ICar from '../../infostructure/ICar';
 import IWinnerRequest from '../../infostructure/IWinnerRequest';
 
-type EmitsName = "updateCars" | "updateButtons" | "updateImput";
+type EmitsName = "updateCars" | "updateButtons" | "updateImput" | "updateColumnsName";
 
 export default abstract class Model extends EventEmitter {
   cars: ICar[] | IWinnerRequest[];
@@ -18,6 +17,8 @@ export default abstract class Model extends EventEmitter {
 
   isNextDisabled: boolean;
 
+  limitCars: number;
+
   emit(event: EmitsName, data?: string) {
     return super.emit(event, data);
   }
@@ -30,6 +31,7 @@ export default abstract class Model extends EventEmitter {
     super();
     this.cars = [];
     this.countCars = 0;
+    this.limitCars = 1;
     this.currentPage = 1;
     this.countPages = 1;
     this.isPrevDisabled = true;
@@ -41,7 +43,7 @@ export default abstract class Model extends EventEmitter {
 
   updateItemsCars = (countCars: number) => {
     this.countCars = countCars;
-    this.countPages = Math.ceil(this.countCars / LIMITCAR.cars);
+    this.countPages = Math.ceil(this.countCars / this.limitCars);
     if (this.currentPage > this.countPages && this.currentPage > 1) {
       this.currentPage = this.countPages;
       this.getCars();
