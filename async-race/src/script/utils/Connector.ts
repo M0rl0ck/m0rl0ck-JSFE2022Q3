@@ -39,9 +39,12 @@ class Connector {
     } catch (e) {
       if ( e instanceof Error) {
         console.log(e.message);
-        
+
       }
-      return undefined;
+      const result: RES = [] as RES;
+      const total = '0';
+      const status = 404;
+      return { result, total, status };
     }
     
 
@@ -89,7 +92,7 @@ class Connector {
     return { result, status };
   }
 
-  async getWinnersCar(
+  async getWinnersCars(
     page: number,
     limit: number,
     sort: Sort = 'id',
@@ -106,7 +109,7 @@ class Connector {
     };
   }
 
-  async getWinnerCar(id: number): Promise<IGetWinner> {
+  async getWinnersCar(id: number): Promise<IGetWinner> {
     const { result, status } = await this.request<IWinnerRequest[], undefined>(`winners?id=${id}`, 'GET');
     return {
       items: result,
@@ -114,17 +117,17 @@ class Connector {
     };
   }
 
-  async createWinnerCar(body: IWinnerRequest): Promise<IWinnerRequest[]> {
+  async createWinnersCar(body: IWinnerRequest): Promise<IWinnerRequest[]> {
     const { result } = await this.request<IWinnerRequest[], IWinnerRequest>('winners', 'POST', body);
     return result;
   }
 
-  async deleteWinnerCar(id: number): Promise<Record<string, never>>  {
+  async deleteWinnersCar(id: number): Promise<Record<string, never>>  {
     const { result } = await this.request<Record<string, never>, undefined>(`winners/${id}`, 'DELETE');
     return result;
   }
 
-  async updateWinnerCar(id: number, body: IUpdateWinnerCarRequest): Promise<IWinnerRequest> {
+  async updateWinnersCar(id: number, body: IUpdateWinnerCarRequest): Promise<IWinnerRequest> {
     const { result } = await this.request<IWinnerRequest, IUpdateWinnerCarRequest>(`winners/${id}`, 'PUT', body);
     return result;
   }
