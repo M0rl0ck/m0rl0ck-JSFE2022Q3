@@ -1,13 +1,11 @@
-import EventEmitter from "events";
 import createButton from "../../utils/createButton";
 import createHtmlElement from "../../utils/createElement";
 import createInputElement from "../../utils/createInputElement";
 import GarageModel from "../models/Garage-model";
 import Trac from "../../base/Trac";
 import createPagination from '../../utils/createPagination';
+import View from './view';
 
-type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar";
-type TracType = InstanceType<typeof Trac>;
 type GarageModelType = InstanceType<typeof GarageModel>;
 
 enum CreateButton {
@@ -15,10 +13,8 @@ enum CreateButton {
   Edit = 'Edit car',
 }
 
-export default class GarageView extends EventEmitter {
+export default class GarageView extends View {
   model: GarageModelType;
-
-  element: HTMLElement;
 
   buttonGenCar: HTMLButtonElement;
 
@@ -34,25 +30,8 @@ export default class GarageView extends EventEmitter {
 
   tracksContainer: HTMLElement;
 
-  coundCars: HTMLElement;
-
-  buttonPrev: HTMLButtonElement;
-
-  buttonNext: HTMLButtonElement;
-
-  paginationText: HTMLElement;
-
-  emit(event: EmitsName, name?: string | number | TracType, color?: string) {
-    return super.emit(event, name, color);
-  }
-
-  on(event: EmitsName, callback: ((name?: string | number, color?: string) => void) | ((trac: TracType) => void)) {
-    return super.on(event, callback);
-  }
-
   constructor(model: GarageModelType) {
-    super();
-    this.model = model;
+    super(model);
     this.element = createHtmlElement("div", "garage");
     this.buttonGenCar = createButton("button button__generateCars", "Generate 100 cars");
     this.buttonCreateCar = createButton("button button__newCar", CreateButton.Create);
@@ -62,12 +41,8 @@ export default class GarageView extends EventEmitter {
     this.inputName.value = this.model.nameCar;
     this.inputColor = createInputElement("inputColor", "color");
     this.inputColor.value = this.model.colorCar;
-    this.coundCars = createHtmlElement("span", "", `${this.model.countCars}`);
     this.createGarageTitle();
     this.tracksContainer = createHtmlElement("div", "tracs__container", "", this.element);
-    this.buttonPrev = createButton("button tracs__prev", "prev", this.model.isPrevDisabled);
-    this.buttonNext = createButton("button tracs__next", "next", this.model.isNextDisabled);
-    this.paginationText = createHtmlElement("div", "tracs__countPages", `${this.model.currentPage} / ${this.model.countPages}`);
     this.element.appendChild(createPagination('tracs', this.buttonPrev, this.paginationText, this.buttonNext));
     this.setListener();
     this.model.on("updateCars", this.updateCars);
@@ -81,7 +56,7 @@ export default class GarageView extends EventEmitter {
     const generateButtons = createHtmlElement("div", "generateButtons", "", createCarButtons);
     const title = createHtmlElement("p", "", "", generateButtons);
     createHtmlElement("span", "", "Cars in garage: ", title);
-    title.appendChild(this.coundCars);
+    title.appendChild(this.countCars);
     generateButtons.appendChild(this.buttonGenCar);
     const createCar = createHtmlElement("div", "createCar", "", createCarButtons);
     createCar.append(this.inputName, this.inputColor, this.buttonCreateCar);
@@ -90,7 +65,7 @@ export default class GarageView extends EventEmitter {
   };
 
   private updateCars = () => {
-    this.coundCars.innerText = `${this.model.countCars}`;
+    this.countCars.innerText = `${this.model.countCars}`;
     this.paginationText.innerText = `${this.model.currentPage} / ${this.model.countPages}`;
     this.setButtonsPagination();
     this.tracksContainer.innerHTML = "";
@@ -114,17 +89,9 @@ export default class GarageView extends EventEmitter {
     this.inputColor.value = this.model.colorCar;
   }
 
-  private setButtonsPagination = () => {
-    this.buttonPrev.disabled = this.model.isPrevDisabled;
-    this.buttonNext.disabled = this.model.isNextDisabled;
-  };
-
   private setListener = () => {
     this.buttonCreateCar.addEventListener("click", () => this.emit("createCar", this.inputName.value, this.inputColor.value));
     this.buttonGenCar.addEventListener("click", () => this.emit("create100"));
-    this.buttonPrev.addEventListener('click', () => this.emit('prevPage'));
-    this.buttonNext.addEventListener('click', () => this.emit('nextPage'));
   };
 
-  render = () => this.element;
 }

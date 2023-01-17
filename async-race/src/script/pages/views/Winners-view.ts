@@ -1,12 +1,11 @@
-import EventEmitter from "events";
-import createButton from "../../utils/createButton";
 import createHtmlElement from "../../utils/createElement";
 import createPagination from "../../utils/createPagination";
 import createSvg from "../../utils/createSvg";
 import WinnersModel from "../models/Winners-model";
+import View from './view';
 
 type WinnersModelType = InstanceType<typeof WinnersModel>;
-type EmitsName = 'sort' | 'prevPage' | 'nextPage';
+
 enum WinColumn {
   Default = "Wins number",
   ABC = "Wins number ↓",
@@ -18,22 +17,12 @@ enum TimeColumn {
   DESC = "Best time ↑",
 }
 
-export default class WinnersView extends EventEmitter {
-  element: HTMLElement;
-
-  countWinners: HTMLElement;
+export default class WinnersView extends View {
+  model: WinnersModelType;
 
   columnNumber: HTMLElement;
 
   columnTime: HTMLElement;
-
-  model: WinnersModelType;
-
-  buttonPrev: HTMLButtonElement;
-
-  buttonNext: HTMLButtonElement;
-
-  paginationText: HTMLElement;
 
   table: HTMLElement;
 
@@ -41,34 +30,18 @@ export default class WinnersView extends EventEmitter {
 
   timeColumn: HTMLElement;
 
-  emit(event: EmitsName, name?: string | number) {
-    return super.emit(event, name);
-  }
-
-  on(event: EmitsName, callback: ((name?: string | number) => void)) {
-    return super.on(event, callback);
-  }
-
-
   constructor(model: WinnersModelType) {
-    super();
-    this.model = model;
+    super(model);
     this.element = createHtmlElement("div", "winners");
-    this.countWinners = createHtmlElement("span", "", "1");
     this.table = createHtmlElement("div", "winners__table");
     const { winText, timeText } = this.getColumnsName();
     this.winColumn = createHtmlElement("div", "winners__wins cursor", `${winText}`);
     this.timeColumn = createHtmlElement("div", "winners__time cursor", `${timeText}`);
-    this.buttonPrev = createButton("button tracs__prev", "prev", this.model.isPrevDisabled);
-    this.buttonNext = createButton("button tracs__next", "next", this.model.isNextDisabled);
-    this.paginationText = createHtmlElement("div", "tracs__countPages", `${this.model.currentPage} / ${this.model.countPages}`);
     this.createWinners();
     this.model.on("updateCars", this.updateCars);
     this.model.on('updateColumnsName', this.setColumnsName);
     this.winColumn.addEventListener('click', () => this.emit('sort', 'wins'));
     this.timeColumn.addEventListener('click', () => this.emit('sort', 'time'));
-    this.buttonPrev.addEventListener("click", () => this.emit("prevPage"));
-    this.buttonNext.addEventListener("click", () => this.emit("nextPage"));
   }
 
   private getColumnsName = () => {
@@ -98,7 +71,7 @@ export default class WinnersView extends EventEmitter {
     const container = createHtmlElement("div", "winners__container", "", this.element);
     const title = createHtmlElement("p", "", "", container);
     createHtmlElement("span", "", "Total winners: ", title);
-    title.appendChild(this.countWinners);
+    title.appendChild(this.countCars);
     container.appendChild(this.table);
     container.appendChild(createPagination("winners", this.buttonPrev, this.paginationText, this.buttonNext));
     this.createTableTitle();
@@ -112,7 +85,7 @@ export default class WinnersView extends EventEmitter {
   };
 
   private updateCars = () => {
-    this.countWinners.innerText = `${this.model.countCars}`;
+    this.countCars.innerText = `${this.model.countCars}`;
     this.paginationText.innerText = `${this.model.currentPage} / ${this.model.countPages}`;
     this.setButtonsPagination();
     this.table.innerHTML = "";
@@ -126,11 +99,4 @@ export default class WinnersView extends EventEmitter {
       createHtmlElement("div", "winners__time", `${winner.time}`, this.table);
     });
   };
-
-  private setButtonsPagination = () => {
-    this.buttonPrev.disabled = this.model.isPrevDisabled;
-    this.buttonNext.disabled = this.model.isNextDisabled;
-  };
-
-  render = () => this.element;
 }
