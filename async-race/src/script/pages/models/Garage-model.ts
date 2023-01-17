@@ -83,7 +83,7 @@ export default class GarageModel extends Model {
       this.isEdit = true;
     }
     this.editId = trac.id;
-    this.isGenCarsDisabled = true;
+    this.isGenCarsDisabled = this.isEdit;
     this.nameCar = trac.name;
     this.colorCar = trac.color;
     this.emit("updateImput");
