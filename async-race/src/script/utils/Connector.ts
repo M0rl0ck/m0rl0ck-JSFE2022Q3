@@ -82,9 +82,9 @@ class Connector {
     return result;
   }
 
-  async startStopEngineCar(id: number, status: StartEngine): Promise<IGetSpeedCar> {
+  async startStopEngineCar(id: number, status: StartEngine): Promise<number> {
     const { result } = await this.request<IGetSpeedCar, undefined>(`engine?id=${id}&status=${status}`, 'PATCH');
-    return result;
+    return result.distance / result.velocity;
   }
 
   async driveCar(id: number) {

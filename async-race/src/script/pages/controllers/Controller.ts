@@ -1,14 +1,10 @@
-import Trac from "../../base/Trac";
+import Trac from "../../base/Trac-View";
 import { Sort } from '../../infostructure/types';
 import Garage from "../Garage";
-// import GarageModel from '../models/Garage-model'
-// import GarageView from '../views/Garage-view'
 import Winners from "../Winners";
 
 type GarageType = InstanceType<typeof Garage>;
 type TracType = InstanceType<typeof Trac>;
-// type GarageViewType = InstanceType<typeof GarageView>
-// type GarageModelType = InstanceType<typeof GarageModel>
 type WinnersType = InstanceType<typeof Winners>;
 
 export default class Controller {

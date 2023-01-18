@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import Trac from '../../base/Trac';
+import Trac from '../../base/Trac-View';
 import createButton from '../../utils/createButton';
 import createHtmlElement from '../../utils/createElement';
 import GarageModel from '../models/Garage-model';

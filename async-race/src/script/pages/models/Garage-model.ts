@@ -1,9 +1,11 @@
+import TracView from "../../base/Trac-View";
 import Trac from "../../base/Trac";
 import { CARSMODEL, CARSNAME, DEFAULTCAR, LIMITCAR } from "../../constants/constants";
 import ICar from "../../infostructure/ICar";
 import connector from "../../utils/Connector";
 import Model from './Model';
 
+type TracViewType = InstanceType<typeof TracView>;
 type TracType = InstanceType<typeof Trac>;
 
 export default class GarageModel extends Model {
@@ -25,10 +27,13 @@ export default class GarageModel extends Model {
 
   colorCar: string;
 
+  tracs: TracType[];
+
   constructor() {
     super();
     this.isEdit = false;
     this.editId = 0;
+    this.tracs = [];
     this.nameCar = DEFAULTCAR.name;
     this.colorCar = DEFAULTCAR.color;
     this.limitCars = LIMITCAR.cars;
@@ -42,9 +47,14 @@ export default class GarageModel extends Model {
   protected getCars = async () => {
     const { items, count } = await connector.getCars(this.currentPage, LIMITCAR.cars);
     this.cars = items;
+    this.getTracs();
     this.updateItemsCars(Number(count));
     this.emit("updateCars");
   };
+
+  private getTracs = () => {
+    this.tracs = this.cars.map(car => new Trac(car));
+  }
 
 
 
@@ -76,7 +86,7 @@ export default class GarageModel extends Model {
     this.getCars();
   };
 
-  setEditCar = (trac: TracType) => {
+  setEditCar = (trac: TracViewType) => {
     if (this.editId === trac.id) {
       this.isEdit = !this.isEdit;
     } else {

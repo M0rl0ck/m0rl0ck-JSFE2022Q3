@@ -2,15 +2,14 @@ import createButton from "../../utils/createButton";
 import createHtmlElement from "../../utils/createElement";
 import createInputElement from "../../utils/createInputElement";
 import GarageModel from "../models/Garage-model";
-import Trac from "../../base/Trac";
-import createPagination from '../../utils/createPagination';
-import View from './view';
+import createPagination from "../../utils/createPagination";
+import View from "./view";
 
 type GarageModelType = InstanceType<typeof GarageModel>;
 
 enum CreateButton {
-  Create = 'Create new car',
-  Edit = 'Edit car',
+  Create = "Create new car",
+  Edit = "Edit car",
 }
 
 export default class GarageView extends View {
@@ -43,11 +42,11 @@ export default class GarageView extends View {
     this.inputColor.value = this.model.colorCar;
     this.createGarageTitle();
     this.tracksContainer = createHtmlElement("div", "tracs__container", "", this.element);
-    this.element.appendChild(createPagination('tracs', this.buttonPrev, this.paginationText, this.buttonNext));
+    this.element.appendChild(createPagination("tracs", this.buttonPrev, this.paginationText, this.buttonNext));
     this.setListener();
     this.model.on("updateCars", this.updateCars);
-    this.model.on('updateButtons', this.updateButtons);
-    this.model.on('updateImput', this.updateInput);
+    this.model.on("updateButtons", this.updateButtons);
+    this.model.on("updateImput", this.updateInput);
   }
 
   private createGarageTitle = () => {
@@ -70,10 +69,9 @@ export default class GarageView extends View {
     this.setButtonsPagination();
     this.tracksContainer.innerHTML = "";
     this.tracksContainer.append(
-      ...this.model.cars.map((car) => {
-        const trac = new Trac(car);
-        trac.buttonEdit.addEventListener('click', () => this.emit('editCar', trac));
-        trac.buttonDelete.addEventListener('click', () => this.emit('deleteCar', trac.id));
+      ...this.model.tracs.map((trac) => {
+        trac.view.buttonEdit.addEventListener("click", () => this.emit("editCar", trac.view));
+        trac.view.buttonDelete.addEventListener("click", () => this.emit("deleteCar", trac.view.id));
         return trac.render();
       })
     );
@@ -82,12 +80,12 @@ export default class GarageView extends View {
   private updateButtons = () => {
     this.buttonCreateCar.innerText = this.model.isEdit ? CreateButton.Edit : CreateButton.Create;
     this.buttonGenCar.disabled = this.model.isGenCarsDisabled;
-  }
+  };
 
   private updateInput = () => {
     this.inputName.value = this.model.nameCar;
     this.inputColor.value = this.model.colorCar;
-  }
+  };
 
   private setListener = () => {
     this.buttonCreateCar.addEventListener("click", () => this.emit("createCar", this.inputName.value, this.inputColor.value));
