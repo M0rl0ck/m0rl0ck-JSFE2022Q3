@@ -70,7 +70,7 @@ export default class GarageView extends View {
     this.tracksContainer.innerHTML = "";
     this.tracksContainer.append(
       ...this.model.tracs.map((trac) => {
-        trac.view.buttonEdit.addEventListener("click", () => this.emit("editCar", trac.view));
+        trac.view.buttonEdit.addEventListener("click", () => this.emit("editCar", trac.model));
         trac.view.buttonDelete.addEventListener("click", () => this.emit("deleteCar", trac.view.id));
         return trac.render();
       })

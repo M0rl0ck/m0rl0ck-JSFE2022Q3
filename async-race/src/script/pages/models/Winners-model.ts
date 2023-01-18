@@ -24,7 +24,7 @@ export default class WinnersModel extends Model {
     this.getCars();
   }
 
-  protected getCars = async (sort: Sort = this.sort, order: Order = this.order) => {
+  getCars = async (sort: Sort = this.sort, order: Order = this.order) => {
     const { items, count } = await connector.getWinnersCars(this.currentPage, LIMITCAR.wins, sort, order);
     this.cars = items;
     this.updateItemsCars(Number(count));

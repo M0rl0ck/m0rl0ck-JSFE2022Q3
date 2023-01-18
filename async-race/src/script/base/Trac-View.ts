@@ -23,10 +23,6 @@ export default class TracView extends EventEmitter {
 
   buttonDelete: HTMLButtonElement;
 
-  name: string;
-
-  color: string;
-
   road: HTMLElement;
 
   car: HTMLElement;
@@ -42,6 +38,7 @@ export default class TracView extends EventEmitter {
   constructor(model:InstanceType<typeof TracModel>) {
     super();
     this.model = model;
+    this.id = this.model.car.id;
     this.animationId = null;
     this.element = createHtmlElement('div', 'trac');
     this.buttonStart = this.createTracButton('start');

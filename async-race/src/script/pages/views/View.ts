@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import Trac from '../../base/Trac-View';
+import TracModel from '../../base/Trac-model';
 import createButton from '../../utils/createButton';
 import createHtmlElement from '../../utils/createElement';
 import GarageModel from '../models/Garage-model';
@@ -7,7 +7,7 @@ import WinnersModel from "../models/Winners-model";
 
 type GarageModelType = InstanceType<typeof GarageModel>;
 type WinnersModelType = InstanceType<typeof WinnersModel>;
-type TracType = InstanceType<typeof Trac>;
+type TracModelType = InstanceType<typeof TracModel>;
 type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar" | "sort" | "prevPage" | "nextPage";
 
 export default abstract class View extends EventEmitter {
@@ -23,11 +23,11 @@ export default abstract class View extends EventEmitter {
 
   paginationText: HTMLElement;
 
-  emit(event: EmitsName, name?: string | number | TracType, color?: string) {
+  emit(event: EmitsName, name?: string | number | TracModelType, color?: string) {
     return super.emit(event, name, color);
   }
 
-  on(event: EmitsName, callback: ((name?: string | number, color?: string) => void) | ((trac: TracType) => void)) {
+  on(event: EmitsName, callback: ((name?: string | number, color?: string) => void) | ((trac: TracModelType) => void)) {
     return super.on(event, callback);
   }
 

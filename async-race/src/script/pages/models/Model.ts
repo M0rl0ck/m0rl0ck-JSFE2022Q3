@@ -2,7 +2,7 @@ import EventEmitter from "events";
 import ICar from '../../infostructure/ICar';
 import IWinnerRequest from '../../infostructure/IWinnerRequest';
 
-type EmitsName = "updateCars" | "updateButtons" | "updateImput" | "updateColumnsName";
+type EmitsName = "updateCars" | "updateButtons" | "updateImput" | "updateColumnsName" | "updateWinners";
 
 export default abstract class Model extends EventEmitter {
   cars: ICar[] | IWinnerRequest[];

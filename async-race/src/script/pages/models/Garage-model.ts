@@ -1,11 +1,11 @@
-import TracView from "../../base/Trac-View";
 import Trac from "../../base/Trac";
 import { CARSMODEL, CARSNAME, DEFAULTCAR, LIMITCAR } from "../../constants/constants";
 import ICar from "../../infostructure/ICar";
 import connector from "../../utils/Connector";
 import Model from './Model';
+import TracModel from '../../base/Trac-model';
 
-type TracViewType = InstanceType<typeof TracView>;
+type TracModelType = InstanceType<typeof TracModel>;
 type TracType = InstanceType<typeof Trac>;
 
 export default class GarageModel extends Model {
@@ -63,6 +63,7 @@ export default class GarageModel extends Model {
       await connector.updateCar(this.editId, { name, color });
       this.isEdit = false;
       this.isGenCarsDisabled = false;
+      this.emit("updateWinners");
       this.emit("updateButtons");
     } else {
       await connector.createCar({ name, color });
@@ -86,16 +87,16 @@ export default class GarageModel extends Model {
     this.getCars();
   };
 
-  setEditCar = (trac: TracViewType) => {
-    if (this.editId === trac.id) {
+  setEditCar = (trac: TracModelType) => {
+    if (this.editId === trac.car.id) {
       this.isEdit = !this.isEdit;
     } else {
       this.isEdit = true;
     }
-    this.editId = trac.id;
+    this.editId = trac.car.id;
     this.isGenCarsDisabled = this.isEdit;
-    this.nameCar = trac.name;
-    this.colorCar = trac.color;
+    this.nameCar = trac.car.name;
+    this.colorCar = trac.car.color;
     this.emit("updateImput");
     this.emit("updateButtons");
   };
