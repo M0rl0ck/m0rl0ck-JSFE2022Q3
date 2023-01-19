@@ -79,7 +79,10 @@ export default class GarageView extends View {
 
   private updateButtons = () => {
     this.buttonCreateCar.innerText = this.model.isEdit ? CreateButton.Edit : CreateButton.Create;
+    this.buttonCreateCar.disabled = this.model.isCreateCarDisabled;
     this.buttonGenCar.disabled = this.model.isGenCarsDisabled;
+    this.buttonReset.disabled = this.model.isResetDisabled;
+    this.buttonStart.disabled = this.model.isStartDisabled;
   };
 
   private updateInput = () => {
@@ -90,6 +93,8 @@ export default class GarageView extends View {
   private setListener = () => {
     this.buttonCreateCar.addEventListener("click", () => this.emit("createCar", this.inputName.value, this.inputColor.value));
     this.buttonGenCar.addEventListener("click", () => this.emit("create100"));
+    this.buttonStart.addEventListener("click", () => this.emit("startRace"));
+    this.buttonReset.addEventListener("click", () => this.emit("stopRace"));
   };
 
 }

@@ -8,7 +8,7 @@ import WinnersModel from "../models/Winners-model";
 type GarageModelType = InstanceType<typeof GarageModel>;
 type WinnersModelType = InstanceType<typeof WinnersModel>;
 type TracModelType = InstanceType<typeof TracModel>;
-type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar" | "sort" | "prevPage" | "nextPage";
+type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar" | "sort" | "prevPage" | "nextPage" | "startRace" | "stopRace";
 
 export default abstract class View extends EventEmitter {
   element: HTMLElement;

@@ -89,7 +89,7 @@ class Connector {
 
   async driveCar(id: number) {
     const { result, status } = await this.request<IStatusDrive, undefined>(`engine?id=${id}&status=drive`, 'PATCH');
-    return { result, status };
+    return { result, status};
   }
 
   async getWinnersCars(

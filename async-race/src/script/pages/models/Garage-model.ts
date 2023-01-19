@@ -2,8 +2,8 @@ import Trac from "../../base/Trac";
 import { CARSMODEL, CARSNAME, DEFAULTCAR, LIMITCAR } from "../../constants/constants";
 import ICar from "../../infostructure/ICar";
 import connector from "../../utils/Connector";
-import Model from './Model';
-import TracModel from '../../base/Trac-model';
+import Model from "./Model";
+import TracModel from "../../base/Trac-model";
 
 type TracModelType = InstanceType<typeof TracModel>;
 type TracType = InstanceType<typeof Trac>;
@@ -53,10 +53,8 @@ export default class GarageModel extends Model {
   };
 
   private getTracs = () => {
-    this.tracs = this.cars.map(car => new Trac(car));
-  }
-
-
+    this.tracs = this.cars.map((car) => new Trac(car));
+  };
 
   createCar = async (name: string, color: string) => {
     if (this.isEdit) {
@@ -76,7 +74,9 @@ export default class GarageModel extends Model {
     this.isGenCarsDisabled = false;
     this.emit("updateButtons");
     for (let i = 0; i < 100; i += 1) {
-      const color = `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
+      const color = `#${Math.floor(Math.random() * 0xffffff)
+        .toString(16)
+        .padStart(6, "0")}`;
       const name = `${CARSNAME[Math.floor(Math.random() * CARSNAME.length)]} ${CARSMODEL[Math.floor(Math.random() * CARSMODEL.length)]}`;
       this.createCar(name, color);
     }
@@ -98,6 +98,22 @@ export default class GarageModel extends Model {
     this.nameCar = trac.car.name;
     this.colorCar = trac.car.color;
     this.emit("updateImput");
+    this.emit("updateButtons");
+  };
+
+  startRace = () => {
+    this.isCreateCarDisabled = true;
+    this.isGenCarsDisabled = true;
+    this.isResetDisabled = false;
+    this.isStartDisabled = true;
+    this.emit("updateButtons");
+  };
+
+  stopRace = () => {
+    this.isCreateCarDisabled = false;
+    this.isGenCarsDisabled = this.isEdit;
+    this.isResetDisabled = true;
+    this.isStartDisabled = false;
     this.emit("updateButtons");
   };
 }
