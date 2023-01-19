@@ -1,7 +1,9 @@
 import Trac from '../../base/Trac';
 import TracModel from "../../base/Trac-model";
 import IStatusDrive from "../../infostructure/IStatusDrive";
+import IWinnerRequest from '../../infostructure/IWinnerRequest';
 import { Sort } from "../../infostructure/types";
+import connector from '../../utils/Connector';
 import Garage from "../Garage";
 import ModalPage from '../ModalPage';
 import Winners from "../Winners";
@@ -68,10 +70,33 @@ export default class Controller {
     if (this.isStop) {
       return;
     }
-    this.modal.show(winner.name, winner.speed);
+    if (winner && winner.id) {
+      this.modal.show(winner.name, winner.time);
+      this.updateWinners(winner);
+    }
   };
 
-  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number, name: string, speed: number}> => {
+  updateWinners = async (winner: IWinnerRequest) => {
+    const{ items} = await connector.getWinnersCar(winner.id);
+    const [ item ] = [...items];
+    if (!(item && item.id)) {
+      await connector.createWinnersCar(winner);
+      
+    } 
+    else {
+      
+      const body = {
+        id: winner.id,
+        wins: item.wins + 1,
+        time: winner.time <= item.time ? winner.time : item.time
+      }
+      await connector.updateWinnersCar(winner.id, body);
+
+    }
+    this.winners.model.getCars();
+  }
+
+  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number, name: string, time: number}> => {
     const {driveStatus, id, name, speed} = await Promise.race(promiseWinners);
     if (!driveStatus.result.success) {
       const failIndex = tracs.findIndex(trac => trac.model.id === id);
@@ -79,7 +104,7 @@ export default class Controller {
       const nextTracs = [...tracs.slice(0, failIndex), ...tracs.slice(failIndex + 1)];
       return this.getWinner(nextPromiseWinners, nextTracs);
     }
-    return { id, name, speed: Number((speed / 1000).toFixed(2)) };
+    return { id, name, time: Number((speed / 1000).toFixed(2)) };
   };
 
   stopRace = () => {
