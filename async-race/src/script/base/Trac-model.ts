@@ -18,6 +18,8 @@ export default class TracModel extends EventEmitter {
 
   id: number;
 
+  name: string;
+
   emit(event: EmitsName, data?: string) {
     return super.emit(event, data);
   }
@@ -30,6 +32,7 @@ export default class TracModel extends EventEmitter {
     super();
     this.car = car;
     this.id = car.id;
+    this.name = car.name;
     this.speed = 0;
     this.isStartDissabled = false;
     this.isStopDissabled = true;

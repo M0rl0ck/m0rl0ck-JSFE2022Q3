@@ -54,6 +54,7 @@ export default class TracController {
 
   preStart = () => {
     this.model.start();
+    this.view.setDistance();
     this.isSrart = false;
     this.isStop = false;
   }
@@ -62,13 +63,13 @@ export default class TracController {
     this.view.startAnimation(speed);
     this.model.speed = speed;
     this.player.src = soundDrive;
-    setTimeout(() => this.player.play(), Math.random() * 600);
+    setTimeout(() => this.player.play(), Math.random() * 500);
     ;
   }
 
   startEngine = async () => {
     this.player.src = soundStart;
-    setTimeout(() => this.player.play(), Math.random() * 600);
+    setTimeout(() => this.player.play(), Math.random() * 500);
     return connector.startStopEngineCar(this.model.car.id, "started");
 }
 
@@ -76,9 +77,9 @@ export default class TracController {
 
   drive = async () => {
     const driveStatus = await connector.driveCar(this.model.car.id);
-    const {id, speed} = this.model;
+    const {id, name, speed} = this.model;
     this.stopDrive(driveStatus);
-    return { driveStatus, id, speed};
+    return { driveStatus, id, name, speed};
   }
 
   stopDrive = (driveStatus: DriveStatus) => {

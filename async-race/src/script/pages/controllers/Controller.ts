@@ -3,6 +3,7 @@ import TracModel from "../../base/Trac-model";
 import IStatusDrive from "../../infostructure/IStatusDrive";
 import { Sort } from "../../infostructure/types";
 import Garage from "../Garage";
+import ModalPage from '../ModalPage';
 import Winners from "../Winners";
 
 type GarageType = InstanceType<typeof Garage>;
@@ -14,6 +15,7 @@ type PromiceWinners = {
     status: number;
   };
   id: number;
+  name: string;
   speed: number;
 };
 
@@ -24,9 +26,12 @@ export default class Controller {
 
   isStop: boolean;
 
+  modal: ModalPage;
+
   constructor(garage: GarageType, winners: WinnersType) {
     this.garage = garage;
     this.winners = winners;
+    this.modal = new ModalPage;
     this.isStop = false;
     this.garage.view.on("createCar", (name: string, color) => this.garage.model.createCar(name, color));
     this.garage.view.on("create100", () => this.garage.model.createCars());
@@ -63,18 +68,18 @@ export default class Controller {
     if (this.isStop) {
       return;
     }
-    console.log(winner);
+    this.modal.show(winner.name, winner.speed);
   };
 
-  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number, speed: number}> => {
-    const {driveStatus, id, speed} = await Promise.race(promiseWinners);
+  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number, name: string, speed: number}> => {
+    const {driveStatus, id, name, speed} = await Promise.race(promiseWinners);
     if (!driveStatus.result.success) {
       const failIndex = tracs.findIndex(trac => trac.model.id === id);
       const nextPromiseWinners = [...promiseWinners.slice(0, failIndex), ...promiseWinners.slice(failIndex + 1)];
       const nextTracs = [...tracs.slice(0, failIndex), ...tracs.slice(failIndex + 1)];
       return this.getWinner(nextPromiseWinners, nextTracs);
     }
-    return { id, speed: Number((speed / 1000).toFixed(2)) };
+    return { id, name, speed: Number((speed / 1000).toFixed(2)) };
   };
 
   stopRace = () => {

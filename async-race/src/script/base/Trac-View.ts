@@ -27,6 +27,8 @@ export default class TracView extends EventEmitter {
 
   car: HTMLElement;
 
+  distance: number;
+
   emit(event: EmitsName, data?: string) {
     return super.emit(event, data);
   }
@@ -80,19 +82,22 @@ export default class TracView extends EventEmitter {
 
   startAnimation = (duration: number) => {
     let currentPosition = 0;
-    const distance = this.road.offsetWidth - this.car.offsetWidth;
-    const offset = distance / ((duration / 1000) * 60);
+    const offset = this.distance / ((duration / 1000) * 60);
     const slip = () => {
       currentPosition += offset;
       this.setStyle(currentPosition);
 
-      if (currentPosition < distance) {
+      if (currentPosition < this.distance) {
         const animationId = requestAnimationFrame(slip);
         this.setAnimationId(animationId);
       }
     };
     slip();
   };
+
+  setDistance = () => {
+    this.distance = this.road.offsetWidth - this.car.offsetWidth;
+  }
 
   stopAnimation = () => {
     cancelAnimationFrame(this.animationId);
