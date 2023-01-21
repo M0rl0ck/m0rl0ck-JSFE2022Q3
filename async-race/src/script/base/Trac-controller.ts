@@ -62,8 +62,11 @@ export default class TracController {
   startAnimation = (speed: number) => {
     this.view.startAnimation(speed);
     this.model.speed = speed;
-    this.player.src = soundDrive;
-    setTimeout(() => this.player.play(), Math.random() * 500);
+    
+    setTimeout(() => {
+      this.player.src = soundDrive;
+      this.player.play();
+    }, Math.random() * 500);
     ;
   }
 
