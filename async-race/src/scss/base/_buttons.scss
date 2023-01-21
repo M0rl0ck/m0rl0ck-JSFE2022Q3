@@ -10,11 +10,13 @@
   background-color: $buttonBg;
   font-size: 2rem;
   color: azure;
+  box-shadow: 0 0 5px 1px azure;
   cursor: pointer;
   transition: all 0.7s;
   &:hover {
     color: yellow;
-    box-shadow: inset 70px 0 0 0 $buttonActiveBg,
+    box-shadow: 0 0 5px 1px azure,
+                inset 70px 0 0 0 $buttonActiveBg,
                 inset -70px 0 0 0 $buttonActiveBg;
   }
   &.active {
@@ -28,7 +30,7 @@
     background-color: $buttonDisabledBg;
     &:hover {
       color: azure;
-      box-shadow: 0 0;
+      box-shadow: 0 0 5px 1px azure;
     }
   }
 }
@@ -43,7 +45,8 @@
 .createCarButtons {
   .button {
     &:hover {
-      box-shadow: inset 110px 0 0 0 $buttonActiveBg,
+      box-shadow: 0 0 5px 1px azure,
+                  inset 110px 0 0 0 $buttonActiveBg,
                   inset -110px 0 0 0 $buttonActiveBg;
     }
 

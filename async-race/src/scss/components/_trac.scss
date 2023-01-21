@@ -33,6 +33,10 @@
     svg {
       width: 150px;
       height: 50px;
+      use {
+        text-shadow: rgba($color: #000000, $alpha: 0.9) -5px 0 2px;
+      }
+      
     }
   }
 }
