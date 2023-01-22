@@ -1,6 +1,6 @@
 import EventEmitter from "events";
-import WinnersModel from './models/Winners-model';
-import WinnersView from './views/Winners-view';
+import WinnersModel from "./models/Winners-model";
+import WinnersView from "./views/Winners-view";
 
 type WinnersViewType = InstanceType<typeof WinnersView>;
 type WinnersModelType = InstanceType<typeof WinnersModel>;

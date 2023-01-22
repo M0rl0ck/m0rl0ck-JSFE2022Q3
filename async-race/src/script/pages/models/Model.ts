@@ -1,6 +1,6 @@
 import EventEmitter from "events";
-import ICar from '../../infostructure/ICar';
-import IWinnerRequest from '../../infostructure/IWinnerRequest';
+import ICar from "../../infostructure/ICar";
+import IWinnerRequest from "../../infostructure/IWinnerRequest";
 
 type EmitsName = "updateCars" | "updateButtons" | "updateImput" | "updateColumnsName" | "updateWinners";
 
@@ -38,8 +38,7 @@ export default abstract class Model extends EventEmitter {
     this.isNextDisabled = true;
   }
 
-  protected getCars = async () => {
-  };
+  protected getCars = async () => {};
 
   updateItemsCars = (countCars: number) => {
     this.countCars = countCars;
@@ -64,7 +63,7 @@ export default abstract class Model extends EventEmitter {
       this.isNextDisabled = false;
     }
   };
-  
+
   nextPage = () => {
     if (this.currentPage < this.countPages) {
       this.currentPage += 1;

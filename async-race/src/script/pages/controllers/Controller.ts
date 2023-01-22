@@ -1,11 +1,11 @@
-import Trac from '../../base/Trac';
+import Trac from "../../base/Trac";
 import TracModel from "../../base/Trac-model";
 import IStatusDrive from "../../infostructure/IStatusDrive";
-import IWinnerRequest from '../../infostructure/IWinnerRequest';
+import IWinnerRequest from "../../infostructure/IWinnerRequest";
 import { Sort } from "../../infostructure/types";
-import connector from '../../utils/Connector';
+import connector from "../../utils/Connector";
 import Garage from "../Garage";
-import ModalPage from '../ModalPage';
+import ModalPage from "../ModalPage";
 import Winners from "../Winners";
 
 type GarageType = InstanceType<typeof Garage>;
@@ -33,7 +33,7 @@ export default class Controller {
   constructor(garage: GarageType, winners: WinnersType) {
     this.garage = garage;
     this.winners = winners;
-    this.modal = new ModalPage;
+    this.modal = new ModalPage();
     this.isStop = false;
     this.garage.view.on("createCar", (name: string, color) => this.garage.model.createCar(name, color));
     this.garage.view.on("create100", () => this.garage.model.createCars());
@@ -77,29 +77,25 @@ export default class Controller {
   };
 
   updateWinners = async (winner: IWinnerRequest) => {
-    const{ items} = await connector.getWinnersCar(winner.id);
-    const [ item ] = [...items];
+    const { items } = await connector.getWinnersCar(winner.id);
+    const [item] = [...items];
     if (!(item && item.id)) {
       await connector.createWinnersCar(winner);
-      
-    } 
-    else {
-      
+    } else {
       const body = {
         id: winner.id,
         wins: item.wins + 1,
-        time: winner.time <= item.time ? winner.time : item.time
-      }
+        time: winner.time <= item.time ? winner.time : item.time,
+      };
       await connector.updateWinnersCar(winner.id, body);
-
     }
     this.winners.model.getCars();
-  }
+  };
 
-  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number, name: string, time: number}> => {
-    const {driveStatus, id, name, speed} = await Promise.race(promiseWinners);
+  getWinner = async (promiseWinners: Promise<PromiceWinners>[], tracs: Trac[]): Promise<{ id: number; name: string; time: number }> => {
+    const { driveStatus, id, name, speed } = await Promise.race(promiseWinners);
     if (!driveStatus.result.success) {
-      const failIndex = tracs.findIndex(trac => trac.model.id === id);
+      const failIndex = tracs.findIndex((trac) => trac.model.id === id);
       const nextPromiseWinners = [...promiseWinners.slice(0, failIndex), ...promiseWinners.slice(failIndex + 1)];
       const nextTracs = [...tracs.slice(0, failIndex), ...tracs.slice(failIndex + 1)];
       return this.getWinner(nextPromiseWinners, nextTracs);
@@ -110,8 +106,8 @@ export default class Controller {
   stopRace = () => {
     this.isStop = true;
     this.garage.model.stopRace();
-    this.garage.model.tracs.forEach(trac => {
+    this.garage.model.tracs.forEach((trac) => {
       trac.controller.stop();
-    })
+    });
   };
 }

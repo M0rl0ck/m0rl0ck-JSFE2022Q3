@@ -2,7 +2,7 @@ import { DEFAULTCAR, LIMITCAR } from "../../constants/constants";
 import ICar from "../../infostructure/ICar";
 import IWinnerCar from "../../infostructure/IWinnerCar";
 import IWinnerRequest from "../../infostructure/IWinnerRequest";
-import { Sort, Order } from '../../infostructure/types';
+import { Sort, Order } from "../../infostructure/types";
 import connector from "../../utils/Connector";
 import Model from "./Model";
 
@@ -19,8 +19,8 @@ export default class WinnersModel extends Model {
     super();
     this.winners = [];
     this.limitCars = LIMITCAR.wins;
-    this.sort = 'id';
-    this.order = 'ASC';
+    this.sort = "id";
+    this.order = "ASC";
     this.getCars();
   }
 
@@ -43,31 +43,33 @@ export default class WinnersModel extends Model {
     });
 
     let cars = await Promise.all(promises);
-    cars = cars.filter(el => el.length);
+    cars = cars.filter((el) => el.length);
     if (cars.length < this.cars.length) {
-      this.cars.forEach(el => {
-        if (!cars.find(element => {
-          const [car] = element;
-          return car.id === el.id
-        })) {
+      this.cars.forEach((el) => {
+        if (
+          !cars.find((element) => {
+            const [car] = element;
+            return car.id === el.id;
+          })
+        ) {
           connector.deleteWinnersCar(el.id);
         }
-      })
+      });
       this.getCars();
     }
     cars.forEach((winner, index) => {
       const [car] = winner;
-      const win = this.cars.find(el => el.id === car?.id);
+      const win = this.cars.find((el) => el.id === car?.id);
       if (car) {
         const result: IWinnerCar = {
-        id: car.id || DEFAULTCAR.id,
-        num: (numPage - 1) * LIMITCAR.wins + index + 1,
-        fill: car.color || DEFAULTCAR.color,
-        name: car.name || DEFAULTCAR.name,
-        wins: win.wins || DEFAULTCAR.win,
-        time: win.time || DEFAULTCAR.time,
-      };
-      winners.push(result)
+          id: car.id || DEFAULTCAR.id,
+          num: (numPage - 1) * LIMITCAR.wins + index + 1,
+          fill: car.color || DEFAULTCAR.color,
+          name: car.name || DEFAULTCAR.name,
+          wins: win.wins || DEFAULTCAR.win,
+          time: win.time || DEFAULTCAR.time,
+        };
+        winners.push(result);
       }
     });
     return winners;
@@ -80,12 +82,12 @@ export default class WinnersModel extends Model {
 
   sortWinners = (name: Sort) => {
     if (name === this.sort) {
-      this.order = this.order === 'ASC' ? 'DESC' : 'ASC';
+      this.order = this.order === "ASC" ? "DESC" : "ASC";
     } else {
       this.sort = name;
-      this.order = 'ASC';
+      this.order = "ASC";
     }
     this.getCars(this.sort, this.order);
-    this.emit('updateColumnsName');
-  }
+    this.emit("updateColumnsName");
+  };
 }

@@ -96,5 +96,4 @@ export default class GarageView extends View {
     this.buttonStart.addEventListener("click", () => this.emit("startRace"));
     this.buttonReset.addEventListener("click", () => this.emit("stopRace"));
   };
-
 }

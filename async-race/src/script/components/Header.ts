@@ -1,6 +1,6 @@
 import EventEmitter from "events";
 import createHtmlElement from "../utils/createElement";
-import createButton from '../utils/createButton';
+import createButton from "../utils/createButton";
 import { PageName } from "../infostructure/types";
 
 type EmitsName = "chagePage";
@@ -36,16 +36,16 @@ export default class Header extends EventEmitter {
     switch (page) {
       case "garage":
         this.buttonGarage.disabled = true;
-        this.buttonGarage.classList.add('active');
+        this.buttonGarage.classList.add("active");
         this.buttonWinners.disabled = false;
-        this.buttonWinners.classList.remove('active');
+        this.buttonWinners.classList.remove("active");
         break;
 
       case "winners":
         this.buttonGarage.disabled = false;
-        this.buttonGarage.classList.remove('active');
+        this.buttonGarage.classList.remove("active");
         this.buttonWinners.disabled = true;
-        this.buttonWinners.classList.add('active');
+        this.buttonWinners.classList.add("active");
         break;
 
       default:

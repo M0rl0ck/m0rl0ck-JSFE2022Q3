@@ -63,7 +63,7 @@ class Connector {
   }
 
   async getCar(id: number): Promise<ICar[]> {
-    const { result } = await this.request<ICar[], undefined>(`garage?id=${id}`, 'GET'); // http://127.0.0.1:3000/garage?id=2
+    const { result } = await this.request<ICar[], undefined>(`garage?id=${id}`, 'GET');
     return result;
   }
 

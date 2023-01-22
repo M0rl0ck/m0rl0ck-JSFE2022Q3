@@ -1,20 +1,31 @@
 import EventEmitter from "events";
-import TracModel from '../../base/Trac-model';
-import createButton from '../../utils/createButton';
-import createHtmlElement from '../../utils/createElement';
-import GarageModel from '../models/Garage-model';
+import TracModel from "../../base/Trac-model";
+import createButton from "../../utils/createButton";
+import createHtmlElement from "../../utils/createElement";
+import GarageModel from "../models/Garage-model";
 import WinnersModel from "../models/Winners-model";
 
 type GarageModelType = InstanceType<typeof GarageModel>;
 type WinnersModelType = InstanceType<typeof WinnersModel>;
 type TracModelType = InstanceType<typeof TracModel>;
-type EmitsName = "createCar" | "create100" | "nextPage" | "prevPage" | "editCar" | "deleteCar" | "sort" | "prevPage" | "nextPage" | "startRace" | "stopRace";
+type EmitsName =
+  | "createCar"
+  | "create100"
+  | "nextPage"
+  | "prevPage"
+  | "editCar"
+  | "deleteCar"
+  | "sort"
+  | "prevPage"
+  | "nextPage"
+  | "startRace"
+  | "stopRace";
 
 export default abstract class View extends EventEmitter {
   element: HTMLElement;
 
   model: GarageModelType | WinnersModelType;
-  
+
   countCars: HTMLElement;
 
   buttonPrev: HTMLButtonElement;

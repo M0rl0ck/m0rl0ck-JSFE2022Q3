@@ -2,7 +2,7 @@ import createHtmlElement from "../../utils/createElement";
 import createPagination from "../../utils/createPagination";
 import createSvg from "../../utils/createSvg";
 import WinnersModel from "../models/Winners-model";
-import View from './view';
+import View from "./view";
 
 type WinnersModelType = InstanceType<typeof WinnersModel>;
 
@@ -39,32 +39,32 @@ export default class WinnersView extends View {
     this.timeColumn = createHtmlElement("div", "winners__time cursor", `${timeText}`);
     this.createWinners();
     this.model.on("updateCars", this.updateCars);
-    this.model.on('updateColumnsName', this.setColumnsName);
-    this.winColumn.addEventListener('click', () => this.emit('sort', 'wins'));
-    this.timeColumn.addEventListener('click', () => this.emit('sort', 'time'));
+    this.model.on("updateColumnsName", this.setColumnsName);
+    this.winColumn.addEventListener("click", () => this.emit("sort", "wins"));
+    this.timeColumn.addEventListener("click", () => this.emit("sort", "time"));
   }
 
   private getColumnsName = () => {
     let winText: string;
     let timeText: string;
-    if (this.model.sort === 'wins') {
-      winText = this.model.order === 'ASC' ? WinColumn.ABC : WinColumn.DESC;
+    if (this.model.sort === "wins") {
+      winText = this.model.order === "ASC" ? WinColumn.ABC : WinColumn.DESC;
     } else {
       winText = WinColumn.Default;
     }
-    if (this.model.sort === 'time') {
-      timeText = this.model.order === 'ASC' ? TimeColumn.ABC : TimeColumn.DESC
+    if (this.model.sort === "time") {
+      timeText = this.model.order === "ASC" ? TimeColumn.ABC : TimeColumn.DESC;
     } else {
       timeText = TimeColumn.Default;
     }
-    return {winText, timeText};
-  }
+    return { winText, timeText };
+  };
 
   setColumnsName = () => {
     const { winText, timeText } = this.getColumnsName();
     this.winColumn.innerText = winText;
     this.timeColumn.innerText = timeText;
-  }
+  };
 
   private createWinners = () => {
     createHtmlElement("h2", "", "Winners", this.element);
