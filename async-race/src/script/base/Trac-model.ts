@@ -1,7 +1,7 @@
 import EventEmitter from "events";
-import ICar from '../infostructure/ICar';
+import ICar from "../infostructure/ICar";
 
-type EmitsName = "updateButtons";
+type EmitsName = "updateButtons" | "preStart" | "startAnimation" | "stopAnimation" | "returnCar";
 
 export default class TracModel extends EventEmitter {
   isStartDissabled: boolean;
@@ -20,11 +20,11 @@ export default class TracModel extends EventEmitter {
 
   name: string;
 
-  emit(event: EmitsName, data?: string) {
+  emit(event: EmitsName, data?: number) {
     return super.emit(event, data);
   }
 
-  on(event: EmitsName, callback: (data?: string) => void) {
+  on(event: EmitsName, callback: (data?: number) => void) {
     return super.on(event, callback);
   }
 
@@ -40,19 +40,36 @@ export default class TracModel extends EventEmitter {
     this.isDeleteDissabled = false;
   }
 
-  start = () => {
+  preStart = () => {
     this.isStartDissabled = true;
     this.isStopDissabled = false;
     this.isEditDissabled = true;
     this.isDeleteDissabled = true;
-    this.emit('updateButtons');
-  }
+    this.emit("preStart");
+  };
+
+  startAnimation = (speed: number) => {
+    this.speed = speed;
+    this.emit("startAnimation", speed);
+  };
+
+  stopAnimation = () => {
+    this.emit("stopAnimation");
+  };
+
+  preStop = () => {
+    this.isStopDissabled = true;
+    this.emit("updateButtons");
+  };
 
   stop = () => {
     this.isStartDissabled = false;
-    this.isStopDissabled = true;
     this.isEditDissabled = false;
     this.isDeleteDissabled = false;
-    this.emit('updateButtons');
-  }
+    this.emit("updateButtons");
+  };
+
+  returnCar = () => {
+    this.emit("returnCar");
+  };
 }

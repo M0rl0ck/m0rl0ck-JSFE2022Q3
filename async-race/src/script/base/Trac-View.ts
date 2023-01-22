@@ -1,8 +1,8 @@
 import EventEmitter from "events";
-import createHtmlElement from '../utils/createElement';
-import createButton from '../utils/createButton';
-import createSvg from '../utils/createSvg';
-import TracModel from './Trac-model';
+import createHtmlElement from "../utils/createElement";
+import createButton from "../utils/createButton";
+import createSvg from "../utils/createSvg";
+import TracModel from "./Trac-model";
 
 type EmitsName = "start" | "stop";
 
@@ -37,48 +37,57 @@ export default class TracView extends EventEmitter {
     return super.on(event, callback);
   }
 
-  constructor(model:InstanceType<typeof TracModel>) {
+  constructor(model: InstanceType<typeof TracModel>) {
     super();
     this.model = model;
     this.id = this.model.car.id;
     this.animationId = null;
-    this.element = createHtmlElement('div', 'trac');
-    this.buttonStart = this.createTracButton('start');
+    this.element = createHtmlElement("div", "trac");
+    this.buttonStart = this.createTracButton("start");
     this.buttonStart.disabled = this.model.isStartDissabled;
-    this.buttonStop = this.createTracButton('stop');
+    this.buttonStop = this.createTracButton("stop");
     this.buttonStop.disabled = this.model.isStopDissabled;
-    this.buttonEdit = this.createTracButton('edit');
+    this.buttonEdit = this.createTracButton("edit");
     this.buttonEdit.disabled = this.model.isEditDissabled;
-    this.buttonDelete = this.createTracButton('delete');
+    this.buttonDelete = this.createTracButton("delete");
     this.buttonDelete.disabled = this.model.isDeleteDissabled;
-    this.road = createHtmlElement('div', 'trac__road');
-    this.car = createHtmlElement('div', 'trac__car');
+    this.road = createHtmlElement("div", "trac__road");
+    this.car = createHtmlElement("div", "trac__car");
     this.createTrac(this.model.car.name, this.model.car.color);
-    this.buttonStart.addEventListener('click', () => this.emit('start'));
-    this.buttonStop.addEventListener('click', () => this.emit('stop'));
-    this.model.on('updateButtons', this.updateButtons);
+    this.buttonStart.addEventListener("click", () => this.emit("start"));
+    this.buttonStop.addEventListener("click", () => this.emit("stop"));
+    this.model.on("preStart", this.preStart);
+    this.model.on("startAnimation", (speed) => this.startAnimation(speed));
+    this.model.on("stopAnimation", this.stopAnimation);
+    this.model.on("updateButtons", this.updateButtons);
+    this.model.on("returnCar", this.returnCar);
   }
 
-  private createTracButton = (innerText: string) => createButton('button button__trac', innerText, false);
+  private createTracButton = (innerText: string) => createButton("button button__trac", innerText, false);
 
   private createTrac = (name: string, color: string) => {
-    const buttons = createHtmlElement('div', 'trac__buttons', '', this.element);
-    const topButtons = createHtmlElement('div', 'trac__buttonsGroup', '', buttons);
+    const buttons = createHtmlElement("div", "trac__buttons", "", this.element);
+    const topButtons = createHtmlElement("div", "trac__buttonsGroup", "", buttons);
     topButtons.append(this.buttonStart, this.buttonStop);
-    const bottomButtons = createHtmlElement('div', 'trac__buttonsGroup', '', buttons);
+    const bottomButtons = createHtmlElement("div", "trac__buttonsGroup", "", buttons);
     bottomButtons.append(this.buttonEdit, this.buttonDelete);
     this.element.appendChild(this.road);
-    createHtmlElement('p', 'nameCar', name, this.road);
+    createHtmlElement("p", "nameCar", name, this.road);
     this.road.appendChild(this.car);
-    this.car.appendChild(createSvg('car', color));
-  }
+    this.car.appendChild(createSvg("car", color));
+  };
+
+  private preStart = () => {
+    this.updateButtons();
+    this.setDistance();
+  };
 
   private updateButtons = () => {
     this.buttonStart.disabled = this.model.isStartDissabled;
     this.buttonStop.disabled = this.model.isStopDissabled;
     this.buttonEdit.disabled = this.model.isEditDissabled;
     this.buttonDelete.disabled = this.model.isDeleteDissabled;
-  }
+  };
 
   startAnimation = (duration: number) => {
     let currentPosition = 0;
@@ -97,23 +106,23 @@ export default class TracView extends EventEmitter {
 
   setDistance = () => {
     this.distance = this.road.offsetWidth - this.car.offsetWidth;
-  }
+  };
 
   stopAnimation = () => {
     cancelAnimationFrame(this.animationId);
-  }
+  };
 
   returnCar = () => {
     this.setStyle(0);
-  }
+  };
 
   setStyle = (dX: number) => {
     this.car.style.transform = `translateX(${dX}px)`;
-  }
+  };
 
   setAnimationId = (id: number) => {
     this.animationId = id;
-  }
+  };
 
   render = () => this.element;
 }

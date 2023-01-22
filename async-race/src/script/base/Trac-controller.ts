@@ -1,15 +1,15 @@
 import connector from "../utils/Connector";
 import TracModel from "./Trac-model";
 import TracView from "./Trac-View";
-import soundStart from '../../assets/sounds/start.mp3';
-import soundBreak from '../../assets/sounds/break.mp3';
-import soundDrive from '../../assets/sounds/drive.mp3';
-import IStatusDrive from '../infostructure/IStatusDrive';
+import soundStart from "../../assets/sounds/start.mp3";
+import soundBreak from "../../assets/sounds/break.mp3";
+import soundDrive from "../../assets/sounds/drive.mp3";
+import IStatusDrive from "../infostructure/IStatusDrive";
 
 type DriveStatus = {
   result: IStatusDrive;
   status: number;
-}
+};
 
 export default class TracController {
   model: InstanceType<typeof TracModel>;
@@ -27,7 +27,7 @@ export default class TracController {
     this.view = view;
     this.isSrart = false;
     this.isStop = false;
-    this.player = new Audio;
+    this.player = new Audio();
     this.player.volume = 0.4;
     this.view.on("start", this.startCar);
     this.view.on("stop", this.stop);
@@ -41,6 +41,7 @@ export default class TracController {
   };
 
   stop = async () => {
+    this.model.preStop();
     await this.stopEngine();
     if (this.isSrart) {
       this.model.stop();
@@ -48,46 +49,43 @@ export default class TracController {
       this.isStop = true;
     }
     this.player.pause();
-    this.view.stopAnimation();
-    this.view.returnCar();
+    this.model.stopAnimation();
+    this.model.returnCar();
   };
 
   preStart = () => {
-    this.model.start();
-    this.view.setDistance();
+    this.model.preStart();
     this.isSrart = false;
     this.isStop = false;
-  }
+  };
 
   startAnimation = (speed: number) => {
-    this.view.startAnimation(speed);
-    this.model.speed = speed;
-    
+    this.model.startAnimation(speed);
+
     setTimeout(() => {
       this.player.src = soundDrive;
       this.player.play();
     }, Math.random() * 500);
-    ;
-  }
+  };
 
   startEngine = async () => {
     this.player.src = soundStart;
     setTimeout(() => this.player.play(), Math.random() * 500);
     return connector.startStopEngineCar(this.model.car.id, "started");
-}
+  };
 
   stopEngine = async () => connector.startStopEngineCar(this.model.car.id, "stopped");
 
   drive = async () => {
     const driveStatus = await connector.driveCar(this.model.car.id);
-    const {id, name, speed} = this.model;
+    const { id, name, speed } = this.model;
     this.stopDrive(driveStatus);
-    return { driveStatus, id, name, speed};
-  }
+    return { driveStatus, id, name, speed };
+  };
 
   stopDrive = (driveStatus: DriveStatus) => {
     if (driveStatus.status === 500) {
-      this.view.stopAnimation();
+      this.model.stopAnimation();
       this.player.src = soundBreak;
       if (!this.isStop) {
         this.player.play();
@@ -101,5 +99,5 @@ export default class TracController {
     } else {
       this.isSrart = true;
     }
-  }
+  };
 }
