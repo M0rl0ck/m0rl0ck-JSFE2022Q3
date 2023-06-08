@@ -11,7 +11,7 @@
 + JS Animations
 + Responsive UI
 
-## To run this application, you must first start a local server.
+## To run this application, you must first start a local server:
 
 ### Clone this repository:
 `$ git clone https://github.com/mikhama/async-race-api.git`
@@ -22,10 +22,10 @@
 ### Install dependencies:
 `$ npm install`
 
-### Running the app
+### Running the server:
 `$ npm start`
 
-Then you must run this app or [deploy:](https://m0rl0ck.github.io/m0rl0ck-JSFE2022Q3/async-race/)
+Then you can run this application or open the link to [deploy](https://m0rl0ck.github.io/m0rl0ck-JSFE2022Q3/async-race/)
 
 ## Setup and Running application:
 
