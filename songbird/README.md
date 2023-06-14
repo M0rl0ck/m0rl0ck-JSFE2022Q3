@@ -1,7 +1,7 @@
 # Songbird
 
 ### Songbird is a quiz app for recognizing birds by their voices.
-+ Deploy: https://m0rl0ck.github.io/m0rl0ck-JSFE2022Q3/songbird/
+[Deploy](https://64895e1190bf8e64ae3305cd--celadon-fairy-bfaa56.netlify.app/)
 
 ## Stack
 + JavaScript
@@ -14,8 +14,14 @@
 ### Clone this repository:
 `$ git clone https://github.com/M0rl0ck/m0rl0ck-JSFE2022Q3.git`
 
+### Go to downloaded folder:
+$ cd m0rl0ck-JSFE2022Q3.
+
 ### Go to branch songbird:
 `$ git checkout songbird`
+
+### Go to project folder:
+$ cd songbird.
 
 ### Install dependencies:
 `$ npm install`
