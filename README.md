@@ -48,6 +48,4 @@ Then you can run this application or open the link to [deploy](https://m0rl0ck.g
 `$ npm run build`
 
 ## APP
-![app](https://github.com/M0rl0ck/m0rl0ck-JSFE2022Q3/assets/95146343/02bc792b-2122-4fa7-9946-55c2e9eeb5fb)
-
-
+![app](https://github.com/M0rl0ck/m0rl0ck-JSFE2022Q3/assets/95146343/c1af5503-5b10-4e21-88f3-9f61a1f33b1e)
