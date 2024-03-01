@@ -1,6 +1,11 @@
 #Online zoo
 
-### Online zoo is a quiz app for recognizing birds by their voices.
+### Online zoo is a educational project as part of the task for [RS School](https://rs.school/).
+
+### [Task description](https://github.com/rolling-scopes-school/tasks/tree/master/stage1/tasks/online-zoo-ru.md)
+
+### [Figma](https://www.figma.com/file/ypzT9idgAILaSRVRmDAJxn/online-zoo-3-weeks)
+
 [Deploy](https://m0rl0ck.github.io/m0rl0ck-JSFE2022Q3/online-zoo/pages/main/index.html)
 
 ## Stack
