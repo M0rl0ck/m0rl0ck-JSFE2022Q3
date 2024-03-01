@@ -1,7 +1,7 @@
 # Songbird
 
 ### Songbird is a quiz app for recognizing birds by their voices.
-[Deploy](https://64895e1190bf8e64ae3305cd--celadon-fairy-bfaa56.netlify.app/)
+### [Deploy](https://celadon-fairy-bfaa56.netlify.app/)
 
 ## Stack
 + JavaScript
